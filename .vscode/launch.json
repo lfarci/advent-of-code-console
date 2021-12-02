@@ -1,9 +1,8 @@
 {
     "configurations": [
-        
         {
             "type": "node-terminal",
-            "name": "JavaScript Debug Terminal",
+            "name": "AOC-2021 Debug Terminal",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "runtimeArgs": [
