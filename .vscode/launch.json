@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        
+        {
+            "type": "node-terminal",
+            "name": "JavaScript Debug Terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeArgs": [
+                "days/02/part2.js", "days/02/input/test.txt"
+            ]
+        }
+    ]
+}
