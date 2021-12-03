@@ -27,7 +27,6 @@ const findByteByJoiningSelectedBits = (bytes, getBitCriteria) => {
     return byte;
 };
 
-
 const findByteByFilteringBytes = (bytes, getBitCriteria) => {
     let remainingBytes = [...bytes];
     let position = 0;
@@ -41,7 +40,6 @@ const findByteByFilteringBytes = (bytes, getBitCriteria) => {
     }
     return remainingBytes[0];
 };
-
 
 const findPowerConsumption = (bytes) => {
     const gammaRateByte = findByteByJoiningSelectedBits(bytes, mostCommonBit);
