@@ -1,3 +1,4 @@
+const aoc = require("../../helpers/aoc");
 const input = require("../../helpers/input");
 
 const add = (accumulator, a) => accumulator + a;
@@ -62,11 +63,11 @@ const countDepthMeasurementWindowsIncreases = (inputFileName, windowSize, onEndO
     });
 };
 
-input.startDailyChallengeWith((inputFileName) => {
-    countDepthMeasurementIncreases(inputFileName, (result) => {
+aoc.day(1, "Sonar Sweep", (inputFile) => {
+    countDepthMeasurementIncreases(inputFile, (result) => {
         console.log("Number of depth measurement increases:", result)
     });
-    countDepthMeasurementWindowsIncreases(inputFileName, 3, (result) => {
+    countDepthMeasurementWindowsIncreases(inputFile, 3, (result) => {
         console.log("Number of depth measurement windows increases:", result);
     });
 });

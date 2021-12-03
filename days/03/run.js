@@ -1,3 +1,4 @@
+const aoc = require("../../helpers/aoc");
 const input = require("../../helpers/input");
 
 const parseIntFromByte = (byte) => {
@@ -57,12 +58,12 @@ const findLifeSupportRating = (bytes) => {
     return oxygenGeneratorRate * CO2ScrubberRate;
 };
 
-input.startDailyChallengeWith((inputFileName) => {
+aoc.day(3, "Binary Diagnostic", (inputFile) => {
     let bytes = [];
-    input.processLineByLine(inputFileName, (byte) => {
+    input.processLineByLine(inputFile, (byte) => {
         bytes.push([...byte]);
     }, () => {
-        console.log("Power consumption:", findPowerConsumption(bytes));
-        console.log("Life support rating:", findLifeSupportRating(bytes));
+        console.log("Power consumption:", findPowerConsumption(bytes), "(Part 1)");
+        console.log("Life support rating:", findLifeSupportRating(bytes), "(Part 2)");
     });
 });
