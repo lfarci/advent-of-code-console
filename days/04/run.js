@@ -4,6 +4,7 @@ const { findCoordinates, readNumbers } = require("../../helpers/util");
 
 const parseSubmarineBingoSubsystem = (file, onParsed) => {
     let drawnNumbers = [];
+    let currentBoardIndex = 0;
     let currentBoard;
     const boards = [];
     const whitespace = /\s+/;
@@ -13,7 +14,7 @@ const parseSubmarineBingoSubsystem = (file, onParsed) => {
         } else {
             if (line === '') {
                 if (currentBoard) boards.push(currentBoard);
-                currentBoard = new BingoBoard();
+                currentBoard = new BingoBoard(currentBoardIndex++);
             } else {
                 currentBoard.addRow(readNumbers(line, whitespace));
             }
@@ -27,10 +28,12 @@ const parseSubmarineBingoSubsystem = (file, onParsed) => {
     });
 };
 
-function BingoBoard() {
+function BingoBoard(order = null) {
 
     this.grid = [];
     this.marks = [];
+    this.order = order;
+    this.won = false;
     this.finalScore = null;
 
     this.addRow = (numbers) => this.grid.push(numbers);
@@ -62,7 +65,8 @@ function BingoBoard() {
         if (c) {
             this.marks.push(c);
             this.finalScore = this.getFinalScore(number);
-            return this.isWinningHit(c);
+            this.won = this.isWinningHit(c);
+            return this.won;
         }
         return false;
     };
@@ -70,24 +74,25 @@ function BingoBoard() {
 
 const play = (bingo) => {
     let currentDrawIndex = 0;
-    let winner = null;
-    while (currentDrawIndex < bingo.draws.length && !winner) {
+    let winners = [];
+    while (currentDrawIndex < bingo.draws.length && winners.length < bingo.boards.length) {
         const currentDraw = bingo.draws[currentDrawIndex];
-        bingo.boards.forEach((b) => {
-            if (b.play(currentDraw)) winner = b;
+        bingo.boards.filter(b => !b.won).forEach((b) => {
+            if (b.play(currentDraw)) {
+                winners.push(b);
+            }
         });
         currentDrawIndex++;
     }
-    return winner;
+    return winners;
 };
 
 aoc.day(4, "Giant Squid", (inputFile) => {
     parseSubmarineBingoSubsystem(inputFile, (bingo) => {
-        const winner = play(bingo);
-        if (winner) {
-            console.log("Winning board final score:", winner.finalScore);
-        } else {
-            console.log("No winner with given input.");
-        }
+        const winners = play(bingo);
+        console.log('\nWinning boards (in order):');
+        winners.forEach((w, i) => {
+            console.log(`\t${i + 1}. Board ${w.order + 1} - score: ${w.finalScore}`);
+        });
     });
 });
