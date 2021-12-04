@@ -64,8 +64,10 @@ function BingoBoard(order = null) {
         const c = findCoordinates(this.grid, number);
         if (c) {
             this.marks.push(c);
-            this.finalScore = this.getFinalScore(number);
             this.won = this.isWinningHit(c);
+            if (this.won) {
+                this.finalScore = this.getFinalScore(number);
+            }
             return this.won;
         }
         return false;
