@@ -6,8 +6,10 @@ const REQUIRE_ARGV_LENGTH = 3;
 const processLineByLine = async (inputFileName, lineReader, onDone) => {
     const fileStream = fs.createReadStream(inputFileName);
     const rl = readline.createInterface({input: fileStream, crlfDelay: Infinity});
+    let lineNumber = 0;
     for await (const line of rl) {
-      lineReader(line);
+      lineReader(line, lineNumber);
+      lineNumber++;
     }
     onDone();
 }
