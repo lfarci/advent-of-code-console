@@ -11,7 +11,7 @@ const processLineByLine = async (inputFileName, lineReader, onDone) => {
       lineReader(line, lineNumber);
       lineNumber++;
     }
-    onDone();
+    if (onDone) onDone();
 }
 
 const startDailyChallengeWith = (handler) => {
