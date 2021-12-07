@@ -1,7 +1,7 @@
 const aoc = require("../../helpers/aoc");
 const { readFileContent } = require("../../helpers/input");
 
-// I got stuck on this one. I found some solution here:
+// I got stuck on the second pard. I found some solution here:
 // https://github.com/Im-Beast/advent_of_code/blob/main/2021/day_6.ts   
 const efficientlySimulate = (lanternfish, days) => {
   const timers = Array(9).fill(0);
