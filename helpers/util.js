@@ -16,5 +16,7 @@ const findCoordinates = (numbersGrid, number) => {
 
 module.exports = {
     readNumbers: readNumbers,
+    min: array => Math.min(...array),
+    max: array => Math.max(...array),
     findCoordinates: findCoordinates
 };
