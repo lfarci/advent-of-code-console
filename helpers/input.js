@@ -3,6 +3,16 @@ const readline = require('readline');
 
 const REQUIRE_ARGV_LENGTH = 3;
 
+const readFileContent = (file, onContent, encoding = "utf8") => {
+    fs.readFile(file, encoding, (error, content) => {
+        if (error) {
+            console.error("Failed to read file:", file);
+        } else {
+            onContent(content);
+        }
+    });
+}
+
 const processLineByLine = async (inputFileName, lineReader, onDone) => {
     const fileStream = fs.createReadStream(inputFileName);
     const rl = readline.createInterface({input: fileStream, crlfDelay: Infinity});
@@ -23,6 +33,7 @@ const startDailyChallengeWith = (handler) => {
 };
 
 module.exports = {
+    readFileContent: readFileContent,
     processLineByLine: processLineByLine,
     startDailyChallengeWith: startDailyChallengeWith
 };
