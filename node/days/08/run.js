@@ -181,7 +181,7 @@ const decodeAll = (signalPatterns) => {
 
             if (currentSignalBottomLeftSegments.length > 1) {
 
-
+                const candidate1
 
                 // console.log(signalPattern, "Current:", currentSignalBottomLeftSegments, "All:", bottomLeftSegment);
                 
