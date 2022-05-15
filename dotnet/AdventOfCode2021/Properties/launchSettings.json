@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Challenge 01: Sonar Sweep": {
+      "commandName": "Project",
+      "commandLineArgs": "01"
+    }
+  }
+}
