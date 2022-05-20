@@ -61,6 +61,118 @@ namespace AdventOfCode2021.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 109
+        ///117
+        ///118
+        ///98
+        ///102
+        ///94
+        ///101
+        ///109
+        ///121
+        ///126
+        ///117
+        ///116
+        ///134
+        ///119
+        ///98
+        ///97
+        ///96
+        ///98
+        ///101
+        ///107
+        ///123
+        ///134
+        ///137
+        ///160
+        ///171
+        ///188
+        ///189
+        ///188
+        ///169
+        ///163
+        ///182
+        ///184
+        ///187
+        ///184
+        ///196
+        ///199
+        ///218
+        ///222
+        ///223
+        ///218
+        ///214
+        ///220
+        ///215
+        ///223
+        ///226
+        ///228
+        ///236
+        ///237
+        ///268
+        ///277
+        ///282
+        ///284
+        ///285
+        ///288
+        ///289
+        ///313
+        ///322
+        ///331
+        ///335
+        ///331
+        ///316
+        ///323
+        ///314
+        ///313
+        ///314
+        ///301
+        ///302
+        ///320
+        ///315
+        ///323
+        ///324
+        ///346
+        ///347
+        ///362
+        ///376
+        ///377
+        ///378
+        ///379
+        ///381
+        ///391
+        ///392
+        ///395
+        ///391
+        ///393
+        ///399
+        ///401
+        ///403
+        ///428
+        ///423
+        ///422
+        ///427
+        ///430
+        ///432
+        ///431
+        ///433
+        ///449
+        ///456
+        ///455
+        ///456
+        ///457
+        ///456
+        ///460
+        ///461
+        ///460 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AdventOfCode2021_Challenges_SonarSweep {
+            get {
+                return ResourceManager.GetString("AdventOfCode2021.Challenges.SonarSweep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 199
         ///200
         ///208
@@ -72,9 +184,9 @@ namespace AdventOfCode2021.Properties {
         ///260
         ///263.
         /// </summary>
-        internal static string AdventOfCode2021_Challenges_SonarSweep {
+        internal static string AdventOfCode2021_Challenges_SonarSweepTest {
             get {
-                return ResourceManager.GetString("AdventOfCode2021.Challenges.SonarSweep", resourceCulture);
+                return ResourceManager.GetString("AdventOfCode2021.Challenges.SonarSweepTest", resourceCulture);
             }
         }
     }

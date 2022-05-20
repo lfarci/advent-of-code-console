@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\SonarSweepInput.txt" />
+	  <EmbeddedResource Include="Resources\SonarSweepInput.txt" />
+	  <EmbeddedResource Include="Resources\SonarSweepInputTest.txt" />
   </ItemGroup>
 
   <ItemGroup>

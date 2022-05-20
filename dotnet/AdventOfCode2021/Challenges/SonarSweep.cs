@@ -7,7 +7,7 @@ namespace AdventOfCode2021.Challenges
 
         private readonly string InputFileResourceName = "AdventOfCode2021.Resources.SonarSweepInput.txt";
 
-        int CountDepthMeasurementIncrement(int[] depths)
+        int CountDepthMeasurementIncrements(int[] depths)
         {
             int count = 0;
             int previous = depths[0];
@@ -22,17 +22,43 @@ namespace AdventOfCode2021.Challenges
             return count;
         }
 
-        int CountDepthMeasurementIncrement(string[] depths)
+        int CountDepthMeasurementIncrements(string[] depths)
         {
             int[] convertedDepths = Array.ConvertAll(depths, d => int.Parse(d));
-            return CountDepthMeasurementIncrement((int[])convertedDepths);
+            return CountDepthMeasurementIncrements((int[]) convertedDepths);
+        }
+
+        int[] SumDepthWindows(int[] depths, int windowSize)
+        {
+            List<int> sums = new List<int>();
+            for (int step = 0; step + windowSize - 1 < depths.Length; step++)
+            {
+                int currentSum = 0;
+                for (int i = 0; i < windowSize; i++)
+                {
+                    currentSum += depths[step + i];
+                }
+                sums.Add(currentSum);
+            }
+
+            return sums.ToArray();
+        }
+
+        int CountDepthMeasurementIncrements(string[] depths, int windowSize)
+        {
+            int[] convertedDepths = Array.ConvertAll(depths, d => int.Parse(d));
+            int[] sums = SumDepthWindows(convertedDepths, windowSize);
+            return CountDepthMeasurementIncrements(sums);
         }
 
         public void Run()
         {
             string[] lines = ChallengeResourceManager.ReadAllLinesFrom(InputFileResourceName);
-            int measurementIncrement = CountDepthMeasurementIncrement(lines);
-            Console.WriteLine($"Day 1: SonarSweep\n\nMeasurement increment: {measurementIncrement}");
+            int measurementIncrements = CountDepthMeasurementIncrements(lines);
+            int windowedMeasurementIncrements = CountDepthMeasurementIncrements(lines, 3);
+            Console.WriteLine($"Day 01 - SonarSweep:");
+            Console.WriteLine($"- Part 1: Measurement increments: {measurementIncrements}");
+            Console.WriteLine($"- Part 2: Windowed increments: {windowedMeasurementIncrements}");
         }
     }
 }
