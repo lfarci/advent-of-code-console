@@ -30,42 +30,6 @@ namespace AdventOfCode2021.Helpers
 
     }
 
-    public class ChallengeResourceManager
-    {
-
-        static Stream GetResourceAsStream(string resourceName)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            Stream? stream = assembly.GetManifestResourceStream(resourceName);
-
-            string[] names = assembly.GetManifestResourceNames();
-            if (stream == null)
-            {
-                throw new IOException($"Could not open a stream for a resource: {resourceName}.");
-            }
-            else
-            {
-                return stream;
-            }
-        }
-
-        public static string[] ReadAllLinesFrom(string resourceName)
-        {
-            List<string> lines = new List<string>();
-            using (Stream stream = GetResourceAsStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                string? line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    lines.Add(line);
-                }
-            }
-            return lines.ToArray();
-        }
-
-    }
-
     public class DailyChallengeInputResolver
     {
 
