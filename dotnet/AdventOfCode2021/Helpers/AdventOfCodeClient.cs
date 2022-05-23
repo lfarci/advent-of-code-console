@@ -10,9 +10,10 @@ namespace AdventOfCode2021
         public string Host { get; } = "localhost";
         public string SessionId
         {
-            get {
+            get
+            {
                 return System.Environment.GetEnvironmentVariable("AOC_SESSION_ID") ?? "";
-            } 
+            }
         }
 
         AdventOfCodeClient()
@@ -67,7 +68,7 @@ namespace AdventOfCode2021
         public static AdventOfCodeClient GetInstance()
         {
             if (_instance == null)
-            { 
+            {
                 _instance = new AdventOfCodeClient();
             }
             return _instance;

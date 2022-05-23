@@ -1,12 +1,8 @@
-﻿using AdventOfCode2021.Challenges;
-using System.Reflection;
-
-namespace AdventOfCode2021.Helpers
+﻿namespace AdventOfCode2021.Helpers
 {
 
     public class DailyChallengeInputResolver
     {
-        private static DailyChallengeInputResolver? _instance;
         private static readonly AdventOfCodeClient client = AdventOfCodeClient.GetInstance();
 
         public static async Task<Stream> GetInputAsStreamAsync(int year, int day)

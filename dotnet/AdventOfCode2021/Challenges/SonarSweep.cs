@@ -30,7 +30,7 @@ namespace AdventOfCode2021.Challenges
         int CountDepthMeasurementIncrements(string[] depths)
         {
             int[] convertedDepths = Array.ConvertAll(depths, d => int.Parse(d));
-            return CountDepthMeasurementIncrements((int[]) convertedDepths);
+            return CountDepthMeasurementIncrements((int[])convertedDepths);
         }
 
         int[] SumDepthWindows(int[] depths, int windowSize)
