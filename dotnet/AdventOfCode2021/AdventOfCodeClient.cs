@@ -5,6 +5,7 @@ namespace AdventOfCode2021
     public class AdventOfCodeClient
     {
 
+        private static AdventOfCodeClient _instance;
         private HttpClient _client;
         public string Host { get; } = "localhost";
         public string SessionId
@@ -14,7 +15,7 @@ namespace AdventOfCode2021
             } 
         }
 
-        public AdventOfCodeClient()
+        AdventOfCodeClient()
         {
             var handler = new HttpClientHandler()
             {
@@ -48,7 +49,7 @@ namespace AdventOfCode2021
             return request;
         }
 
-        public async Task<HttpResponseMessage?> SendDailyChallengeInputRequest(int year, int day)
+        private async Task<HttpResponseMessage?> SendDailyChallengeInputRequest(int year, int day)
         {
             HttpResponseMessage? response = null;
             try
@@ -61,6 +62,15 @@ namespace AdventOfCode2021
                 Console.Error.WriteLine($"Request failure: {e.StackTrace}");
             }
             return response;
+        }
+
+        public static AdventOfCodeClient GetInstance()
+        {
+            if (_instance == null)
+            { 
+                _instance = new AdventOfCodeClient();
+            }
+            return _instance;
         }
 
         public async Task<Stream> GetDailyChallengeInputAsStreamAsync(int year, int day)

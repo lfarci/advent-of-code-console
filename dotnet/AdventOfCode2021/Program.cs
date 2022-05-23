@@ -9,19 +9,12 @@ namespace AdventOfCode2021
 
         static async Task Main(string[] args)
         {
-            AdventOfCodeClient client = new AdventOfCodeClient();
-
-            
-
-
-            return;
-
             if (args.Length == 1)
             {
                 IDailyChallenge? challenge = DailyChallengeResolver.Resolve(args[0]);
                 if (challenge != null)
                 {
-                    challenge.Run();
+                    await challenge.Run();
                 }
                 else
                 {

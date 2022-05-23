@@ -51,9 +51,9 @@ namespace AdventOfCode2021.Challenges
             return CountDepthMeasurementIncrements(sums);
         }
 
-        public void Run()
+        public async Task Run()
         {
-            string[] lines = ChallengeResourceManager.ReadAllLinesFrom(InputFileResourceName);
+            string[] lines = await DailyChallengeInputResolver.ReadAllLinesFrom(2021, 1);
             int measurementIncrements = CountDepthMeasurementIncrements(lines);
             int windowedMeasurementIncrements = CountDepthMeasurementIncrements(lines, 3);
             Console.WriteLine($"Day 01 - SonarSweep:");
