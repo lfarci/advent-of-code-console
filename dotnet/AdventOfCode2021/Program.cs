@@ -14,7 +14,7 @@ namespace AdventOfCode2021
                 IDailyChallenge? challenge = DailyChallengeResolver.Resolve(args[0]);
                 if (challenge != null)
                 {
-                    await challenge.Run();
+                    await challenge.ShowResults();
                 }
                 else
                 {

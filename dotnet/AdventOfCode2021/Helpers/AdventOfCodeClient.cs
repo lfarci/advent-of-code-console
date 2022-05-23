@@ -5,7 +5,7 @@ namespace AdventOfCode2021
     public class AdventOfCodeClient
     {
 
-        private static AdventOfCodeClient _instance;
+        private static AdventOfCodeClient? _instance;
         private HttpClient _client;
         public string Host { get; } = "localhost";
         public string SessionId

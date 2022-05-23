@@ -2,10 +2,15 @@
 
 namespace AdventOfCode2021.Challenges
 {
-    public class SonarSweepChallenge : IDailyChallenge
+    public class SonarSweepChallenge : DailyChallenge
     {
 
-        private readonly string InputFileResourceName = "AdventOfCode2021.Resources.SonarSweepInput.txt";
+        private const string title = "Sonar Sweep";
+        private const int day = 1;
+
+        public SonarSweepChallenge() : base(title, day)
+        {
+        }
 
         int CountDepthMeasurementIncrements(int[] depths)
         {
@@ -51,14 +56,12 @@ namespace AdventOfCode2021.Challenges
             return CountDepthMeasurementIncrements(sums);
         }
 
-        public async Task Run()
+        protected override void Run(string[] lines)
         {
-            string[] lines = await DailyChallengeInputResolver.ReadAllLinesFrom(2021, 1);
             int measurementIncrements = CountDepthMeasurementIncrements(lines);
             int windowedMeasurementIncrements = CountDepthMeasurementIncrements(lines, 3);
-            Console.WriteLine($"Day 01 - SonarSweep:");
-            Console.WriteLine($"- Part 1: Measurement increments: {measurementIncrements}");
-            Console.WriteLine($"- Part 2: Windowed increments: {windowedMeasurementIncrements}");
+            RegisterResultEntry($"measurement increments is {measurementIncrements}");
+            RegisterResultEntry($"windowed increments is {windowedMeasurementIncrements}");
         }
     }
 }
