@@ -7,8 +7,15 @@ namespace AdventOfCode2021
 
         private static readonly string ProgramFriendlyName = AppDomain.CurrentDomain.FriendlyName;
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
+            AdventOfCodeClient client = new AdventOfCodeClient();
+
+            
+
+
+            return;
+
             if (args.Length == 1)
             {
                 IDailyChallenge? challenge = DailyChallengeResolver.Resolve(args[0]);
