@@ -12,7 +12,7 @@ namespace AdventOfCode2021.Challenges
         {
         }
 
-        int CountDepthMeasurementIncrements(int[] depths)
+        private static int CountDepthIncrements(int[] depths)
         {
             int count = 0;
             int previous = depths[0];
@@ -27,13 +27,7 @@ namespace AdventOfCode2021.Challenges
             return count;
         }
 
-        int CountDepthMeasurementIncrements(string[] depths)
-        {
-            int[] convertedDepths = Array.ConvertAll(depths, d => int.Parse(d));
-            return CountDepthMeasurementIncrements((int[])convertedDepths);
-        }
-
-        int[] SumDepthWindows(int[] depths, int windowSize)
+        private static int[] SumDepthsByWindow(int[] depths, int windowSize)
         {
             List<int> sums = new List<int>();
             for (int step = 0; step + windowSize - 1 < depths.Length; step++)
@@ -49,17 +43,23 @@ namespace AdventOfCode2021.Challenges
             return sums.ToArray();
         }
 
-        int CountDepthMeasurementIncrements(string[] depths, int windowSize)
+        public static int CountDepthIncrements(string[] depths)
         {
             int[] convertedDepths = Array.ConvertAll(depths, d => int.Parse(d));
-            int[] sums = SumDepthWindows(convertedDepths, windowSize);
-            return CountDepthMeasurementIncrements(sums);
+            return CountDepthIncrements((int[])convertedDepths);
+        }
+
+        public static int CountDepthIncrements(string[] depths, int windowSize)
+        {
+            int[] convertedDepths = Array.ConvertAll(depths, d => int.Parse(d));
+            int[] sums = SumDepthsByWindow(convertedDepths, windowSize);
+            return CountDepthIncrements(sums);
         }
 
         protected override void Run(string[] lines)
         {
-            int measurementIncrements = CountDepthMeasurementIncrements(lines);
-            int windowedMeasurementIncrements = CountDepthMeasurementIncrements(lines, 3);
+            int measurementIncrements = CountDepthIncrements(lines);
+            int windowedMeasurementIncrements = CountDepthIncrements(lines, 3);
             RegisterResultEntry($"measurement increments is {measurementIncrements}");
             RegisterResultEntry($"windowed increments is {windowedMeasurementIncrements}");
         }
