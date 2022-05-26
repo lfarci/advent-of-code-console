@@ -1,9 +1,9 @@
-using AdventOfCode2021.Challenges;
 using Xunit;
+using AdventOfCode2021.Challenges;
 
-namespace AdventOfCode2021Tests.Challenges
+namespace Tests.Challenges
 {
-    public class SonarSweepTests
+    public class SonarSweepChallengeTests
     {
         private static string[] depths = { "199", "200", "208", "210", "200", "207", "240", "269", "260", "263" };
 

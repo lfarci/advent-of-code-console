@@ -6,7 +6,8 @@ namespace AdventOfCode2021.Helpers
     {
         private static IDictionary<string, IDailyChallenge> challenges = new Dictionary<string, IDailyChallenge>
         {
-            { "01", new SonarSweepChallenge() }
+            { "01", new SonarSweepChallenge() },
+            { "02", new DiveChallenge() }
         };
 
         public static IDailyChallenge? Resolve(string challengeKey)
