@@ -1,4 +1,5 @@
-﻿using AdventOfCode2021.Challenges;
+﻿using AdventOfCode2021.Challenges.Day01;
+using AdventOfCode2021.Challenges.Day02;
 
 namespace AdventOfCode2021.Helpers
 {

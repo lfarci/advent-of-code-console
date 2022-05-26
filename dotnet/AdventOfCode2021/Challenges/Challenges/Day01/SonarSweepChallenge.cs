@@ -1,6 +1,6 @@
 ﻿using AdventOfCode2021.Helpers;
 
-namespace AdventOfCode2021.Challenges
+namespace AdventOfCode2021.Challenges.Day01
 {
     public class SonarSweepChallenge : DailyChallenge
     {
