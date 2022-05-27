@@ -1,7 +1,7 @@
-using Xunit;
 using AdventOfCode2021.Challenges.Day01;
+using Xunit;
 
-namespace Tests.Challenges
+namespace Tests.Challenges.Day01
 {
     public class SonarSweepChallengeTests
     {

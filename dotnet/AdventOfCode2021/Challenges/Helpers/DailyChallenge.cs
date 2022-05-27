@@ -15,10 +15,10 @@
 
         private List<string> _resultEntries;
 
-        public DailyChallenge(string title, int index)
+        public DailyChallenge(string title, int day)
         {
             Title = title;
-            Day = index;
+            Day = day;
             _resultEntries = new List<string>();
         }
 

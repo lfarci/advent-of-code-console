@@ -1,5 +1,6 @@
 ﻿using AdventOfCode2021.Challenges.Day01;
 using AdventOfCode2021.Challenges.Day02;
+using AdventOfCode2021.Challenges.Day03;
 
 namespace AdventOfCode2021.Helpers
 {
@@ -8,7 +9,8 @@ namespace AdventOfCode2021.Helpers
         private static IDictionary<string, IDailyChallenge> challenges = new Dictionary<string, IDailyChallenge>
         {
             { "01", new SonarSweepChallenge() },
-            { "02", new DiveChallenge() }
+            { "02", new DiveChallenge() },
+            { "03", new BinaryDiagnosticChallenge() }
         };
 
         public static IDailyChallenge? Resolve(string challengeKey)

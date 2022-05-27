@@ -1,6 +1,4 @@
-﻿using AdventOfCode2021.Challenges.Day02;
-
-namespace AdventOfCode2021.Challenges.Day02
+﻿namespace AdventOfCode2021.Challenges.Day02
 {
     public class SubmarineCoordinate : Coordinate
     {
