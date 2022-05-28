@@ -9,5 +9,9 @@
         public AdventOfCodeClientException(string? message) : base(message)
         {
         }
+
+        public AdventOfCodeClientException(string? message, Exception cause) : base(message, cause)
+        {
+        }
     }
 }

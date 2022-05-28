@@ -1,11 +1,11 @@
-﻿namespace AdventOfCode2021
+﻿namespace AdventOfCode2021.CommandLineInterface.Client
 {
     public class AdventOfCodeHttpClient
     {
 
         private static AdventOfCodeHttpClient? instance;
         private static readonly string scheme = "https";
-        private static readonly  HttpClientHandler handler = new HttpClientHandler()
+        private static readonly HttpClientHandler handler = new HttpClientHandler()
         {
             ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
         };
@@ -14,9 +14,6 @@
         private readonly string _adventOfCodeHost;
         private readonly string _sessionId;
 
-        public string Host { get; } = "localhost";
-        
-
         AdventOfCodeHttpClient(string adventOfCodeHost, string sessionId)
         {
             _adventOfCodeHost = adventOfCodeHost;
@@ -24,6 +21,16 @@
             _client = new HttpClient(handler);
         }
 
+        public AdventOfCodeHttpClient(
+            HttpClientHandler handler,
+            string adventOfCodeHost,
+            string sessionId) : this(adventOfCodeHost, sessionId)
+        {
+            _client = new HttpClient(handler);
+        }
+
+        public string Host { get { return _adventOfCodeHost; } }
+        public string SessionId { get { return _sessionId; } }
 
         private Uri BuildResourceUri(string resourcePath)
         {
@@ -36,10 +43,10 @@
             return uriBuilder.Uri;
         }
 
-        private HttpRequestMessage BuildHttpGetRequestMessage(string resourcePath)
+        public HttpRequestMessage BuildHttpGetRequestMessage(string resourcePath)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, BuildResourceUri(resourcePath));
-            request.Headers.Add("Host", Host);
+            request.Headers.Add("Host", Environment.MachineName);
             request.Headers.Add("Cookie", $"session={_sessionId}");
             return request;
         }
@@ -54,7 +61,7 @@
             }
             catch (HttpRequestException e)
             {
-                Console.Error.WriteLine($"Request failure: {e.StackTrace}");
+                throw new AdventOfCodeClientException($"Could not get resource at {resourcePath}", e);
             }
             return response;
         }
