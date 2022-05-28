@@ -4,14 +4,13 @@ using Moq.Protected;
 using System.Linq;
 using AdventOfCode2021.CommandLineInterface.Client;
 using System.Net.Http;
-using AdventOfCode2021;
 using System.Threading;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace Tests.CommandLineInterface.Client
 {
-    public class AdventOdCodeHttpClientTests
+    public class AdventOfCodeHttpClientTests
     {
         private static readonly string host = "adventofcode.com";
         private static readonly string session = "sessionId";
@@ -25,6 +24,12 @@ namespace Tests.CommandLineInterface.Client
                 AdventOfCodeHttpClient.GetInstance(host, session)
             );
         }
+
+        [Fact]
+        public void Host_ReturnsHostPassedToConstructor() => Assert.Equal(host, client.Host);
+
+        [Fact]
+        public void SessionId_ReturnsHostPassedToConstructor() => Assert.Equal(session, client.SessionId);
 
         [Fact]
         public void BuildHttpGetRequestMessage_ValidResourcePath_ReturnsRequestWithRootUri()
