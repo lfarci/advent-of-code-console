@@ -14,7 +14,7 @@ namespace Tests.CommandLineInterface.Client
     {
         private static readonly string host = "adventofcode.com";
         private static readonly string session = "sessionId";
-        private static readonly AdventOfCodeHttpClient client = AdventOfCodeHttpClient.GetInstance(host, session);
+        private static readonly IAdventOfCodeHttpClient client = AdventOfCodeHttpClient.GetInstance(host, session);
 
         [Fact]
         public void GetInstance_ValidHostAndSessionId_ReturnsSameInstance()

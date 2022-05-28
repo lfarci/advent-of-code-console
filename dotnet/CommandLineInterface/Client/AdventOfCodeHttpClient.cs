@@ -1,9 +1,9 @@
 ﻿namespace AdventOfCode2021.CommandLineInterface.Client
 {
-    public class AdventOfCodeHttpClient
+    public class AdventOfCodeHttpClient : IAdventOfCodeHttpClient
     {
 
-        private static AdventOfCodeHttpClient? instance;
+        private static IAdventOfCodeHttpClient? instance;
         private static readonly string scheme = "https";
         private static readonly HttpClientHandler handler = new HttpClientHandler()
         {
@@ -51,7 +51,7 @@
             return request;
         }
 
-        public async Task<HttpResponseMessage?> GetResourceAsync(string resourcePath)
+        public virtual async Task<HttpResponseMessage?> GetResourceAsync(string resourcePath)
         {
             HttpResponseMessage? response = null;
             try
@@ -66,7 +66,7 @@
             return response;
         }
 
-        public static AdventOfCodeHttpClient GetInstance(string adventOfCodeHost, string sessionId)
+        public static IAdventOfCodeHttpClient GetInstance(string adventOfCodeHost, string sessionId)
         {
             if (instance == null)
             {
