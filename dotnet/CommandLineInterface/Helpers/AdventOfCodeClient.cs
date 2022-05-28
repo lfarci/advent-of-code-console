@@ -1,6 +1,4 @@
-﻿
-
-namespace AdventOfCode2021
+﻿namespace AdventOfCode2021
 {
     public class AdventOfCodeClient
     {

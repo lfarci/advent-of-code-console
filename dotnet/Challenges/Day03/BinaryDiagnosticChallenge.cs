@@ -1,7 +1,6 @@
-﻿using AdventOfCode2021.Helpers;
-using System.Text;
+﻿using System.Text;
 
-namespace AdventOfCode2021.Challenges.Day03
+namespace AdventOfCode2021.Challenges
 {
 
 
@@ -14,13 +13,15 @@ namespace AdventOfCode2021.Challenges.Day03
         {
         }
 
-        protected override void Run(string[] lines)
+        public override IEnumerable<PuzzleAnswer> Run(string[] lines)
         {
             int powerConsumption = DecodePowerConsumption(lines);
             int oxygenGeneratorRating = DecodeOxygenGeneratorRating(lines);
             int co2ScrubberRating = DecodeCO2ScrubberRating(lines);
-            RegisterResultEntry($"power consumption is {powerConsumption}");
-            RegisterResultEntry($"Oxygen generator rating is {oxygenGeneratorRating}, CO2 Scrubber rating is {co2ScrubberRating}, result is {oxygenGeneratorRating * co2ScrubberRating}");
+            return new List<PuzzleAnswer> {
+                new PuzzleAnswer(powerConsumption, "power consumption"),
+                new PuzzleAnswer(oxygenGeneratorRating * co2ScrubberRating, "oxygen generator rating multiplied by the CO2 scrubber rating")
+            };
         }
 
         public static string DecodeGammaRateFrom(string[] diagnosticReport)

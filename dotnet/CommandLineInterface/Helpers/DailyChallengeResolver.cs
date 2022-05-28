@@ -1,19 +1,17 @@
-﻿using AdventOfCode2021.Challenges.Day01;
-using AdventOfCode2021.Challenges.Day02;
-using AdventOfCode2021.Challenges.Day03;
+﻿using AdventOfCode2021.Challenges;
 
 namespace AdventOfCode2021.Helpers
 {
-    internal class DailyChallengeResolver
+    class DailyChallengeResolver
     {
-        private static IDictionary<string, IDailyChallenge> challenges = new Dictionary<string, IDailyChallenge>
+        private static IDictionary<string, DailyChallenge> challenges = new Dictionary<string, DailyChallenge>
         {
             { "01", new SonarSweepChallenge() },
             { "02", new DiveChallenge() },
             { "03", new BinaryDiagnosticChallenge() }
         };
 
-        public static IDailyChallenge? Resolve(string challengeKey)
+        public static DailyChallenge? Resolve(string challengeKey)
         {
             if (challenges.ContainsKey(challengeKey))
                 return challenges[challengeKey];

@@ -1,4 +1,5 @@
-﻿using AdventOfCode2021.Helpers;
+﻿using AdventOfCode2021.Challenges;
+using AdventOfCode2021.Helpers;
 
 namespace AdventOfCode2021
 {
@@ -11,10 +12,16 @@ namespace AdventOfCode2021
         {
             if (args.Length == 1)
             {
-                IDailyChallenge? challenge = DailyChallengeResolver.Resolve(args[0]);
+                DailyChallenge? challenge = DailyChallengeResolver.Resolve(args[0]);
                 if (challenge != null)
                 {
-                    await challenge.ShowResults();
+                    string[] lines = await DailyChallengeInputResolver.ReadAllLinesFrom(challenge.Year, challenge.Day);
+                    IEnumerable<DailyChallenge.PuzzleAnswer> answers = challenge.Run(lines);
+                    Console.WriteLine($"Day {challenge.Day}: {challenge.Title}");
+                    foreach (DailyChallenge.PuzzleAnswer answer in answers)
+                    {
+                        Console.WriteLine($"\t- {answer.Description}: {answer.Value}.");
+                    }
                 }
                 else
                 {

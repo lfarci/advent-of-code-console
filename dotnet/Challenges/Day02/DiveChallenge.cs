@@ -1,6 +1,4 @@
-﻿using AdventOfCode2021.Helpers;
-
-namespace AdventOfCode2021.Challenges.Day02
+﻿namespace AdventOfCode2021.Challenges
 {
     public partial class DiveChallenge : DailyChallenge
     {
@@ -22,15 +20,16 @@ namespace AdventOfCode2021.Challenges.Day02
             return current;
         }
 
-        protected override void Run(string[] lines)
+        public override IEnumerable<PuzzleAnswer> Run(string[] lines)
         {
             ICoordinate coordinate = new Coordinate(0, 0);
             ICoordinate submarineCoordinate = new SubmarineCoordinate(0, 0, 0);
             coordinate = FollowInstructionsFrom(coordinate, lines);
             submarineCoordinate = FollowInstructionsFrom(submarineCoordinate, lines);
-            RegisterResultEntry($"puzzle answer is {coordinate.X * coordinate.Y}");
-            RegisterResultEntry($"puzzle answer is {submarineCoordinate.X * submarineCoordinate.Y}");
+            return new List<PuzzleAnswer> {
+                new PuzzleAnswer(coordinate.X * coordinate.Y, "simplistic instructions"),
+                new PuzzleAnswer(submarineCoordinate.X * submarineCoordinate.Y, "submarine instructions")
+            };
         }
-
     }
 }
