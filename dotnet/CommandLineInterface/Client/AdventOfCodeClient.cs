@@ -3,12 +3,25 @@
     public class AdventOfCodeClient : IAdventOfCodeClient
     {
 
+        private static IAdventOfCodeClient? instance = null;
         private static readonly string host = "adventofcode.com";
         private static readonly string session = Environment.GetEnvironmentVariable("AOC_SESSION_ID") ?? "";
 
         private readonly IAdventOfCodeHttpClient _client;
 
-        public AdventOfCodeClient()
+        public static IAdventOfCodeClient Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AdventOfCodeClient();
+                }
+                return instance;
+            }
+        }
+
+        private AdventOfCodeClient()
         {
             _client = AdventOfCodeHttpClient.GetInstance(host, session);
         }

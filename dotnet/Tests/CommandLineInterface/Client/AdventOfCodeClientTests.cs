@@ -9,7 +9,7 @@ namespace Tests.CommandLineInterface.Client
 {
     public class AdventOfCodeClientTests
     {
-        private static readonly Mock<IAdventOfCodeHttpClient> clientMock = new Mock<IAdventOfCodeHttpClient>();
+        private static readonly Mock<IAdventOfCodeHttpClient> clientMock = new();
 
         private static IAdventOfCodeClient GetClientThatReturns(HttpResponseMessage? response)
         {
@@ -17,6 +17,12 @@ namespace Tests.CommandLineInterface.Client
                 .Setup(client => client.GetResourceAsync(It.IsAny<string>()).Result)
                 .Returns(response);
             return new AdventOfCodeClient(clientMock.Object);
+        }
+
+        [Fact]
+        public void Instance_AlwaysReturnsSameInstance()
+        {
+            Assert.Equal(AdventOfCodeClient.Instance, AdventOfCodeClient.Instance);
         }
 
         [Fact]

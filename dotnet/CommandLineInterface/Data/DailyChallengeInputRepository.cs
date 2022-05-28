@@ -4,7 +4,7 @@ namespace AdventOfCode2021.CommandLineInterface.Data
 {
     public static class DailyChallengeInputRepository
     {
-        private static readonly AdventOfCodeClient client = new AdventOfCodeClient();
+        private static readonly IAdventOfCodeClient client = AdventOfCodeClient.Instance;
 
         public static async Task<Stream> GetInputAsStreamAsync(int year, int day)
         {
