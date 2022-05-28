@@ -40,7 +40,7 @@
         public static int CountDepthIncrements(string[] depths)
         {
             int[] convertedDepths = Array.ConvertAll(depths, d => int.Parse(d));
-            return CountDepthIncrements((int[])convertedDepths);
+            return CountDepthIncrements(convertedDepths);
         }
 
         public static int CountDepthIncrements(string[] depths, int windowSize)
