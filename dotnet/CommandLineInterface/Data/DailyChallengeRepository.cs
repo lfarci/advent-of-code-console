@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2021.CommandLineInterface.Data
 {
-    class DailyChallengeRepository
+    public static class DailyChallengeRepository
     {
         private static List<DailyChallenge> challenges = new List<DailyChallenge>
         {

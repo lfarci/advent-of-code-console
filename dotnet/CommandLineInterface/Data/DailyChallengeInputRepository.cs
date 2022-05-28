@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2021.CommandLineInterface.Data
 {
-    public class DailyChallengeInputRepository
+    public static class DailyChallengeInputRepository
     {
         private static readonly AdventOfCodeClient client = new AdventOfCodeClient();
 

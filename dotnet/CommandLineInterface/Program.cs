@@ -3,7 +3,7 @@ using AdventOfCode2021.CommandLineInterface.Data;
 
 namespace AdventOfCode2021
 {
-    class Program
+    public static class Program
     {
 
         private static readonly string ProgramFriendlyName = AppDomain.CurrentDomain.FriendlyName;

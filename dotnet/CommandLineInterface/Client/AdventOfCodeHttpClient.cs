@@ -10,7 +10,7 @@
             ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
         };
 
-        private HttpClient _client;
+        private readonly HttpClient _client;
         private readonly string _adventOfCodeHost;
         private readonly string _sessionId;
 
