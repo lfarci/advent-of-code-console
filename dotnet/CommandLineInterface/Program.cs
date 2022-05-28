@@ -1,5 +1,5 @@
 ﻿using AdventOfCode2021.Challenges;
-using AdventOfCode2021.Helpers;
+using AdventOfCode2021.CommandLineInterface.Data;
 
 namespace AdventOfCode2021
 {
@@ -12,10 +12,10 @@ namespace AdventOfCode2021
         {
             if (args.Length == 1)
             {
-                DailyChallenge? challenge = DailyChallengeResolver.Resolve(args[0]);
+                DailyChallenge? challenge = DailyChallengeRepository.FindByDay(args[0]);
                 if (challenge != null)
                 {
-                    string[] lines = await DailyChallengeInputResolver.ReadAllLinesFrom(challenge.Year, challenge.Day);
+                    string[] lines = await DailyChallengeInputRepository.ReadAllLinesFrom(challenge.Year, challenge.Day);
                     IEnumerable<DailyChallenge.PuzzleAnswer> answers = challenge.Run(lines);
                     Console.WriteLine($"Day {challenge.Day}: {challenge.Title}");
                     foreach (DailyChallenge.PuzzleAnswer answer in answers)
@@ -25,7 +25,7 @@ namespace AdventOfCode2021
                 }
                 else
                 {
-                    string[] challengeKeys = DailyChallengeResolver.FindAllChallengeKeys();
+                    string[] challengeKeys = DailyChallengeRepository.FindAllChallengeKeys();
                     string challengeKeysText = string.Join(",", challengeKeys);
                     Console.WriteLine($"No daily challenge could be resolved with key: \"{args[0]}\".");
                     Console.WriteLine($"Existing keys are: {challengeKeysText}");

@@ -2,10 +2,7 @@
 {
     public partial class DiveChallenge : DailyChallenge
     {
-        private const string title = "Dive!";
-        private const int day = 2;
-
-        public DiveChallenge() : base(title, day)
+        public DiveChallenge(int day, string title) : base(title, day)
         {
         }
 

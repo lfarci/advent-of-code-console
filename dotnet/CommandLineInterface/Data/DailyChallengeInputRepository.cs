@@ -1,9 +1,10 @@
-﻿namespace AdventOfCode2021.Helpers
-{
+﻿using AdventOfCode2021.CommandLineInterface.Client;
 
-    public class DailyChallengeInputResolver
+namespace AdventOfCode2021.CommandLineInterface.Data
+{
+    public class DailyChallengeInputRepository
     {
-        private static readonly AdventOfCodeClient client = AdventOfCodeClient.GetInstance();
+        private static readonly AdventOfCodeClient client = new AdventOfCodeClient();
 
         public static async Task<Stream> GetInputAsStreamAsync(int year, int day)
         {

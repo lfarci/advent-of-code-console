@@ -6,10 +6,7 @@ namespace AdventOfCode2021.Challenges
 
     public class BinaryDiagnosticChallenge : DailyChallenge
     {
-        private const string title = "Binary Diagnostic";
-        private const int day = 3;
-
-        public BinaryDiagnosticChallenge() : base(title, day)
+        public BinaryDiagnosticChallenge(int day, string title) : base(title, day)
         {
         }
 

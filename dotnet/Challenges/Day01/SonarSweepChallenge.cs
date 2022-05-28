@@ -2,11 +2,7 @@
 {
     public class SonarSweepChallenge : DailyChallenge
     {
-
-        private const string title = "Sonar Sweep";
-        private const int day = 1;
-
-        public SonarSweepChallenge() : base(title, day)
+        public SonarSweepChallenge(int day, string title) : base(title, day)
         {
         }
 

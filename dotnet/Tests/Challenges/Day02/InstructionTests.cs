@@ -1,4 +1,4 @@
-﻿using AdventOfCode2021.Challenges.Day02;
+﻿using AdventOfCode2021.Challenges;
 using System;
 using Xunit;
 
