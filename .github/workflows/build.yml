@@ -38,6 +38,7 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"lfarci_advent-of-code-2021" /n:"Advent Of Code 2021" /o:"lfarci" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
