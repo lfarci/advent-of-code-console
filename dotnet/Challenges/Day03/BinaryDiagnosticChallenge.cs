@@ -25,7 +25,7 @@ namespace AdventOfCode2021.Challenges
         {
             if (diagnosticReport.Length == 0)
             {
-                throw new ArgumentException(nameof(diagnosticReport));
+                throw new ArgumentException("Cannot decode gamma rate from an empty report.");
             }
             int[] enabledBitsCounters = CountEnabledBitsByPosition(diagnosticReport);
             StringBuilder sb = new StringBuilder();
