@@ -13,9 +13,9 @@
                 Value = value;
             }
         }
-
+        
+        public static int Year { get { return 2021;  } }
         public string Title { get; }
-        public static int Year = 2021;
         public int Day { get; }
 
         protected DailyChallenge(string title, int day)
