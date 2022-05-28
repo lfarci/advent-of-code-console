@@ -12,14 +12,14 @@
         {
             if (string.IsNullOrEmpty(text))
             {
-                throw new ArgumentException(nameof(text));
+                throw new ArgumentException("Cannot parse from an empty string.");
             }
 
             string[] tokens = text.Split(' ');
 
             if (tokens.Length != length)
             {
-                throw new ArgumentException(nameof(text));
+                throw new ArgumentException($"Unexpected number of tokens: {text}.");
             }
 
             try
@@ -27,13 +27,13 @@
                 int value = Int32.Parse(tokens[1]);
                 if (!validNames.Contains(tokens[0]))
                 {
-                    throw new ArgumentException(nameof(text));
+                    throw new ArgumentException($"Unknown instruction: {tokens[0]}");
                 }
                 return new Instruction(tokens[0], value);
             }
             catch (FormatException e)
             {
-                throw new ArgumentException(nameof(text), e);
+                throw new ArgumentException($"Invalid value: {tokens[1]}", e);
             }
         }
 
