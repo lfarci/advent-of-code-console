@@ -30,7 +30,7 @@ namespace AdventOfCode2021.CommandLineInterface.Data
 
         public static string[] FindAllChallengeKeys()
         {
-            return new string[0];
+            return Array.Empty<string>();
         }
 
     }

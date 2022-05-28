@@ -38,7 +38,7 @@ namespace Tests.Challenges.Day02
         public void FollowInstructionsFrom_CoordinateAndNoInstructions_RetunsInputCoordinate(int x, int y)
         {
             var departure = new Coordinate(x, y);
-            var arrival = DiveChallenge.FollowInstructionsFrom(departure, new string[0]);
+            var arrival = DiveChallenge.FollowInstructionsFrom(departure, Array.Empty<string>());
             Assert.True(departure.Equals(arrival));
         }
 

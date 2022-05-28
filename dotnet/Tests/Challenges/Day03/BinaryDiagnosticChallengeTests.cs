@@ -25,7 +25,7 @@ namespace Tests.Challenges.Day03
         [Fact]
         public void DecodeGammaRateFrom_EmptyReport_ThrowsArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => BinaryDiagnosticChallenge.DecodeGammaRateFrom(new string[0]));
+            Assert.Throws<ArgumentException>(() => BinaryDiagnosticChallenge.DecodeGammaRateFrom(Array.Empty<string>()));
         }
 
         [Fact]
