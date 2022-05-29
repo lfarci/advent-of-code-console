@@ -7,6 +7,7 @@ namespace AdventOfCode2021
     {
 
         private static readonly string ProgramFriendlyName = AppDomain.CurrentDomain.FriendlyName;
+        private static readonly IChallengeInputRepository inputRepository = ChallengeInputRepository.Instance;
 
         static async Task Main(string[] args)
         {
@@ -15,7 +16,7 @@ namespace AdventOfCode2021
                 DailyChallenge? challenge = DailyChallengeRepository.FindByDay(args[0]);
                 if (challenge != null)
                 {
-                    string[] lines = await DailyChallengeInputRepository.ReadAllLinesFrom(DailyChallenge.Year, challenge.Day);
+                    string[] lines = await inputRepository.FindInputLinesByYearAndDayAsync(DailyChallenge.Year, challenge.Day);
                     IEnumerable<DailyChallenge.PuzzleAnswer> answers = challenge.Run(lines);
                     Console.WriteLine($"Day {challenge.Day}: {challenge.Title}");
                     foreach (DailyChallenge.PuzzleAnswer answer in answers)
