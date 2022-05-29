@@ -25,10 +25,7 @@ namespace AdventOfCode2021
                 }
                 else
                 {
-                    string[] challengeKeys = DailyChallengeRepository.FindAllChallengeKeys();
-                    string challengeKeysText = string.Join(",", challengeKeys);
                     Console.WriteLine($"No daily challenge could be resolved with key: \"{args[0]}\".");
-                    Console.WriteLine($"Existing keys are: {challengeKeysText}");
                 }
             }
             else

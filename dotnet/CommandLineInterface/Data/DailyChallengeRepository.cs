@@ -11,6 +11,8 @@ namespace AdventOfCode2021.CommandLineInterface.Data
             new BinaryDiagnosticChallenge(3, "Binary Diagnostic")
         };
 
+        public static List<DailyChallenge> Challenges { get => challenges; }
+
         public static DailyChallenge? FindByDay(int day) => challenges.FirstOrDefault(c => c.Day == day);
 
         public static DailyChallenge? FindByDay(string day)
@@ -18,7 +20,7 @@ namespace AdventOfCode2021.CommandLineInterface.Data
             DailyChallenge? challenge;
             try
             {
-                int result = Int32.Parse(day);
+                int result = int.Parse(day);
                 challenge = FindByDay(result);
             }
             catch (FormatException)
@@ -27,11 +29,5 @@ namespace AdventOfCode2021.CommandLineInterface.Data
             }
             return challenge;
         }
-
-        public static string[] FindAllChallengeKeys()
-        {
-            return Array.Empty<string>();
-        }
-
     }
 }
