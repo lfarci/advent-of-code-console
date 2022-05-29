@@ -1,13 +1,17 @@
-﻿namespace AdventOfCode2021.CommandLineInterface.Client
+﻿using System.Net.Security;
+
+namespace AdventOfCode2021.CommandLineInterface.Client
 {
     public class AdventOfCodeHttpClient : IAdventOfCodeHttpClient
     {
 
         private static IAdventOfCodeHttpClient? instance;
         private static readonly string scheme = "https";
-        private static readonly HttpClientHandler handler = new HttpClientHandler()
+        private static readonly HttpClientHandler handler = new()
         {
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            ServerCertificateCustomValidationCallback = (request, certificate, cetChain, policyErrors) => {
+                return policyErrors == SslPolicyErrors.None;
+            }
         };
 
         private readonly HttpClient _client;
@@ -46,7 +50,7 @@
         public HttpRequestMessage BuildHttpGetRequestMessage(string resourcePath)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, BuildResourceUri(resourcePath));
-            request.Headers.Add("Host", Environment.MachineName);
+            request.Headers.Add("Host", _adventOfCodeHost);
             request.Headers.Add("Cookie", $"session={_sessionId}");
             return request;
         }

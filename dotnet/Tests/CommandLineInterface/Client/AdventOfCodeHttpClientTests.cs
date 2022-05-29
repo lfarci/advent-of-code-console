@@ -58,7 +58,7 @@ namespace Tests.CommandLineInterface.Client
         public void BuildHttpGetRequestMessage_ValidResourcePath_ReturnsRequestWithExpectedHostValue()
         {
             var request = client.BuildHttpGetRequestMessage("/");
-            Assert.Equal(System.Environment.MachineName, request.Headers.Host);
+            Assert.Equal(host, request.Headers.Host);
         }
 
         [Fact]
