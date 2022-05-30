@@ -31,6 +31,16 @@
             _client = client;
         }
 
+        public async Task<Stream> GetCalendarPageAsStreamAsync(int year)
+        {
+            HttpResponseMessage? response = await _client.GetResourceAsync($"/{year}");
+            if (response != null && response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStreamAsync();
+            }
+            throw new AdventOfCodeClientException($"Could not request calendar par for year {year}.");
+        }
+
         public async Task<Stream> GetDailyChallengeInputAsStreamAsync(int year, int day)
         {
             HttpResponseMessage? response = await _client.GetResourceAsync($"{year}/day/{day}/input");
@@ -38,7 +48,7 @@
             {
                 return await response.Content.ReadAsStreamAsync();
             }
-            throw new AdventOfCodeClientException($"Could not request daily challenge input for year {year} and day {day}).");
+            throw new AdventOfCodeClientException($"Could not request daily challenge input for year {year} and day {day}.");
         }
     }
 }

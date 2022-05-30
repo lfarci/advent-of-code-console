@@ -2,6 +2,7 @@
 {
     public interface IAdventOfCodeClient
     {
+        Task<Stream> GetCalendarPageAsStreamAsync(int year);
         Task<Stream> GetDailyChallengeInputAsStreamAsync(int year, int day);
     }
 }

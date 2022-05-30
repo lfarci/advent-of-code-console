@@ -1,5 +1,6 @@
 ﻿using AdventOfCode2021.Challenges;
 using AdventOfCode2021.CommandLineInterface.Data;
+using CommandLineInterface.Data;
 
 namespace AdventOfCode2021
 {
@@ -8,10 +9,12 @@ namespace AdventOfCode2021
 
         private static readonly string ProgramFriendlyName = AppDomain.CurrentDomain.FriendlyName;
         private static readonly IChallengeInputRepository inputRepository = ChallengeInputRepository.Instance;
+        private static readonly ICalendarRepository calendarRepository = CalendarRepository.Instance;
 
         static async Task Main(string[] args)
         {
-            if (args.Length == 1)
+            await calendarRepository.FindByYear(2020);
+            /*if (args.Length == 1)
             {
                 DailyChallenge? challenge = DailyChallengeRepository.FindByDay(args[0]);
                 if (challenge != null)
@@ -32,7 +35,7 @@ namespace AdventOfCode2021
             else
             {
                 Console.WriteLine($"Usage: {ProgramFriendlyName} ## (Daily challenge key).");
-            }
+            }*/
         }
     }
 }
