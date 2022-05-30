@@ -13,7 +13,24 @@ namespace AdventOfCode2021
 
         static async Task Main(string[] args)
         {
-            await calendarRepository.FindByYear(2020);
+            AdventOfCodeCalendar c = await calendarRepository.FindByYear(2020);
+
+            Console.WriteLine($"Calendar 2020:");
+
+            foreach (AdventOfCodeCalendar.Day day in c.Days)
+            {
+                Console.WriteLine($"\t- Index: {day.Index} Completion: {day.Completion}");
+            }
+
+            c = await calendarRepository.FindByYear(2021);
+
+            Console.WriteLine($"Calendar 2021:");
+
+            foreach (AdventOfCodeCalendar.Day day in c.Days)
+            {
+                Console.WriteLine($"\t- Index: {day.Index} Completion: {day.Completion}");
+            }
+
             /*if (args.Length == 1)
             {
                 DailyChallenge? challenge = DailyChallengeRepository.FindByDay(args[0]);

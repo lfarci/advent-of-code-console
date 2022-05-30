@@ -2,8 +2,9 @@
 
 namespace AdventOfCode2021.CommandLineInterface.Data
 {
-    public static class DailyChallengeRepository
+    public class ChallengeRepository : IChallengeRepository
     {
+        private static IChallengeRepository? instance;
         private static List<DailyChallenge> challenges = new()
         {
             new SonarSweepChallenge(1, "Sonar Sweep"),
@@ -11,11 +12,27 @@ namespace AdventOfCode2021.CommandLineInterface.Data
             new BinaryDiagnosticChallenge(3, "Binary Diagnostic")
         };
 
-        public static List<DailyChallenge> Challenges { get => challenges; }
+        protected ChallengeRepository()
+        {
+        }
 
-        public static DailyChallenge? FindByDay(int day) => challenges.FirstOrDefault(c => c.Day == day);
+        public static IChallengeRepository Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ChallengeRepository();
+                }
+                return instance;
+            }
+        }
 
-        public static DailyChallenge? FindByDay(string day)
+        public List<DailyChallenge> Challenges { get => challenges; }
+
+        public DailyChallenge? FindByDay(int day) => challenges.FirstOrDefault(c => c.Day == day);
+
+        public DailyChallenge? FindByDay(string day)
         {
             DailyChallenge? challenge;
             try

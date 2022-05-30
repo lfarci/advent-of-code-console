@@ -20,22 +20,20 @@ namespace CommandLineInterface.Data
 
         public async Task<AdventOfCodeCalendar> FindByYear(int year)
         {
-            var calendar = new AdventOfCodeCalendar();
             try
             {
                 using Stream stream = await client.GetCalendarPageAsStreamAsync(year);
                 using StreamReader reader = new(stream);
-
-                string s = await reader.ReadToEndAsync();
-
-                Console.WriteLine(s);
-                AdventOfCodeCalendar.Parse(s);
+                return AdventOfCodeCalendar.Parse(await reader.ReadToEndAsync());
+            }
+            catch (FormatException e)
+            {
+                throw new ArgumentOutOfRangeException($"Could not find cannot calendar for year {year}.", e);
             }
             catch (AdventOfCodeClientException e)
             {
                 throw new ArgumentOutOfRangeException($"Could not find cannot calendar for year {year}.", e);
             }
-            return calendar;
         }
     }
 }
