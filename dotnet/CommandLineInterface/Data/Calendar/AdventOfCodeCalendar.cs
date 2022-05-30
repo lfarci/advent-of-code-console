@@ -1,9 +1,4 @@
 ﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CommandLineInterface.Data
 {
@@ -35,9 +30,9 @@ namespace CommandLineInterface.Data
                 string day = daySpanNode?.InnerHtml ?? "";
                 return int.Parse(day);
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
-                return -1;
+                throw new FormatException($"Invalid day index format.", e);
             }
         }
 
@@ -62,14 +57,22 @@ namespace CommandLineInterface.Data
             document.LoadHtml(text);
 
             var calendar = document.DocumentNode.SelectSingleNode("//main/pre[@class='calendar']");
+
+            if (calendar == null)
+            {
+                throw new FormatException("Could not find the calendar in the given page.");
+            }
+
             var children = calendar.Descendants("a");
+
+            if (!children.Any())
+            { 
+                throw new FormatException("Could not find any entry in the calendar.");
+            }
 
             foreach (var dayAnchorNode in children)
             {
-                var day = ParseDayIndex(dayAnchorNode);
-                var completion = ParseCompletion(dayAnchorNode);
-
-                parsed.Add(day, completion);
+                parsed.Add(ParseDayIndex(dayAnchorNode), ParseCompletion(dayAnchorNode));
             }
 
             return parsed;

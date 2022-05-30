@@ -1,5 +1,6 @@
 ﻿using CommandLineInterface.Data;
 using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -49,10 +50,16 @@ namespace Tests.CommandLineInterface.Data
             Assert.True(calendar.Equals(Parse(calendarPage)));
         }
 
-        [Fact]
-        public void Parse_CalendarPage_ReturnsCalendarWithExpectedCount()
+        [Theory]
+        [InlineData("")]
+        [InlineData("<main><pre></pre></main>")]
+        [InlineData("<body><main><pre></pre></main></body>")]
+        [InlineData("<body><main><pre class='unknown'></pre></main></body>")]
+        [InlineData("<body><main><div class='calendar'></div></main></body>")]
+        [InlineData("<body><main><pre class='calendar'></pre></main></body>")]
+        public void Parse_InvalidHtmlPage_ThrowsFormatException(string text)
         {
-            Assert.Equal(expectedDays.Count, Parse(calendarPage).Days.Count);
+            Assert.Throws<FormatException>(() => Parse(text));
         }
 
         [Fact]
@@ -62,24 +69,25 @@ namespace Tests.CommandLineInterface.Data
         }
 
         [Fact]
-        public void ParseDayIndex_AnchorWithoutCalendarDay_ReturnsMinusOne()
+        public void ParseDayIndex_AnchorWithoutCalendarDay_ThrowsFormatException()
         {
             var htmlNode = HtmlNode.CreateNode(@"<a href='/2020/day/1' class='calendar-day'>
                 <span class='calendar-day-with-typo'>1</span>
             </a>");
-            Assert.Equal(-1, ParseDayIndex(htmlNode));
+            Assert.Throws<FormatException>(() => ParseDayIndex(htmlNode));
         }
 
         [Fact]
-        public void ParseDayIndex_AnchorWithInvalidStringInDay_ReturnsMinusOne()
+        public void ParseDayIndex_AnchorWithInvalidStringInDay_ThrowsFormatException()
         {
-            Assert.Equal(-1, ParseDayIndex(BuildDayAnchorNode("invalid", Completion.VeryComplete)));
+            Assert.Throws<FormatException>(() => ParseDayIndex(BuildDayAnchorNode("invalid", Completion.VeryComplete)));
+
         }
 
         [Fact]
-        public void ParseDayIndex_AnchorWithEmptyStringInDay_ReturnsMinusOne()
+        public void ParseDayIndex_AnchorWithEmptyStringInDay_ThrowsFormatException()
         {
-            Assert.Equal(-1, ParseDayIndex(BuildDayAnchorNode("", Completion.VeryComplete)));
+            Assert.Throws<FormatException>(() => ParseDayIndex(BuildDayAnchorNode("", Completion.VeryComplete)));
         }
 
         [Fact]
