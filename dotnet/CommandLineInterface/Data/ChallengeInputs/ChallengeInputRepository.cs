@@ -1,4 +1,4 @@
-﻿using AdventOfCode2021.CommandLineInterface.Client;
+﻿using AdventOfCode2021.CommandLineInterface.WebClient;
 
 namespace AdventOfCode2021.CommandLineInterface.Data
 {
@@ -25,7 +25,7 @@ namespace AdventOfCode2021.CommandLineInterface.Data
 
         public async virtual Task<Stream> FindInputStreamByYearAndDayAsync(int year, int day)
         {
-            return await client.GetDailyChallengeInputAsStreamAsync(year, day);
+            return await client.GetPuzzleInputAsStreamAsync(year, day);
         }
 
         public async virtual Task<string[]> FindInputLinesByYearAndDayAsync(int year, int day)

@@ -2,13 +2,13 @@
 using Moq;
 using Moq.Protected;
 using System.Linq;
-using AdventOfCode2021.CommandLineInterface.Client;
+using AdventOfCode2021.CommandLineInterface.WebClient;
 using System.Net.Http;
 using System.Threading;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Tests.CommandLineInterface.Client
+namespace Tests.CommandLineInterface.WebClient
 {
     public class AdventOfCodeHttpClientTests
     {

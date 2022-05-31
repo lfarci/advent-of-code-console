@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode2021.CommandLineInterface.Client
+﻿namespace AdventOfCode2021.CommandLineInterface.WebClient
 {
     public interface IAdventOfCodeHttpClient
     {
