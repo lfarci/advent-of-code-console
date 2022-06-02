@@ -2,17 +2,14 @@
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text;
 using Tests.Helpers;
 using Xunit;
 
-using static CommandLineInterface.Data.AdventOfCodeCalendar;
+using static CommandLineInterface.Data.CalendarPage;
 
 namespace Tests.CommandLineInterface.Data
 {
-    public class AdventOfCodeCalendarTests
+    public class CalendarPageTests
     {
         private static readonly string resourceName = "Tests.Resources.CalendarPage.html";
         private static readonly string calendarPage = ReadCalendarPage();
@@ -47,7 +44,7 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public void Parse_CalendarPage_ReturnsParsedCalendar()
         {
-            var calendar = new AdventOfCodeCalendar(expectedDays);
+            var calendar = new CalendarPage(expectedDays);
             Assert.True(calendar.Equals(Parse(calendarPage)));
         }
 
@@ -122,18 +119,18 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public void Equals_EmptyCalendar_ReturnsIsEquals()
         {
-            var emptyCalendar = () => new AdventOfCodeCalendar(new List<Day>());
+            var emptyCalendar = () => new CalendarPage(new List<Day>());
             Assert.True(emptyCalendar().Equals(emptyCalendar()));
         }
 
         [Fact]
         public void Equals_CalendarWithExtraDay_ReturnsIsNotEqual()
         {
-            var first = () => new AdventOfCodeCalendar(new List<Day>() {
+            var first = () => new CalendarPage(new List<Day>() {
                 new Day { Index = 1, Completion = Completion.VeryComplete },
                 new Day { Index = 2, Completion = Completion.VeryComplete },
             });
-            var second = () => new AdventOfCodeCalendar(new List<Day>() {
+            var second = () => new CalendarPage(new List<Day>() {
                 new Day { Index = 1, Completion = Completion.VeryComplete },
                 new Day { Index = 2, Completion = Completion.VeryComplete },
                 new Day { Index = 3, Completion = Completion.VeryComplete },
@@ -144,12 +141,12 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public void Equals_CalendarWithSameCountButDifferentElements_ReturnsIsNotEqual()
         {
-            var first = () => new AdventOfCodeCalendar(new List<Day>() {
+            var first = () => new CalendarPage(new List<Day>() {
                 new Day { Index = 1, Completion = Completion.NotStarted },
                 new Day { Index = 2, Completion = Completion.Complete},
                 new Day { Index = 3, Completion = Completion.VeryComplete },
             });
-            var second = () => new AdventOfCodeCalendar(new List<Day>() {
+            var second = () => new CalendarPage(new List<Day>() {
                 new Day { Index = 1, Completion = Completion.VeryComplete },
                 new Day { Index = 2, Completion = Completion.NotStarted },
                 new Day { Index = 3, Completion = Completion.VeryComplete },
@@ -160,12 +157,12 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public void Equals_CalendarWithSameElements_ReturnsIsEqual()
         {
-            var first = () => new AdventOfCodeCalendar(new List<Day>() {
+            var first = () => new CalendarPage(new List<Day>() {
                 new Day { Index = 1, Completion = Completion.NotStarted },
                 new Day { Index = 2, Completion = Completion.Complete},
                 new Day { Index = 3, Completion = Completion.VeryComplete },
             });
-            var second = () => new AdventOfCodeCalendar(new List<Day>() {
+            var second = () => new CalendarPage(new List<Day>() {
                 new Day { Index = 1, Completion = Completion.NotStarted },
                 new Day { Index = 2, Completion = Completion.Complete },
                 new Day { Index = 3, Completion = Completion.VeryComplete },
@@ -176,12 +173,12 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public void Equals_CalendarWithUnorderedSameElements_ReturnsIsEqual()
         {
-            var first = () => new AdventOfCodeCalendar(new List<Day>() {
+            var first = () => new CalendarPage(new List<Day>() {
                 new Day { Index = 1, Completion = Completion.NotStarted },
                 new Day { Index = 2, Completion = Completion.Complete},
                 new Day { Index = 3, Completion = Completion.VeryComplete },
             });
-            var second = () => new AdventOfCodeCalendar(new List<Day>() {
+            var second = () => new CalendarPage(new List<Day>() {
                 new Day { Index = 2, Completion = Completion.Complete },
                 new Day { Index = 3, Completion = Completion.VeryComplete },
                 new Day { Index = 1, Completion = Completion.NotStarted },

@@ -20,8 +20,8 @@ namespace CommandLineInterface.Commands
             try
             {
                 int year = int.Parse(settings?.Year ?? "");
-                ICalendarRepository repository = CalendarRepository.Instance;
-                AdventOfCodeCalendar calendar = await repository.FindByYear(year);
+                ICalendarPageRepository repository = CalendarPageRepository.Instance;
+                CalendarPage calendar = await repository.FindByYear(year);
 
                 var rule = new Rule($"Advent Of Code {year}");
                 AnsiConsole.Write(rule);
@@ -34,17 +34,17 @@ namespace CommandLineInterface.Commands
                 {
                     AnsiConsole.MarkupLine($"Day {day.Index}: {day.Completion}");
 
-                    if (day.Completion == AdventOfCodeCalendar.Completion.Complete)
+                    if (day.Completion == Completion.Complete)
                     {
                         complete++;
                     }
 
-                    if (day.Completion == AdventOfCodeCalendar.Completion.VeryComplete)
+                    if (day.Completion == Completion.VeryComplete)
                     {
                         veryComplete++;
                     }
 
-                    if (day.Completion == AdventOfCodeCalendar.Completion.NotStarted)
+                    if (day.Completion == Completion.NotStarted)
                     {
                         notStarted++;
                     }

@@ -2,29 +2,29 @@
 
 namespace CommandLineInterface.Data
 {
-    public class CalendarRepository : ICalendarRepository
+    public class CalendarPageRepository : ICalendarPageRepository
     {
-        private static ICalendarRepository? instance;
+        private static ICalendarPageRepository? instance;
         private static readonly IAdventOfCodeClient client = AdventOfCodeClient.Instance;
-        public static ICalendarRepository Instance
+        public static ICalendarPageRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new CalendarRepository();
+                    instance = new CalendarPageRepository();
                 }
                 return instance;
             }
         }
 
-        public async Task<AdventOfCodeCalendar> FindByYear(int year)
+        public async Task<CalendarPage> FindByYear(int year)
         {
             try
             {
                 using Stream stream = await client.GetCalendarPageAsStreamAsync(year);
                 using StreamReader reader = new(stream);
-                return AdventOfCodeCalendar.Parse(await reader.ReadToEndAsync());
+                return CalendarPage.Parse(await reader.ReadToEndAsync());
             }
             catch (FormatException e)
             {

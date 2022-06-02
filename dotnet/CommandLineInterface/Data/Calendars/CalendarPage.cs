@@ -2,18 +2,18 @@
 
 namespace CommandLineInterface.Data
 {
-    public class AdventOfCodeCalendar
+    public class CalendarPage
     {
         private readonly IList<Day> _days;
 
         public IList<Day> Days { get => _days; }
 
-        public AdventOfCodeCalendar(IList<Day> days)
+        public CalendarPage(IList<Day> days)
         {
             _days = new List<Day>(days);
         }
 
-        public AdventOfCodeCalendar() : this(new List<Day>())
+        public CalendarPage() : this(new List<Day>())
         {
         }
 
@@ -50,9 +50,9 @@ namespace CommandLineInterface.Data
             return Completion.NotStarted;
         }
 
-        public static AdventOfCodeCalendar Parse(string text)
+        public static CalendarPage Parse(string text)
         {
-            var parsed = new AdventOfCodeCalendar();
+            var parsed = new CalendarPage();
             var document = new HtmlDocument();
             document.LoadHtml(text);
 
@@ -80,7 +80,7 @@ namespace CommandLineInterface.Data
 
         public override bool Equals(object? obj)
         {
-            return obj is AdventOfCodeCalendar calendar &&
+            return obj is CalendarPage calendar &&
                    _days.All(day => calendar._days.Contains(day)) &&
                    _days.Distinct().Count() == _days.Count &&
                    _days.Count == calendar._days.Count;
@@ -89,13 +89,6 @@ namespace CommandLineInterface.Data
         public override int GetHashCode()
         {
             return HashCode.Combine(_days);
-        }
-
-        public enum Completion
-        {
-            NotStarted = 0,
-            Complete = 1,
-            VeryComplete = 2
         }
 
         public struct Day
