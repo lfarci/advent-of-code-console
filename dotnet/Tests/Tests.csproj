@@ -8,7 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\CompleteDayPage.html" />
+    <None Remove="Resources\NotStartedDayPage.html" />
+    <None Remove="Resources\VeryCompleteDayPage.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Resources\CalendarPage.html" />
+    <EmbeddedResource Include="Resources\CompleteDayPage.html" />
+    <EmbeddedResource Include="Resources\NotStartedDayPage.html" />
+    <EmbeddedResource Include="Resources\VeryCompleteDayPage.html" />
   </ItemGroup>
 
   <ItemGroup>

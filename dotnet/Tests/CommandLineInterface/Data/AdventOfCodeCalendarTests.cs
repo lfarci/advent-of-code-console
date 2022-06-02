@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using Tests.Helpers;
 using Xunit;
 
 using static CommandLineInterface.Data.AdventOfCodeCalendar;
@@ -190,14 +191,7 @@ namespace Tests.CommandLineInterface.Data
 
         private static string ReadCalendarPage()
         {
-            string calendarPage = "";
-            var assembly = Assembly.GetExecutingAssembly();
-            var stream = assembly.GetManifestResourceStream(resourceName);
-            if (stream != null)
-            {
-                calendarPage = new StreamReader(stream, Encoding.UTF8).ReadToEnd();
-            }
-            return calendarPage;
+            return TestHelpers.ReadResourceContentAsString(resourceName);
         }
 
         private static string ToClassName(Completion completion)
