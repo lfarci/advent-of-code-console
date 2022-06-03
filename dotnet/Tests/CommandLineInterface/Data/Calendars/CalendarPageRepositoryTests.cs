@@ -1,11 +1,6 @@
 ﻿using CommandLineInterface.Data;
-using Moq;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Tests.CommandLineInterface.Data
@@ -25,7 +20,7 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public async void FindByYearAsync_ClientThrowsIOException_ThrowsIOException()
         {
-            var repository = GetRepositoryThatThrows(new IOException());
+            var repository = GetRepositoryThatThrows<IOException>();
             var thrown = await Assert.ThrowsAsync<IOException>(() => repository.FindByYearAsync(defaultYear));
             Assert.Equal($"Could not find cannot calendar for year {defaultYear}.", thrown.Message);
         }
@@ -46,28 +41,16 @@ namespace Tests.CommandLineInterface.Data
             Assert.NotNull(calendar);
         }
 
-        private static CalendarPageRepository GetRepositoryThatReturns(string response)
+        private static ICalendarPageRepository GetRepositoryThatThrows<TException>() where TException : Exception, new()
         {
-            var repositoryMock = new Mock<CalendarPageRepository>();
-            repositoryMock.CallBase = true;
-
-            repositoryMock
-                .Setup(r => r.FindCalendarPageAsStreamAsync(defaultYear).Result)
-                .Returns(Helpers.GenerateStreamFromString(response));
-
-            return repositoryMock.Object;
+            var client = Helpers.GetClientThatThrows<IOException>(c => c.GetCalendarPageAsStreamAsync(defaultYear));
+            return new CalendarPageRepository(client);
         }
 
-        private static CalendarPageRepository GetRepositoryThatThrows(Exception exception)
+        private static ICalendarPageRepository GetRepositoryThatReturns(string result)
         {
-            var repositoryMock = new Mock<CalendarPageRepository>();
-            repositoryMock.CallBase = true;
-
-            repositoryMock
-                .Setup(r => r.FindCalendarPageAsStreamAsync(defaultYear).Result)
-                .Throws(exception);
-
-            return repositoryMock.Object;
+            var client = Helpers.GetClientThatReturns(result, c => c.GetCalendarPageAsStreamAsync(defaultYear).Result);
+            return new CalendarPageRepository(client);
         }
     }
 }

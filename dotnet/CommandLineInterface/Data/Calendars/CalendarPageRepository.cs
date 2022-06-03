@@ -5,7 +5,7 @@ namespace CommandLineInterface.Data
     public class CalendarPageRepository : ICalendarPageRepository
     {
         private static ICalendarPageRepository? instance;
-        private static readonly IAdventOfCodeClient client = AdventOfCodeClient.Instance;
+        private readonly IAdventOfCodeClient _client = AdventOfCodeClient.Instance;
         public static ICalendarPageRepository Instance
         {
             get
@@ -18,16 +18,19 @@ namespace CommandLineInterface.Data
             }
         }
 
-        public async virtual Task<Stream> FindCalendarPageAsStreamAsync(int year)
+        protected CalendarPageRepository() : this(AdventOfCodeClient.Instance)
+        { }
+
+        public CalendarPageRepository(IAdventOfCodeClient client)
         {
-            return await client.GetCalendarPageAsStreamAsync(year);
+            _client = client;
         }
 
         public async Task<CalendarPage> FindByYearAsync(int year)
         {
             try
             {
-                using Stream stream = await FindCalendarPageAsStreamAsync(year);
+                using Stream stream = await _client.GetCalendarPageAsStreamAsync(year);
                 using StreamReader reader = new(stream);
                 return CalendarPage.Parse(await reader.ReadToEndAsync());
             }

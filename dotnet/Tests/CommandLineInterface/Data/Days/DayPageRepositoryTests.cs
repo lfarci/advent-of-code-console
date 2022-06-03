@@ -1,12 +1,6 @@
-﻿using AdventOfCode2021.CommandLineInterface.WebClient;
-using CommandLineInterface.Data;
-using Moq;
+﻿using CommandLineInterface.Data;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -16,6 +10,12 @@ namespace Tests.CommandLineInterface.Data
     {
         private static readonly int defaultYear = 2021;
         private static readonly int defaultDay = 1;
+
+        [Fact]
+        public void Instance_ReturnsSingleton()
+        {
+            Assert.Equal(DayPageRepository.Instance, DayPageRepository.Instance);
+        }
 
         [Fact]
         public async Task FindByYearAndDayAsync_ClientThrowsIOException_ThrowsIOException()
