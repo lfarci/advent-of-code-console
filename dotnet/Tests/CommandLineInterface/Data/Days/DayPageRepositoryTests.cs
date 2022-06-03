@@ -53,7 +53,7 @@ namespace Tests.CommandLineInterface.Data
 
         private static IDayPageRepository GetRepositoryThatThrows<TException>() where TException : Exception, new()
         {
-            var client = Helpers.GetClientThatThrows<IOException>(c => c.GetDayPageAsStreamAsync(defaultYear, defaultDay));
+            var client = Helpers.GetClientThatThrows<TException>(c => c.GetDayPageAsStreamAsync(defaultYear, defaultDay));
             return new DayPageRepository(client);
         }
 

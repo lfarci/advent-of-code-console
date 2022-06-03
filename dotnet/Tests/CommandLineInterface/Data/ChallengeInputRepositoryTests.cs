@@ -1,5 +1,4 @@
-﻿using AdventOfCode2021.CommandLineInterface.WebClient;
-using AdventOfCode2021.CommandLineInterface.Data;
+﻿using AdventOfCode2021.CommandLineInterface.Data;
 using Moq;
 using System;
 using System.IO;
@@ -21,27 +20,29 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public async void FindInputLinesByYearAndDayAsync_ClientThrowsException_ThrowsOutOfRangeException()
         {
+            var repository = GetRepositoryThatThrows<IOException>();
             await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
-                await ThrowingRepositoryMock.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
+                await repository.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
             });
         }
 
         [Fact]
         public async void FindInputLinesByYearAndDayAsync_ClientThrowsException_ThrowExceptionExpectedMessage()
         {
-            var e = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            var repository = GetRepositoryThatThrows<IOException>();
+            var thrown = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
-                await ThrowingRepositoryMock.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
+                await repository.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
             });
 
-            Assert.Equal($"Could not find input for year 2021 and day 1.", e.Message);
+            Assert.Equal(ChallengeInputRepository.GetNotFoundErrorMessage(defaultYear, defaultDay), thrown.Message);
         }
 
         [Fact]
         public async void FindInputLinesByYearAndDayAsync_EmptyFile_ReturnsEmptyArray()
         {
-            var repository = GetRepositoryMockWithInput("");
+            var repository = GetRepositoryThatReturns("");
             string[] lines = await repository.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
             Assert.Empty(lines);
         }
@@ -49,7 +50,7 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public async void FindInputLinesByYearAndDayAsync_ThreeLines_ReturnsArrayWithExpectedSize()
         {
-            var repository = GetRepositoryMockWithInput("line1\nline2\nline3");
+            var repository = GetRepositoryThatReturns("line1\nline2\nline3");
             string[] lines = await repository.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
             Assert.Equal(3, lines.Length);
         }
@@ -57,38 +58,23 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public async void FindInputLinesByYearAndDayAsync_ThreeLines_ReturnsExpectedLines()
         {
-            var repository = GetRepositoryMockWithInput("line1\nline2\nline3");
+            var repository = GetRepositoryThatReturns("line1\nline2\nline3");
             string[] lines = await repository.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
             Assert.Contains("line1", lines);
             Assert.Contains("line2", lines);
             Assert.Contains("line3", lines);
         }
 
-        private static ChallengeInputRepository ThrowingRepositoryMock
+        private static IChallengeInputRepository GetRepositoryThatThrows<TException>() where TException : Exception, new()
         {
-            get
-            {
-                var repositoryMock = new Mock<ChallengeInputRepository>();
-                repositoryMock.CallBase = true;
-
-                repositoryMock
-                    .Setup(r => r.FindInputStreamByYearAndDayAsync(defaultYear, defaultDay).Result)
-                    .Throws<IOException>();
-
-                return repositoryMock.Object;
-            }
+            var client = Helpers.GetClientThatThrows<TException>(c => c.GetPuzzleInputAsStreamAsync(defaultYear, defaultDay));
+            return new ChallengeInputRepository(client);
         }
 
-        private static ChallengeInputRepository GetRepositoryMockWithInput(string input)
+        private static IChallengeInputRepository GetRepositoryThatReturns(string result)
         {
-            var repositoryMock = new Mock<ChallengeInputRepository>();
-            repositoryMock.CallBase = true;
-
-            repositoryMock
-                .Setup(r => r.FindInputStreamByYearAndDayAsync(defaultYear, defaultDay).Result)
-                .Returns(Helpers.GenerateStreamFromString(input));
-
-            return repositoryMock.Object;
+            var client = Helpers.GetClientThatReturns(result, c => c.GetPuzzleInputAsStreamAsync(defaultYear, defaultDay).Result);
+            return new ChallengeInputRepository(client);
         }
 
     }

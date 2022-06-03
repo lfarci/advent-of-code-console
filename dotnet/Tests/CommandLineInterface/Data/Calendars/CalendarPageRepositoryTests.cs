@@ -43,7 +43,7 @@ namespace Tests.CommandLineInterface.Data
 
         private static ICalendarPageRepository GetRepositoryThatThrows<TException>() where TException : Exception, new()
         {
-            var client = Helpers.GetClientThatThrows<IOException>(c => c.GetCalendarPageAsStreamAsync(defaultYear));
+            var client = Helpers.GetClientThatThrows<TException>(c => c.GetCalendarPageAsStreamAsync(defaultYear));
             return new CalendarPageRepository(client);
         }
 

@@ -5,11 +5,7 @@ namespace AdventOfCode2021.CommandLineInterface.Data
     public class ChallengeInputRepository : IChallengeInputRepository
     {
         private static IChallengeInputRepository? instance;
-        private static readonly IAdventOfCodeClient client = AdventOfCodeClient.Instance;
-
-        protected ChallengeInputRepository()
-        {
-        }
+        private readonly IAdventOfCodeClient _client = AdventOfCodeClient.Instance;
 
         public static IChallengeInputRepository Instance
         {
@@ -23,10 +19,15 @@ namespace AdventOfCode2021.CommandLineInterface.Data
             }
         }
 
-        public async virtual Task<Stream> FindInputStreamByYearAndDayAsync(int year, int day)
+        protected ChallengeInputRepository() : this(AdventOfCodeClient.Instance)
+        { }
+
+        public ChallengeInputRepository(IAdventOfCodeClient client)
         {
-            return await client.GetPuzzleInputAsStreamAsync(year, day);
+            _client = client;
         }
+
+        public static string GetNotFoundErrorMessage(int year, int day) => $"Could not find input for year {year} and day {day}.";
 
         public async virtual Task<string[]> FindInputLinesByYearAndDayAsync(int year, int day)
         {
@@ -34,7 +35,7 @@ namespace AdventOfCode2021.CommandLineInterface.Data
 
             try
             {
-                using Stream stream = await FindInputStreamByYearAndDayAsync(year, day);
+                using Stream stream = await _client.GetPuzzleInputAsStreamAsync(year, day);
                 using StreamReader reader = new(stream);
                 string? line;
                 while ((line = reader.ReadLine()) != null)
@@ -44,7 +45,7 @@ namespace AdventOfCode2021.CommandLineInterface.Data
             }
             catch (IOException e)
             {
-                throw new InvalidOperationException($"Could not find input for year {year} and day {day}.", e);
+                throw new InvalidOperationException(GetNotFoundErrorMessage(year, day), e);
             }
 
             return lines.ToArray();
