@@ -4,7 +4,6 @@ using Moq;
 using System;
 using System.IO;
 using Xunit;
-using Tests.Helpers;
 
 namespace Tests.CommandLineInterface.Data
 {
@@ -87,7 +86,7 @@ namespace Tests.CommandLineInterface.Data
 
             repositoryMock
                 .Setup(r => r.FindInputStreamByYearAndDayAsync(defaultYear, defaultDay).Result)
-                .Returns(TestHelpers.GenerateStreamFromString(input));
+                .Returns(Helpers.GenerateStreamFromString(input));
 
             return repositoryMock.Object;
         }

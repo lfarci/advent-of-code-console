@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tests.Helpers;
 using Xunit;
 
 namespace Tests.CommandLineInterface.Data
@@ -15,7 +14,7 @@ namespace Tests.CommandLineInterface.Data
     {
         private static readonly int defaultYear = 2021;
         private static readonly string resourceName = "Tests.Resources.CalendarPage.html";
-        private static readonly string validPage = TestHelpers.ReadResourceContentAsString(resourceName);
+        private static readonly string validPage = Helpers.ReadResourceContentAsString(resourceName);
 
         [Fact]
         public void Instance_ReturnsSingleton()
@@ -54,7 +53,7 @@ namespace Tests.CommandLineInterface.Data
 
             repositoryMock
                 .Setup(r => r.FindCalendarPageAsStreamAsync(defaultYear).Result)
-                .Returns(TestHelpers.GenerateStreamFromString(response));
+                .Returns(Helpers.GenerateStreamFromString(response));
 
             return repositoryMock.Object;
         }

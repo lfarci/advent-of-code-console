@@ -1,6 +1,5 @@
 ﻿using CommandLineInterface.Data;
 using System;
-using Tests.Helpers;
 using Xunit;
 
 namespace Tests.CommandLineInterface.Data
@@ -193,7 +192,7 @@ namespace Tests.CommandLineInterface.Data
 
         private static void WithHtmlPage(string resourceName, Action<DayPage> assertCallback)
         {
-            var page = TestHelpers.ReadResourceContentAsString(resourceName);
+            var page = Helpers.ReadResourceContentAsString(resourceName);
             assertCallback(DayPage.Parse(page));
         }
     }

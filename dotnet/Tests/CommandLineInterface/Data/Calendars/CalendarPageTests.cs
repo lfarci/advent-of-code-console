@@ -2,7 +2,6 @@
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using Tests.Helpers;
 using Xunit;
 
 using static CommandLineInterface.Data.CalendarPage;
@@ -188,7 +187,7 @@ namespace Tests.CommandLineInterface.Data
 
         private static string ReadCalendarPage()
         {
-            return TestHelpers.ReadResourceContentAsString(resourceName);
+            return Helpers.ReadResourceContentAsString(resourceName);
         }
 
         private static string ToClassName(Completion completion)
