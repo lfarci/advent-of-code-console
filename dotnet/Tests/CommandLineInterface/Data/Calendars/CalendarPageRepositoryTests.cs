@@ -22,7 +22,7 @@ namespace Tests.CommandLineInterface.Data
         {
             var repository = GetRepositoryThatThrows<IOException>();
             var thrown = await Assert.ThrowsAsync<IOException>(() => repository.FindByYearAsync(defaultYear));
-            Assert.Equal($"Could not find cannot calendar for year {defaultYear}.", thrown.Message);
+            Assert.Equal(CalendarPageRepository.GetNotFoundErrorMessage(defaultYear), thrown.Message);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace Tests.CommandLineInterface.Data
         {
             var repository = GetRepositoryThatReturns("Invalid page");
             var thrown = await Assert.ThrowsAsync<InvalidOperationException>(() => repository.FindByYearAsync(defaultYear));
-            Assert.Equal($"Could not parse calendar for year {defaultYear}.", thrown.Message);
+            Assert.Equal(CalendarPageRepository.GetParseErrorMessage(defaultYear), thrown.Message);
         }
 
         [Fact]

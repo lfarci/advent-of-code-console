@@ -26,6 +26,9 @@ namespace CommandLineInterface.Data
             _client = client;
         }
 
+        public static string GetParseErrorMessage(int year) => $"Could not parse calendar for year {year}.";
+        public static string GetNotFoundErrorMessage(int year) => $"Could not find cannot calendar for year {year}.";
+
         public async Task<CalendarPage> FindByYearAsync(int year)
         {
             try
@@ -36,11 +39,11 @@ namespace CommandLineInterface.Data
             }
             catch (FormatException e)
             {
-                throw new InvalidOperationException($"Could not parse calendar for year {year}.", e);
+                throw new InvalidOperationException(GetParseErrorMessage(year), e);
             }
             catch (IOException e)
             {
-                throw new IOException($"Could not find cannot calendar for year {year}.", e);
+                throw new IOException(GetNotFoundErrorMessage(year), e);
             }
         }
     }
