@@ -2,34 +2,34 @@
 
 namespace AdventOfCode2021.CommandLineInterface.Data
 {
-    public class ChallengeInputRepository : IChallengeInputRepository
+    public class PuzzleInputRepository : IPuzzleInputRepository
     {
-        private static IChallengeInputRepository? instance;
+        private static IPuzzleInputRepository? instance;
         private readonly IAdventOfCodeClient _client = AdventOfCodeClient.Instance;
 
-        public static IChallengeInputRepository Instance
+        public static IPuzzleInputRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ChallengeInputRepository();
+                    instance = new PuzzleInputRepository();
                 }
                 return instance;
             }
         }
 
-        protected ChallengeInputRepository() : this(AdventOfCodeClient.Instance)
+        protected PuzzleInputRepository() : this(AdventOfCodeClient.Instance)
         { }
 
-        public ChallengeInputRepository(IAdventOfCodeClient client)
+        public PuzzleInputRepository(IAdventOfCodeClient client)
         {
             _client = client;
         }
 
         public static string GetNotFoundErrorMessage(int year, int day) => $"Could not find input for year {year} and day {day}.";
 
-        public async virtual Task<string[]> FindInputLinesByYearAndDayAsync(int year, int day)
+        public async virtual Task<string[]> FindByYearAndDayAsync(int year, int day)
         {
             var lines = new List<string>();
 

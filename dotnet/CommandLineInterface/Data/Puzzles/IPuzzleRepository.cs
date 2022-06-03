@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2021.CommandLineInterface.Data
 {
-    public interface IChallengeRepository
+    public interface IPuzzleRepository
     {
         List<DailyChallenge> Challenges { get; }
 

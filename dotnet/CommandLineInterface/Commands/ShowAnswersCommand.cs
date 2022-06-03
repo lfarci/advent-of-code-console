@@ -24,7 +24,7 @@ namespace CommandLineInterface.Commands
 
                 int year = int.Parse(settings?.Year ?? "");
                 ICalendarPageRepository calendars = CalendarPageRepository.Instance;
-                IChallengeRepository challenges = ChallengeRepository.Instance;
+                IPuzzleRepository challenges = PuzzleRepository.Instance;
                 CalendarPage calendar = await calendars.FindByYearAsync(year);
 
                 var answers = new Table()

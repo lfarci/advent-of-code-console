@@ -2,9 +2,9 @@
 
 namespace AdventOfCode2021.CommandLineInterface.Data
 {
-    public class ChallengeRepository : IChallengeRepository
+    public class PuzzleRepository : IPuzzleRepository
     {
-        private static IChallengeRepository? instance;
+        private static IPuzzleRepository? instance;
         private static List<DailyChallenge> challenges = new()
         {
             new SonarSweepChallenge(1, "Sonar Sweep"),
@@ -12,17 +12,17 @@ namespace AdventOfCode2021.CommandLineInterface.Data
             new BinaryDiagnosticChallenge(3, "Binary Diagnostic")
         };
 
-        protected ChallengeRepository()
+        protected PuzzleRepository()
         {
         }
 
-        public static IChallengeRepository Instance
+        public static IPuzzleRepository Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ChallengeRepository();
+                    instance = new PuzzleRepository();
                 }
                 return instance;
             }

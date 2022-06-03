@@ -4,9 +4,9 @@ using Xunit;
 
 namespace Tests.CommandLineInterface.Data
 {
-    public class DailyChallengeRepositoryTests
+    public class PuzzleRepositoryTests
     {
-        private static readonly IChallengeRepository repository = ChallengeRepository.Instance;
+        private static readonly IPuzzleRepository repository = PuzzleRepository.Instance;
 
         [Fact]
         public void Challenges_IsNotEmpty()
