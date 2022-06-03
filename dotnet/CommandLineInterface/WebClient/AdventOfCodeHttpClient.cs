@@ -65,7 +65,7 @@ namespace AdventOfCode2021.CommandLineInterface.WebClient
             }
             catch (HttpRequestException e)
             {
-                throw new AdventOfCodeClientException($"Could not get resource at {resourcePath}", e);
+                throw new IOException($"Could not get resource at {resourcePath}", e);
             }
             return response;
         }

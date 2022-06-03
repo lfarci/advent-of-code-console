@@ -70,7 +70,7 @@
             {
                 return await response.Content.ReadAsStreamAsync();
             }
-            throw new AdventOfCodeClientException(request.ErrorMessage);
+            throw new IOException(request.ErrorMessage);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace CommandLineInterface.Data
 
         private static readonly string titleXpathQuery = "//main/article[@class='day-desc']/h2";
         private static readonly string puzzleAnswersQuery = $"//main/p[contains(text(), '{puzzleAnswerText}')]/code";
+        private static readonly string descriptionsQuery = "//main/article[@class='day-desc']";
 
         public string Title { get; set; } = "";
         public Completion Completion { get; set; } = Completion.NotStarted;
@@ -42,18 +43,18 @@ namespace CommandLineInterface.Data
             var dayPage = new DayPage();
             document.LoadHtml(text);
             
-            SetTitle(dayPage, document.DocumentNode);
-            SetCompletion(dayPage, document.DocumentNode);
+            dayPage.Title = ParseTitle(document.DocumentNode);
+            dayPage.Completion = ParseCompletion(document.DocumentNode);
 
             if (dayPage.Completion != Completion.NotStarted)
             { 
-                SetPuzzleAnswers(dayPage, document.DocumentNode);
+                ParsePuzzleAnswers(dayPage, document.DocumentNode);
             }
 
             return dayPage;
         }
 
-        private static void SetTitle(DayPage dayPage, HtmlNode document)
+        private static string ParseTitle(HtmlNode document)
         {
             var titleNode = document.SelectSingleNode(titleXpathQuery);
 
@@ -62,20 +63,22 @@ namespace CommandLineInterface.Data
                 throw new FormatException(TitleNotFoundError);
             }
 
-            dayPage.Title = ParseTitle(titleNode.InnerText);
+            return ParseTitle(titleNode.InnerText);
         }
 
-        private static void SetCompletion(DayPage dayPage, HtmlNode document)
+        private static Completion ParseCompletion(HtmlNode document)
         {
-            dayPage.Completion = Completion.NotStarted;
-            var descriptions = document.SelectNodes("//main/article[@class='day-desc']");
+            var completion = Completion.NotStarted;
+            var descriptions = document.SelectNodes(descriptionsQuery);
+
             if (descriptions?.Count == 2)
             {
-                dayPage.Completion = HasSubmissionForm(document) ? Completion.Complete : Completion.VeryComplete;
+                completion = HasSubmissionForm(document) ? Completion.Complete : Completion.VeryComplete;
             }
+            return completion;
         }
 
-        private static void SetPuzzleAnswers(DayPage dayPage, HtmlNode document)
+        private static void ParsePuzzleAnswers(DayPage dayPage, HtmlNode document)
         {
             var puzzleAnswerNodes = document.SelectNodes(puzzleAnswersQuery);
             int expectedAnswersCount = (int)dayPage.Completion;

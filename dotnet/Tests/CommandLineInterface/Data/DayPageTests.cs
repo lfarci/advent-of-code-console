@@ -84,7 +84,7 @@ namespace Tests.CommandLineInterface.Data
                         <article class='day-desc'><h2>Part Two</h2></article>
                         <p>Your puzzle answer was <code>invalid second answer</code></p>
                     </main></body>")]
-        public void Parse_InvalidPage_ThrowsFormatException(string page)
+        public void Parse_PageWithInvalidPuzzleAnswer_ThrowsFormatException(string page)
         {
             var exception = Assert.Throws<FormatException>(() => DayPage.Parse(page));
             Assert.Contains(DayPage.InvalidPuzzleAnswerFormatError, exception.Message);
@@ -102,6 +102,11 @@ namespace Tests.CommandLineInterface.Data
                         <p>Your puzzle answer was <code>21234</code></p>
                         <article class='day-desc'><h2>Part Two</h2></article>
                         <p>Your puzzle answer was</p>
+                    </main></body>")]
+        [InlineData(@"<body><main>
+                        <article class='day-desc'><h2>Day 1 : My Title</h2></article>
+                        <p>Your puzzle answer was <code>21234</code></p>
+                        <article class='day-desc'><h2>Part Two</h2></article>
                     </main></body>")]
         public void Parse_PageWithoutExpectedPuzzleAnswer_ThrowsFormatException(string page)
         {

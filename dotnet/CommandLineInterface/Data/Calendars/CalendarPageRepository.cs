@@ -18,21 +18,26 @@ namespace CommandLineInterface.Data
             }
         }
 
-        public async Task<CalendarPage> FindByYear(int year)
+        public async virtual Task<Stream> FindCalendarPageAsStreamAsync(int year)
+        {
+            return await client.GetCalendarPageAsStreamAsync(year);
+        }
+
+        public async Task<CalendarPage> FindByYearAsync(int year)
         {
             try
             {
-                using Stream stream = await client.GetCalendarPageAsStreamAsync(year);
+                using Stream stream = await FindCalendarPageAsStreamAsync(year);
                 using StreamReader reader = new(stream);
                 return CalendarPage.Parse(await reader.ReadToEndAsync());
             }
             catch (FormatException e)
             {
-                throw new ArgumentOutOfRangeException($"Could not find cannot calendar for year {year}.", e);
+                throw new InvalidOperationException($"Could not parse calendar for year {year}.", e);
             }
-            catch (AdventOfCodeClientException e)
+            catch (IOException e)
             {
-                throw new ArgumentOutOfRangeException($"Could not find cannot calendar for year {year}.", e);
+                throw new IOException($"Could not find cannot calendar for year {year}.", e);
             }
         }
     }

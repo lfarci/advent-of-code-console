@@ -20,15 +20,15 @@ namespace Tests.CommandLineInterface.WebClient
         }
 
         [Fact]
-        public void GetDayPageAsStreamAsync_ResponseIsNull_ThrowsClientException()
+        public async Task GetDayPageAsStreamAsync_ResponseIsNull_ThrowsClientException()
         {
-            AssertThrowsClientException(null, c => c.GetDayPageAsStreamAsync(2021, 1));
+            await AssertThrowsIOException(null, c => c.GetDayPageAsStreamAsync(2021, 1));
         }
 
         [Fact]
-        public void GetDayPageAsStreamAsync_NoSuccessStatusCode_ThrowsClientException()
+        public async Task GetDayPageAsStreamAsync_NoSuccessStatusCode_ThrowsClientException()
         {
-            AssertThrowsClientException(new HttpResponseMessage
+            await AssertThrowsIOException(new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.BadRequest
             }, c => c.GetDayPageAsStreamAsync(2021, 1));
@@ -41,15 +41,15 @@ namespace Tests.CommandLineInterface.WebClient
         }
 
         [Fact]
-        public void GetCalendarPageAsStreamAsync_ResponseIsNull_ThrowsClientException()
+        public async Task GetCalendarPageAsStreamAsync_ResponseIsNull_ThrowsClientException()
         {
-            AssertThrowsClientException(null, c => c.GetCalendarPageAsStreamAsync(2021));
+            await AssertThrowsIOException(null, c => c.GetCalendarPageAsStreamAsync(2021));
         }
 
         [Fact]
-        public void GetCalendarPageAsStreamAsync_NoSuccessStatusCode_ThrowsClientException()
+        public async Task GetCalendarPageAsStreamAsync_NoSuccessStatusCode_ThrowsClientException()
         {
-            AssertThrowsClientException(new HttpResponseMessage
+            await AssertThrowsIOException(new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.BadRequest
             }, c => c.GetCalendarPageAsStreamAsync(2021));
@@ -63,15 +63,15 @@ namespace Tests.CommandLineInterface.WebClient
         }
 
         [Fact]
-        public void GetPuzzleInputAsStreamAsync_ResponseIsNull_ThrowsClientException()
+        public async Task GetPuzzleInputAsStreamAsync_ResponseIsNull_ThrowsClientException()
         {
-            AssertThrowsClientException(null, c => c.GetPuzzleInputAsStreamAsync(2021, 1));
+            await AssertThrowsIOException(null, c => c.GetPuzzleInputAsStreamAsync(2021, 1));
         }
 
         [Fact]
-        public void GetPuzzleInputAsStreamAsync_NoSuccessStatusCode_ThrowsClientException()
+        public async Task GetPuzzleInputAsStreamAsync_NoSuccessStatusCode_ThrowsClientException()
         {
-            AssertThrowsClientException(new HttpResponseMessage
+            await AssertThrowsIOException(new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.BadRequest
             }, c => c.GetPuzzleInputAsStreamAsync(2021, 1));
@@ -91,11 +91,11 @@ namespace Tests.CommandLineInterface.WebClient
             return new AdventOfCodeClient(clientMock.Object);
         }
 
-        private static void AssertThrowsClientException(HttpResponseMessage? message, Func<IAdventOfCodeClient, Task> call)
+        private static async Task AssertThrowsIOException(HttpResponseMessage? message, Func<IAdventOfCodeClient, Task> call)
         {
-            var client = GetClientThatReturns(message);
-            Assert.ThrowsAsync<AdventOfCodeClientException>(() => call(client));
+            await Assert.ThrowsAsync<IOException>(() => call(GetClientThatReturns(message)));
         }
+
         private static async Task AssertReturnsContent(string content, Func<IAdventOfCodeClient, Task<Stream>> call)
         {
             var client = GetClientThatReturns(new HttpResponseMessage

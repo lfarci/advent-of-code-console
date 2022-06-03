@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Net;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Tests.CommandLineInterface.WebClient
 {
@@ -91,7 +92,7 @@ namespace Tests.CommandLineInterface.WebClient
         }
 
         [Fact]
-        public void GetResourceAsync_HttpRequestExceptionThrown_ThrowsAdventOdCodeClientException()
+        public async Task GetResourceAsync_HttpRequestExceptionThrown_ThrowsIOException()
         {
             var httpClientHandlerMock = new Mock<HttpClientHandler>();
 
@@ -101,10 +102,7 @@ namespace Tests.CommandLineInterface.WebClient
                 .Throws<HttpRequestException>();
 
             var client = new AdventOfCodeHttpClient(httpClientHandlerMock.Object, host, session);
-            Assert.ThrowsAsync<AdventOfCodeClientException>(() => client.GetResourceAsync("/"));
+            await Assert.ThrowsAsync<IOException>(() => client.GetResourceAsync("/"));
         }
-
-
-
     }
 }

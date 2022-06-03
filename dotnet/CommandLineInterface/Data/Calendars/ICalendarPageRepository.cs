@@ -2,6 +2,7 @@
 {
     public interface ICalendarPageRepository
     {
-        public Task<CalendarPage> FindByYear(int year);
+        public Task<Stream> FindCalendarPageAsStreamAsync(int year);
+        public Task<CalendarPage> FindByYearAsync(int year);
     }
 }

@@ -21,7 +21,7 @@ namespace CommandLineInterface.Commands
             {
                 int year = int.Parse(settings?.Year ?? "");
                 ICalendarPageRepository repository = CalendarPageRepository.Instance;
-                CalendarPage calendar = await repository.FindByYear(year);
+                CalendarPage calendar = await repository.FindByYearAsync(year);
 
                 var rule = new Rule($"Advent Of Code {year}");
                 AnsiConsole.Write(rule);
@@ -72,7 +72,7 @@ namespace CommandLineInterface.Commands
                 AnsiConsole.MarkupLine($"[red][bold]Invalid year:[/] {settings.Year}[/]");
                 return -1;
             }
-            catch (AdventOfCodeClientException)
+            catch (IOException)
             {
                 AnsiConsole.MarkupLine($"[red][bold]Failed to show calendar for the given year:[/] {settings.Year}[/]");
                 return -1;

@@ -4,6 +4,7 @@ using Moq;
 using System;
 using System.IO;
 using Xunit;
+using Tests.Helpers;
 
 namespace Tests.CommandLineInterface.Data
 {
@@ -21,7 +22,7 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public async void FindInputLinesByYearAndDayAsync_ClientThrowsException_ThrowsOutOfRangeException()
         {
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
                 await ThrowingRepositoryMock.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
             });
@@ -30,12 +31,12 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public async void FindInputLinesByYearAndDayAsync_ClientThrowsException_ThrowExceptionExpectedMessage()
         {
-            var e = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+            var e = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
             {
                 await ThrowingRepositoryMock.FindInputLinesByYearAndDayAsync(defaultYear, defaultDay);
             });
 
-            Assert.Equal($"Could not find lines for year 2021 and day 1.", e.Message);
+            Assert.Equal($"Could not find input for year 2021 and day 1.", e.Message);
         }
 
         [Fact]
@@ -73,7 +74,7 @@ namespace Tests.CommandLineInterface.Data
 
                 repositoryMock
                     .Setup(r => r.FindInputStreamByYearAndDayAsync(defaultYear, defaultDay).Result)
-                    .Throws<AdventOfCodeClientException>();
+                    .Throws<IOException>();
 
                 return repositoryMock.Object;
             }
@@ -86,19 +87,9 @@ namespace Tests.CommandLineInterface.Data
 
             repositoryMock
                 .Setup(r => r.FindInputStreamByYearAndDayAsync(defaultYear, defaultDay).Result)
-                .Returns(GenerateStreamFromString(input));
+                .Returns(TestHelpers.GenerateStreamFromString(input));
 
             return repositoryMock.Object;
-        }
-
-        private static Stream GenerateStreamFromString(string s)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
         }
 
     }

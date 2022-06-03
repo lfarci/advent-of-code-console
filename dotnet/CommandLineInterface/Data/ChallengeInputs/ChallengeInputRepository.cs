@@ -42,9 +42,9 @@ namespace AdventOfCode2021.CommandLineInterface.Data
                     lines.Add(line);
                 }
             }
-            catch (AdventOfCodeClientException e)
+            catch (IOException e)
             {
-                throw new ArgumentOutOfRangeException($"Could not find lines for year {year} and day {day}.", e);
+                throw new InvalidOperationException($"Could not find input for year {year} and day {day}.", e);
             }
 
             return lines.ToArray();
