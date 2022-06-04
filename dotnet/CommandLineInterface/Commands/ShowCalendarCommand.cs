@@ -1,5 +1,5 @@
-﻿using AdventOfCode2021.CommandLineInterface.WebClient;
-using CommandLineInterface.Data;
+﻿using AdventOfCode.CommandLineInterface.Core;
+using AdventOfCode.CommandLineInterface.Web;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.ComponentModel;

@@ -1,6 +1,5 @@
-﻿using AdventOfCode2021.CommandLineInterface.WebClient;
-using AdventOfCode2021.CommandLineInterface.Data;
-using CommandLineInterface.Data;
+﻿using AdventOfCode.CommandLineInterface.Core;
+using AdventOfCode.CommandLineInterface.Web;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.ComponentModel;
@@ -44,7 +43,7 @@ namespace CommandLineInterface.Commands
 
                     if (challenge != null)
                     {
-                        answers.AddRow($"Day {day.Index}: {challenge.Title}", "0", "0", link);
+                        answers.AddRow($"Day {day.Index}:", "0", "0", link);
                     }
                     else
                     { 
