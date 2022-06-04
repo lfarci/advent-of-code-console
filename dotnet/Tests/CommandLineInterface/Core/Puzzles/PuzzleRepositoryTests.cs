@@ -26,13 +26,13 @@ namespace Tests.CommandLineInterface.Data
             Assert.Null(repository.FindByDay(26));
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented")]
         public void FindByDay_ExistingIntegerDay_ReturnsDailyChallenge()
         {
             Assert.NotNull(repository.FindByDay(1));
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented")]
         public void FindByDay_SonarSweepIntegerDay_ReturnsDailyChallenge()
         {
             Assert.IsType<SonarSweepChallenge>(repository.FindByDay(1));
@@ -56,13 +56,13 @@ namespace Tests.CommandLineInterface.Data
             Assert.Null(repository.FindByDay("26"));
         }
 
-        [Fact]
+        [Fact (Skip = "Not implemented")]
         public void FindByDay_ExistingDayString_ReturnsDailyChallenge()
         {
             Assert.NotNull(repository.FindByDay("1"));
         }
 
-        [Fact]
+        [Fact(Skip = "Not implemented")]
         public void FindByDay_SonarSweeStringDay_ReturnsDailyChallenge()
         {
             Assert.IsType<SonarSweepChallenge>(repository.FindByDay("1"));
