@@ -14,6 +14,7 @@ namespace Tests.CommandLineInterface.Web.Resources
         private static readonly string resourceName = "Tests.Resources.CalendarPage.html";
         private static readonly string calendarPage = ReadCalendarPage();
         private static readonly IList<DayEntry> expectedDays = new List<DayEntry>() {
+            new DayEntry { Index = 1, Completion = Completion.VeryComplete },
             new DayEntry { Index = 2, Completion = Completion.VeryComplete },
             new DayEntry { Index = 3, Completion = Completion.VeryComplete },
             new DayEntry { Index = 4, Completion = Completion.VeryComplete },
