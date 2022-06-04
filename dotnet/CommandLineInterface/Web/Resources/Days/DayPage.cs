@@ -1,6 +1,7 @@
-﻿using HtmlAgilityPack;
+﻿using AdventOfCode.CommandLineInterface.Core;
+using HtmlAgilityPack;
 
-namespace CommandLineInterface.Data
+namespace AdventOfCode.CommandLineInterface.Web
 {
     public class DayPage
     {
@@ -19,8 +20,8 @@ namespace CommandLineInterface.Data
 
         public string Title { get; set; } = "";
         public Completion Completion { get; set; } = Completion.NotStarted;
-        public int? FirstPuzzleAnswer { get; set; } = null;
-        public int? SecondPuzzleAnswer { get; set; } = null;
+        public long? FirstPuzzleAnswer { get; set; } = null;
+        public long? SecondPuzzleAnswer { get; set; } = null;
 
         public static string ParseTitle(string text)
         {
@@ -33,7 +34,7 @@ namespace CommandLineInterface.Data
         }
 
         public static bool HasSubmissionForm(HtmlNode document)
-        { 
+        {
             return document.SelectSingleNode("//main/form[@method='post']") != null;
         }
 
@@ -42,12 +43,12 @@ namespace CommandLineInterface.Data
             var document = new HtmlDocument();
             var dayPage = new DayPage();
             document.LoadHtml(text);
-            
+
             dayPage.Title = ParseTitle(document.DocumentNode);
             dayPage.Completion = ParseCompletion(document.DocumentNode);
 
             if (dayPage.Completion != Completion.NotStarted)
-            { 
+            {
                 ParsePuzzleAnswers(dayPage, document.DocumentNode);
             }
 
@@ -78,6 +79,19 @@ namespace CommandLineInterface.Data
             return completion;
         }
 
+        private static long ParsePuzzleAnswer(string text)
+        {
+            try
+            {
+                return long.Parse(text);
+            }
+            catch (Exception e)
+            when (e is FormatException || e is OverflowException || e is ArgumentNullException)
+            {
+                throw new FormatException($"{InvalidPuzzleAnswerFormatError}: \"{text}\"", e);
+            }
+        }
+
         private static void ParsePuzzleAnswers(DayPage dayPage, HtmlNode document)
         {
             var puzzleAnswerNodes = document.SelectNodes(puzzleAnswersQuery);
@@ -88,21 +102,14 @@ namespace CommandLineInterface.Data
                 throw new FormatException(UnexpectedPuzzleAnswersCountError);
             }
 
-            try
+            if (puzzleAnswerNodes?.Count > 0)
             {
-                if (puzzleAnswerNodes?.Count > 0)
-                {
-                    dayPage.FirstPuzzleAnswer = int.Parse(puzzleAnswerNodes[0].InnerText);
-                }
-
-                if (puzzleAnswerNodes?.Count == 2)
-                {
-                    dayPage.SecondPuzzleAnswer = int.Parse(puzzleAnswerNodes[1].InnerText);
-                }
+                dayPage.FirstPuzzleAnswer = ParsePuzzleAnswer(puzzleAnswerNodes[0].InnerText);
             }
-            catch (FormatException e)
+
+            if (puzzleAnswerNodes?.Count == 2)
             {
-                throw new FormatException($"{InvalidPuzzleAnswerFormatError}", e);
+                dayPage.SecondPuzzleAnswer = ParsePuzzleAnswer(puzzleAnswerNodes[1].InnerText);
             }
         }
 

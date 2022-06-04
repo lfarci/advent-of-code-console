@@ -1,6 +1,4 @@
-﻿using AdventOfCode2021.CommandLineInterface.WebClient;
-
-namespace AdventOfCode2021.CommandLineInterface.Data
+﻿namespace AdventOfCode.CommandLineInterface.Web
 {
     public interface IPuzzleInputRepository
     {

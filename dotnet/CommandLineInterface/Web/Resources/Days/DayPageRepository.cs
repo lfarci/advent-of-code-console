@@ -1,6 +1,4 @@
-﻿using AdventOfCode2021.CommandLineInterface.WebClient;
-
-namespace CommandLineInterface.Data
+﻿namespace AdventOfCode.CommandLineInterface.Web
 {
     public class DayPageRepository : IDayPageRepository
     {

@@ -1,4 +1,4 @@
-﻿namespace CommandLineInterface.Data
+﻿namespace AdventOfCode.CommandLineInterface.Web
 {
     public interface ICalendarPageRepository
     {

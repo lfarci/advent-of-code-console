@@ -1,25 +1,26 @@
-﻿using HtmlAgilityPack;
+﻿using AdventOfCode.CommandLineInterface.Core;
+using HtmlAgilityPack;
 
-namespace CommandLineInterface.Data
+namespace AdventOfCode.CommandLineInterface.Web
 {
     public class CalendarPage
     {
-        private readonly IList<Day> _days;
+        private readonly IList<DayEntry> _days;
 
-        public IList<Day> Days { get => _days; }
+        public IList<DayEntry> Days { get => _days; }
 
-        public CalendarPage(IList<Day> days)
+        public CalendarPage(IList<DayEntry> days)
         {
-            _days = new List<Day>(days);
+            _days = new List<DayEntry>(days);
         }
 
-        public CalendarPage() : this(new List<Day>())
+        public CalendarPage() : this(new List<DayEntry>())
         {
         }
 
         public void Add(int dayIndex, Completion completion)
         {
-            _days.Add(new Day { Index = dayIndex, Completion = completion });
+            _days.Add(new DayEntry { Index = dayIndex, Completion = completion });
         }
 
         public static int ParseDayIndex(HtmlNode dayAnchorNode)
@@ -91,14 +92,14 @@ namespace CommandLineInterface.Data
             return HashCode.Combine(_days);
         }
 
-        public struct Day
+        public struct DayEntry
         {
             public int Index { get; set; }
             public Completion Completion { get; set; }
 
             public override bool Equals(object? obj)
             {
-                return obj is Day day &&
+                return obj is DayEntry day &&
                        Index == day.Index &&
                        Completion == day.Completion;
             }
