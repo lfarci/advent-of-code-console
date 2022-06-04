@@ -1,11 +1,9 @@
-﻿namespace AdventOfCode2021.Challenges
-{
-    public class SonarSweepChallenge : DailyChallenge
-    {
-        public SonarSweepChallenge(int day, string title) : base(title, day)
-        {
-        }
+﻿using AdventOfCode.CommandLineInterface.Core;
 
+namespace AdventOfCode.Challenges
+{
+    public class SonarSweepChallenge : Puzzle
+    {
         private static int CountDepthIncrements(int[] depths)
         {
             int count = 0;
@@ -50,9 +48,9 @@
             return CountDepthIncrements(sums);
         }
 
-        public override IEnumerable<PuzzleAnswer> Run(string[] lines) => new List<PuzzleAnswer> { 
-            new PuzzleAnswer(CountDepthIncrements(lines), "measurement increments"),
-            new PuzzleAnswer(CountDepthIncrements(lines, 3), "windowed increments")
+        public override IEnumerable<Answer> Run(string[] lines) => new List<Answer> { 
+            new Answer(CountDepthIncrements(lines), "measurement increments"),
+            new Answer(CountDepthIncrements(lines, 3), "windowed increments")
         };
     }
 }

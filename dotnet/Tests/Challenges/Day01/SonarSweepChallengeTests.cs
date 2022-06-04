@@ -1,4 +1,4 @@
-using AdventOfCode2021.Challenges;
+using AdventOfCode.Challenges;
 using Xunit;
 
 namespace Tests.Challenges.Day01

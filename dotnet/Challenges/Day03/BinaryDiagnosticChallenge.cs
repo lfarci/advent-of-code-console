@@ -1,23 +1,18 @@
-﻿using System.Text;
+﻿using AdventOfCode.CommandLineInterface.Core;
+using System.Text;
 
-namespace AdventOfCode2021.Challenges
+namespace AdventOfCode.Challenges
 {
-
-
-    public class BinaryDiagnosticChallenge : DailyChallenge
+    public class BinaryDiagnosticChallenge : Puzzle
     {
-        public BinaryDiagnosticChallenge(int day, string title) : base(title, day)
-        {
-        }
-
-        public override IEnumerable<PuzzleAnswer> Run(string[] lines)
+        public override IEnumerable<Answer> Run(string[] lines)
         {
             int powerConsumption = DecodePowerConsumption(lines);
             int oxygenGeneratorRating = DecodeOxygenGeneratorRating(lines);
             int co2ScrubberRating = DecodeCO2ScrubberRating(lines);
-            return new List<PuzzleAnswer> {
-                new PuzzleAnswer(powerConsumption, "power consumption"),
-                new PuzzleAnswer(oxygenGeneratorRating * co2ScrubberRating, "oxygen generator rating multiplied by the CO2 scrubber rating")
+            return new List<Answer> {
+                new Answer(powerConsumption, "power consumption"),
+                new Answer(oxygenGeneratorRating * co2ScrubberRating, "oxygen generator rating multiplied by the CO2 scrubber rating")
             };
         }
 

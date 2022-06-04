@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode2021.Challenges
+﻿namespace AdventOfCode.Challenges
 {
     public abstract class DailyChallenge
     {
