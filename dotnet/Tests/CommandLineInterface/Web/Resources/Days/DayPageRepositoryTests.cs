@@ -1,10 +1,10 @@
-﻿using CommandLineInterface.Data;
+﻿using AdventOfCode.CommandLineInterface.Web;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Data
+namespace Tests.CommandLineInterface.Web.Resources
 {
     public class DayPageRepositoryTests
     {

@@ -1,8 +1,9 @@
-﻿using CommandLineInterface.Data;
+﻿using AdventOfCode.CommandLineInterface.Core;
+using AdventOfCode.CommandLineInterface.Web;
 using System;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Data
+namespace Tests.CommandLineInterface.Web.Resources
 {
     public class DayPageTests
     {
@@ -122,19 +123,31 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public void Parse_CompleteDayPage_ReturnsDayWithExpectedCompletion()
         {
-            WithHtmlPage(completeDayPage, day => Assert.Equal(Completion.Complete, day.Completion));
+            WithHtmlPageResource(completeDayPage, day => Assert.Equal(Completion.Complete, day.Completion));
         }
 
         [Fact]
-        public void Parse_CompleteDayPage__ReturnsDayWithExpectedFirstPuzzleAnswer()
+        public void Parse_CompleteDayPage_ReturnsDayWithExpectedFirstPuzzleAnswer()
         {
-            WithHtmlPage(completeDayPage, day => Assert.Equal(412, day.FirstPuzzleAnswer));
+            WithHtmlPageResource(completeDayPage, day => Assert.Equal(412, day.FirstPuzzleAnswer));
+        }
+
+        [Fact]
+        public void Parse_CompleteDayPageWithBigValue_ReturnsDayWithExpectedFirstPuzzleAnswer()
+        {
+            string page = @"<body><main>
+                <article class='day-desc'><h2>Day 1 : My Title</h2></article>
+                <p>Your puzzle answer was <code>1595330616005</code></p>
+                <article class='day-desc'><h2>Part Two</h2></article>
+                <form method='post'></form>
+            </main></body>";
+            WithHtmlPage(page, day => Assert.Equal(1595330616005, day.FirstPuzzleAnswer));
         }
 
         [Fact]
         public void Parse_CompleteDayPage_ReturnsDayWithoutSecondPuzzleAnswer()
         {
-            WithHtmlPage(completeDayPage, day => Assert.Null(day.SecondPuzzleAnswer));
+            WithHtmlPageResource(completeDayPage, day => Assert.Null(day.SecondPuzzleAnswer));
         }
 
         [Fact]
@@ -146,19 +159,19 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public void Parse_VeryCompleteDayPage_ReturnsDayWithExpectedCompletion()
         {
-            WithHtmlPage(veryCompleteDayPage, day => Assert.Equal(Completion.VeryComplete, day.Completion));
+            WithHtmlPageResource(veryCompleteDayPage, day => Assert.Equal(Completion.VeryComplete, day.Completion));
         }
 
         [Fact]
         public void Parse_VeryCompleteDayPage_ReturnsDayWithExpectedFirstPuzzleAnswer()
         {
-            WithHtmlPage(veryCompleteDayPage, day => Assert.Equal(1448, day.FirstPuzzleAnswer));
+            WithHtmlPageResource(veryCompleteDayPage, day => Assert.Equal(1448, day.FirstPuzzleAnswer));
         }
 
         [Fact]
         public void Parse_VeryCompleteDayPage_ReturnsDayWithExpectedSecondPuzzleAnswer()
         {
-            WithHtmlPage(veryCompleteDayPage, day => Assert.Equal(1471, day.SecondPuzzleAnswer));
+            WithHtmlPageResource(veryCompleteDayPage, day => Assert.Equal(1471, day.SecondPuzzleAnswer));
         }
 
         [Fact]
@@ -170,29 +183,34 @@ namespace Tests.CommandLineInterface.Data
         [Fact]
         public void Parse_NotStartedDayPage_ReturnsDayWithExpectedCompletion()
         {
-            WithHtmlPage(notStartedDayPage, day => Assert.Equal(Completion.NotStarted, day.Completion));
+            WithHtmlPageResource(notStartedDayPage, day => Assert.Equal(Completion.NotStarted, day.Completion));
         }
 
         [Fact]
         public void Parse_NotStartedDayPage_ReturnsDayWithoutFirstPuzzleAnswer()
         {
-            WithHtmlPage(notStartedDayPage, day => Assert.Null(day.FirstPuzzleAnswer));
+            WithHtmlPageResource(notStartedDayPage, day => Assert.Null(day.FirstPuzzleAnswer));
         }
 
         [Fact]
         public void Parse_NotStartedDayPage_ReturnsDayWithoutSecondPuzzleAnswer()
         {
-            WithHtmlPage(notStartedDayPage, day => Assert.Null(day.SecondPuzzleAnswer));
+            WithHtmlPageResource(notStartedDayPage, day => Assert.Null(day.SecondPuzzleAnswer));
         }
 
         private static void AssertParsedTitleEqual(string expectedTitle, string resourceName)
         {
-            WithHtmlPage(resourceName, day => Assert.Equal(expectedTitle, day.Title));
+            WithHtmlPageResource(resourceName, day => Assert.Equal(expectedTitle, day.Title));
         }
 
-        private static void WithHtmlPage(string resourceName, Action<DayPage> assertCallback)
+        private static void WithHtmlPageResource(string resourceName, Action<DayPage> assertCallback)
         {
             var page = Helpers.ReadResourceContentAsString(resourceName);
+            WithHtmlPage(page, assertCallback);
+        }
+
+        private static void WithHtmlPage(string page, Action<DayPage> assertCallback)
+        {
             assertCallback(DayPage.Parse(page));
         }
     }

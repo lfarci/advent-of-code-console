@@ -1,10 +1,9 @@
-﻿using AdventOfCode2021.CommandLineInterface.Data;
-using Moq;
+﻿using AdventOfCode.CommandLineInterface.Web;
 using System;
 using System.IO;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Data
+namespace Tests.CommandLineInterface.Web.Resources
 {
     public class PuzzleInputRepositoryTests
     {

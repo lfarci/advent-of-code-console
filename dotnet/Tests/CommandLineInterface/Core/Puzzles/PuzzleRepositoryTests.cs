@@ -1,5 +1,5 @@
-﻿using AdventOfCode2021.Challenges;
-using AdventOfCode2021.CommandLineInterface.Data;
+﻿using AdventOfCode.Challenges;
+using AdventOfCode.CommandLineInterface.Core;
 using Xunit;
 
 namespace Tests.CommandLineInterface.Data
@@ -9,9 +9,9 @@ namespace Tests.CommandLineInterface.Data
         private static readonly IPuzzleRepository repository = PuzzleRepository.Instance;
 
         [Fact]
-        public void Challenges_IsNotEmpty()
+        public void Puzzles_IsEmpty()
         {
-            Assert.NotEmpty(repository.Challenges);
+            Assert.Empty(repository.Puzzles);
         }
 
         [Fact]
