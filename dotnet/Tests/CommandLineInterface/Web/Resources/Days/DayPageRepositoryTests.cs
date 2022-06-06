@@ -51,6 +51,18 @@ namespace Tests.CommandLineInterface.Web.Resources
             Assert.NotNull(await repository.FindByYearAndDayAsync(defaultYear, defaultDay));
         }
 
+        [Theory]
+        [InlineData(12, "Tests.Resources.NotStartedDayPage.html")]
+        [InlineData(4, "Tests.Resources.CompleteDayPage.html")]
+        [InlineData(7, "Tests.Resources.VeryCompleteDayPage.html")]
+        public async Task FindByYearAndDayAsync_ValidPage_ReturnsDayWithIndex(int index, string resourceName)
+        {
+            var content = Helpers.ReadResourceContentAsString(resourceName);
+            var repository = GetRepositoryThatReturns(content, index);
+            var page = await repository.FindByYearAndDayAsync(defaultYear, index);
+            Assert.Equal(index, page.Index);
+        }
+
         private static IDayPageRepository GetRepositoryThatThrows<TException>() where TException : Exception, new()
         {
             var client = Helpers.GetClientThatThrows<TException>(c => c.GetDayPageAsStreamAsync(defaultYear, defaultDay));
@@ -59,7 +71,12 @@ namespace Tests.CommandLineInterface.Web.Resources
 
         private static IDayPageRepository GetRepositoryThatReturns(string result)
         {
-            var client = Helpers.GetClientThatReturns(result, c => c.GetDayPageAsStreamAsync(defaultYear, defaultDay).Result);
+            return GetRepositoryThatReturns(result, defaultDay);
+        }
+
+        private static IDayPageRepository GetRepositoryThatReturns(string result, int day)
+        {
+            var client = Helpers.GetClientThatReturns(result, c => c.GetDayPageAsStreamAsync(defaultYear, day).Result);
             return new DayPageRepository(client);
         }
     }

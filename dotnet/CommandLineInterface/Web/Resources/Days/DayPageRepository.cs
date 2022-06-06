@@ -34,21 +34,23 @@
             return $"Could not find page for year {year} and day {day}.";
         }
 
-        public async Task<DayPage> FindByYearAndDayAsync(int year, int day)
+        public async Task<DayPage> FindByYearAndDayAsync(int year, int index)
         {
             try
             {
-                using Stream stream = await _client.GetDayPageAsStreamAsync(year, day);
+                using Stream stream = await _client.GetDayPageAsStreamAsync(year, index);
                 using StreamReader reader = new(stream);
-                return DayPage.Parse(await reader.ReadToEndAsync());
+                var day = DayPage.Parse(await reader.ReadToEndAsync());
+                day.Index = index;
+                return day;
             }
             catch (FormatException e)
             {
-                throw new InvalidOperationException(GetParseErrorMessage(year, day), e);
+                throw new InvalidOperationException(GetParseErrorMessage(year, index), e);
             }
             catch (IOException e)
             {
-                throw new IOException(GetNotFoundErrorMessage(year, day), e);
+                throw new IOException(GetNotFoundErrorMessage(year, index), e);
             }
         }
     }

@@ -11,15 +11,13 @@ namespace AdventOfCode.Console.Core
         private async Task<Day> GetCalendarDayAsync(int year, DayEntry calendarPageDayEntry)
         {
             var dayPage = await dayPageRepository.FindByYearAndDayAsync(year, calendarPageDayEntry.Index);
-            return new Day
-            {
-                Title = dayPage.Title,
-                Index = calendarPageDayEntry.Index,
-                Completion = calendarPageDayEntry.Completion,
-                FirstPuzzleAnswer = dayPage.FirstPuzzleAnswer,
-                SecondPuzzleAnswer = dayPage.SecondPuzzleAnswer,
-                Puzzle = null
-            };
+            return new DayBuilder()
+                .WithTitle(dayPage.Title)
+                .WithIndex(calendarPageDayEntry.Index)
+                .WithCompletion(dayPage.Completion)
+                .WithFirstPuzzleAnswer(dayPage.FirstPuzzleAnswer)
+                .WithSecondPuzzleAnswer(dayPage.SecondPuzzleAnswer)
+                .Build();
         }
 
         private async Task<IEnumerable<Day>> GetCalendarDaysAsync(CalendarPage page)

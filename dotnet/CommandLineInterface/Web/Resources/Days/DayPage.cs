@@ -18,6 +18,7 @@ namespace AdventOfCode.Console.Web
         private static readonly string puzzleAnswersQuery = $"//main/p[contains(text(), '{puzzleAnswerText}')]/code";
         private static readonly string descriptionsQuery = "//main/article[@class='day-desc']";
 
+        public int Index { get; set; } = 1;
         public string Title { get; set; } = "";
         public Completion Completion { get; set; } = Completion.NotStarted;
         public long? FirstPuzzleAnswer { get; set; } = null;
