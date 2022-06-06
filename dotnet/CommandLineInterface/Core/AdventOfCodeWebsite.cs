@@ -8,13 +8,14 @@ namespace AdventOfCode.Console.Core
         private static ICalendarPageRepository calendarPageRepository = CalendarPageRepository.Instance;
         private static IDayPageRepository dayPageRepository = DayPageRepository.Instance;
 
-        private async Task<Day> GetCalendarDayAsync(int year, DayEntry calendarPageEntry)
+        private async Task<Day> GetCalendarDayAsync(int year, DayEntry calendarPageDayEntry)
         {
-            var dayPage = await dayPageRepository.FindByYearAndDayAsync(year, calendarPageEntry.Index);
+            var dayPage = await dayPageRepository.FindByYearAndDayAsync(year, calendarPageDayEntry.Index);
             return new Day
             {
-                Index = calendarPageEntry.Index,
-                Completion = calendarPageEntry.Completion,
+                Title = dayPage.Title,
+                Index = calendarPageDayEntry.Index,
+                Completion = calendarPageDayEntry.Completion,
                 FirstPuzzleAnswer = dayPage.FirstPuzzleAnswer,
                 SecondPuzzleAnswer = dayPage.SecondPuzzleAnswer,
                 Puzzle = null
@@ -23,7 +24,7 @@ namespace AdventOfCode.Console.Core
 
         private async Task<IEnumerable<Day>> GetCalendarDaysAsync(CalendarPage page)
         {
-            var tasks = page.Days.Select(async d => await GetCalendarDayAsync(0, d));
+            var tasks = page.Days.Select(async d => await GetCalendarDayAsync(page.Year, d));
             var days = await Task.WhenAll(tasks);
             return days;
         }

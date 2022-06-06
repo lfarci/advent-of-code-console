@@ -1,23 +1,27 @@
 ﻿using AdventOfCode.Console.Web;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCode.Console.Core
 {
     public class CalendarPageMapper
     {
-
+        /// <summary>
+        /// Parse the calendar page to a calendar object.
+        /// </summary>
+        /// <remarks>
+        /// The calendar is created with an empty list of days because the
+        /// intent is to build the list asynchronously then set its value once
+        /// it's ready.
+        /// It needs to be done asynchronously because days are made of data
+        /// coming from the calendar page and day pages.
+        /// </remarks>
+        /// <param name="page">This is the page to map.</param>
+        /// <returns>A calendar mapped from the given page.</returns>
         public static Calendar ToCalendar(CalendarPage page)
         {
             return new Calendar {
-                Year = 0,
-                Length = page.Days.Count(),
-
+                Year = page.Year,
+                Length = page.Days.Count
             };
         }
-
     }
 }

@@ -4,8 +4,6 @@ namespace AdventOfCode.Console.Web
 {
     public class AdventOfCodeHttpClient : IAdventOfCodeHttpClient
     {
-
-        private static IAdventOfCodeHttpClient? instance;
         private static readonly string scheme = "https";
         private static readonly HttpClientHandler handler = new()
         {
