@@ -1,7 +1,7 @@
 ﻿using AdventOfCode.Console.Core;
 using HtmlAgilityPack;
 
-namespace AdventOfCode.Console.Web
+namespace AdventOfCode.Console.Web.Resources
 {
     public class CalendarPage
     {
@@ -68,7 +68,7 @@ namespace AdventOfCode.Console.Web
             var children = calendar.Descendants("a");
 
             if (!children.Any())
-            { 
+            {
                 throw new FormatException("Could not find any entry in the calendar.");
             }
 

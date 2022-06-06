@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Console.Web
+﻿namespace AdventOfCode.Console.Web.Client
 {
     public interface IAdventOfCodeClient
     {

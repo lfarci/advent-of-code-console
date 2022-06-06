@@ -1,5 +1,5 @@
-﻿using AdventOfCode.Console.Web;
-using static AdventOfCode.Console.Web.CalendarPage;
+﻿using AdventOfCode.Console.Web.Resources;
+using static AdventOfCode.Console.Web.Resources.CalendarPage;
 
 namespace AdventOfCode.Console.Core
 {

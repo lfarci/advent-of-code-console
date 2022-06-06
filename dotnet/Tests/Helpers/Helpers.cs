@@ -1,4 +1,6 @@
 ﻿using AdventOfCode.Console.Web;
+using AdventOfCode.Console.Web.Client;
+using AdventOfCode.Console.Web.Resources;
 using Moq;
 using System;
 using System.IO;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Tests
 {
-    public static class Helpers
+    internal static class Helpers
     {
         public static string ReadResourceContentAsString(string resourceName)
         {
@@ -46,5 +48,18 @@ namespace Tests
             client.Setup(call).Returns(GenerateStreamFromString(result));
             return client.Object;
         }
+
+        public static ICalendarPageRepository GetCalendarPageRepositoryThatThrows<TException>() where TException : Exception, new()
+        {
+            var client = GetClientThatThrows<TException>(c => c.GetCalendarPageAsStreamAsync(It.IsAny<int>()));
+            return new CalendarPageRepository(client);
+        }
+
+        public static ICalendarPageRepository GetCalendarPageRepositoryThatReturns(string result)
+        {
+            var client = Helpers.GetClientThatReturns(result, c => c.GetCalendarPageAsStreamAsync(It.IsAny<int>()).Result);
+            return new CalendarPageRepository(client);
+        }
+
     }
 }

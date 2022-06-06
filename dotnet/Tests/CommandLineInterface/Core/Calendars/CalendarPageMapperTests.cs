@@ -1,8 +1,8 @@
 ﻿using AdventOfCode.Console.Core;
-using AdventOfCode.Console.Web;
+using AdventOfCode.Console.Web.Resources;
 using System.Collections.Generic;
 using Xunit;
-using static AdventOfCode.Console.Web.CalendarPage;
+using static AdventOfCode.Console.Web.Resources.CalendarPage;
 
 namespace Tests.CommandLineInterface.Core
 {

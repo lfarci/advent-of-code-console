@@ -1,7 +1,7 @@
 ﻿using AdventOfCode.Console.Core;
 using HtmlAgilityPack;
 
-namespace AdventOfCode.Console.Web
+namespace AdventOfCode.Console.Web.Resources
 {
     public class DayPage
     {
@@ -114,6 +114,19 @@ namespace AdventOfCode.Console.Web
             }
         }
 
+        public override bool Equals(object? obj)
+        {
+            return obj is DayPage page &&
+                   Index == page.Index &&
+                   Title == page.Title &&
+                   Completion == page.Completion &&
+                   FirstPuzzleAnswer == page.FirstPuzzleAnswer &&
+                   SecondPuzzleAnswer == page.SecondPuzzleAnswer;
+        }
 
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Index, Title, Completion, FirstPuzzleAnswer, SecondPuzzleAnswer);
+        }
     }
 }

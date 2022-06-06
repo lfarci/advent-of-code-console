@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Console.Web;
+﻿using AdventOfCode.Console.Web.Resources;
 
 namespace AdventOfCode.Console.Core
 {

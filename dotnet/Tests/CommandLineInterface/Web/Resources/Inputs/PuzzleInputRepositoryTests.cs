@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Console.Web;
+﻿using AdventOfCode.Console.Web.Resources;
 using System;
 using System.IO;
 using Xunit;
@@ -20,7 +20,7 @@ namespace Tests.CommandLineInterface.Web.Resources
         public async void FindByYearAndDayAsync_ClientThrowsException_ThrowsOutOfRangeException()
         {
             var repository = GetRepositoryThatThrows<IOException>();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await Assert.ThrowsAsync<IOException>(async () =>
             {
                 await repository.FindByYearAndDayAsync(defaultYear, defaultDay);
             });
@@ -30,7 +30,7 @@ namespace Tests.CommandLineInterface.Web.Resources
         public async void FindByYearAndDayAsync_ClientThrowsException_ThrowExceptionExpectedMessage()
         {
             var repository = GetRepositoryThatThrows<IOException>();
-            var thrown = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            var thrown = await Assert.ThrowsAsync<IOException>(async () =>
             {
                 await repository.FindByYearAndDayAsync(defaultYear, defaultDay);
             });

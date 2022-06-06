@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Console.Web
+﻿using AdventOfCode.Console.Web.Client;
+
+namespace AdventOfCode.Console.Web.Resources
 {
     public class DayPageRepository : IDayPageRepository
     {

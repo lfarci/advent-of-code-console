@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Console.Web
+﻿using AdventOfCode.Console.Web.Client;
+
+namespace AdventOfCode.Console.Web.Resources
 {
     public class PuzzleInputRepository : IPuzzleInputRepository
     {
@@ -43,7 +45,7 @@
             }
             catch (IOException e)
             {
-                throw new InvalidOperationException(GetNotFoundErrorMessage(year, day), e);
+                throw new IOException(GetNotFoundErrorMessage(year, day), e);
             }
 
             return lines.ToArray();

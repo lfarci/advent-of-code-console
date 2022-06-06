@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Console.Web;
+﻿using AdventOfCode.Console.Web.Resources;
 using System;
 using System.IO;
 using System.Threading.Tasks;

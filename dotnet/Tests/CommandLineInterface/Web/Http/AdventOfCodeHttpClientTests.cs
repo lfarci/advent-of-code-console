@@ -8,6 +8,7 @@ using System.Threading;
 using System.Net;
 using System.Threading.Tasks;
 using System.IO;
+using AdventOfCode.Console.Web.Http;
 
 namespace Tests.CommandLineInterface.Web.Client
 {

@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Console.Web
+﻿using AdventOfCode.Console.Web.Http;
+
+namespace AdventOfCode.Console.Web.Client
 {
     public class AdventOfCodeClient : IAdventOfCodeClient
     {

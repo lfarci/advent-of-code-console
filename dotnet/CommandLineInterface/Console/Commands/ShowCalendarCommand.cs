@@ -1,5 +1,5 @@
 ﻿using AdventOfCode.Console.Core;
-using AdventOfCode.Console.Web;
+using AdventOfCode.Console.Web.Resources;
 using Spectre.Console;
 using Spectre.Console.Cli;
 using System.ComponentModel;
