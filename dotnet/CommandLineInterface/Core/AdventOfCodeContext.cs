@@ -1,19 +1,20 @@
-﻿using AdventOfCode.Console.Web.Resources;
+﻿using AdventOfCode.Console.Web;
 
 namespace AdventOfCode.Console.Core
 {
     public class AdventOfCodeContext
     {
 
-        private static ICalendarPageRepository calendarPageRepository = CalendarPageRepository.Instance;
-        private static IDayPageRepository dayPageRepository = DayPageRepository.Instance;
+        private static IDataSource data = new AdventOfCodeWebsite { 
+            Resources = ResourceRepository.Instance
+        };
 
-        private IEnumerable<Day> _days;
+        private Calendar _calendar;
         public int Year { get; }
 
         public AdventOfCodeContext(int year)
         {
-            _days = new List<Day>();
+            _calendar = new Calendar();
             Year = year;
         }
 
@@ -22,34 +23,15 @@ namespace AdventOfCode.Console.Core
             return e is ApplicationException || e is SystemException;
         }
 
-        private async Task<Day> From(CalendarPage.DayEntry day)
-        {
-            var dayPage = await dayPageRepository.FindByYearAndDayAsync(Year, day.Index);
-            return new Day
-            {
-                Index = day.Index,
-                Completion = day.Completion,
-                FirstPuzzleAnswer = dayPage.FirstPuzzleAnswer,
-                SecondPuzzleAnswer = dayPage.SecondPuzzleAnswer,
-                Puzzle = null
-            };
-        }
-
         public async Task Initialize(Action<AdventOfCodeContext> onInitialized)
         {
-            var calendar = await calendarPageRepository.FindByYearAsync(Year);
-            _days = await Task.WhenAll(calendar.Days.Select(async d => await From(d)));
+            _calendar = await data.FindCalendarByYearAsync(Year);
             onInitialized(this);
         }
 
         private void RegisterPuzzleForDay(int index, Puzzle puzzle)
         {
-            Day? day = _days.Where(d => d.Index == index).ToList().FirstOrDefault();
-            if (day == null)
-            {
-                throw new ArgumentOutOfRangeException($"No day {index} for year {Year}.");
-            }
-            day.Puzzle = puzzle;
+          _calendar[index].Puzzle = puzzle;
         }
 
         public class PuzzleSubmission

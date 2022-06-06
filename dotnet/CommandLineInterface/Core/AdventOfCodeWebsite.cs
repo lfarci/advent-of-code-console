@@ -1,16 +1,16 @@
-﻿using AdventOfCode.Console.Web.Resources;
+﻿using AdventOfCode.Console.Web;
+using AdventOfCode.Console.Web.Resources;
 using static AdventOfCode.Console.Web.Resources.CalendarPage;
 
 namespace AdventOfCode.Console.Core
 {
-    public class AdventOfCodeWebsite : IDataSource
+    internal class AdventOfCodeWebsite : IDataSource
     {
-        private static ICalendarPageRepository calendarPageRepository = CalendarPageRepository.Instance;
-        private static IDayPageRepository dayPageRepository = DayPageRepository.Instance;
+        public IResourceRepository Resources { get; init; } = ResourceRepository.Instance;
 
         private async Task<Day> GetCalendarDayAsync(int year, DayEntry calendarPageDayEntry)
         {
-            var dayPage = await dayPageRepository.FindByYearAndDayAsync(year, calendarPageDayEntry.Index);
+            var dayPage = await Resources.FindDayPageByYearAndDayAsync(year, calendarPageDayEntry.Index);
             return new DayBuilder()
                 .WithTitle(dayPage.Title)
                 .WithIndex(calendarPageDayEntry.Index)
@@ -29,7 +29,7 @@ namespace AdventOfCode.Console.Core
 
         public async Task<Calendar> FindCalendarByYearAsync(int year)
         {
-            CalendarPage page = await calendarPageRepository.FindByYearAsync(year);
+            CalendarPage page = await Resources.FindCalendarPageByYearAsync(year);
             Calendar calendar = CalendarPageMapper.ToCalendar(page);
             calendar.Days = await GetCalendarDaysAsync(page);
             return calendar;

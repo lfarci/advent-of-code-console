@@ -36,5 +36,23 @@ namespace Tests
             new DayEntry { Index = 24, Completion = Completion.NotStarted },
             new DayEntry { Index = 25, Completion = Completion.NotStarted }
         };
+
+        public static readonly Calendar Calendar = new Calendar { 
+            Year = 2021,
+            Length = 10,
+            Days = new[] { 
+                new Day { Index = 1, Title = "Day 1" },
+                new Day { Index = 2, Title = "Day 2" },
+                new Day { Index = 3, Title = "Day 3"},
+                new Day { Index = 4, Title = "Day 4"},
+                new Day { Index = 5, Title = "Day 5"},
+                new Day { Index = 6, Title = "Day 6"},
+                new Day { Index = 7, Title = "Day 7"},
+                new Day { Index = 8, Title = "Day 8"},
+                new Day { Index = 9, Title = "Day 9"},
+                new Day { Index = 10, Title = "Day 10" },
+            }
+        };
+
     }
 }
