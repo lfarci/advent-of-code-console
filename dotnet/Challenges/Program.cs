@@ -8,18 +8,12 @@ namespace AdventOfCode
     {
         public static void Main(string[] args)
         {
-            var app = new AdventOfCodeApplication();
+            var app = AdventOfCodeApplication.Instance;
 
-            app.AddYear(2020, year => {
-                year.Submit<SonarSweepChallenge>().Run(1);
-                year.Submit<DiveChallenge>().Run(2);
-                year.Submit<BinaryDiagnosticChallenge>().Run(3);
-            });
-
-            app.AddYear(2021, year => {
-                year.Submit<SonarSweepChallenge>().Run(1);
-                year.Submit<DiveChallenge>().Run(2);
-                year.Submit<BinaryDiagnosticChallenge>().Run(3);
+            app.StartYear(2021, year => {
+                year.Submit<SonarSweepChallenge>().ForDay(1);
+                year.Submit<DiveChallenge>().ForDay(2);
+                year.Submit<BinaryDiagnosticChallenge>().ForDay(3);
             });
 
             app.Run(args);

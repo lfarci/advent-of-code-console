@@ -8,8 +8,8 @@ namespace AdventOfCode.Console.Core
         private static IDataSource data = new AdventOfCodeWebsite { 
             Resources = ResourceRepository.Instance
         };
-
         private Calendar _calendar;
+        public Calendar Calendar { get => _calendar; }
         public int Year { get; }
 
         public AdventOfCodeContext(int year)
@@ -29,16 +29,11 @@ namespace AdventOfCode.Console.Core
             onInitialized(this);
         }
 
-        private void RegisterPuzzleForDay(int index, Puzzle puzzle)
-        {
-          _calendar[index].Puzzle = puzzle;
-        }
-
         public class PuzzleSubmission
         {
             public Action<int>? RegisterForDay { get; set; }
 
-            public void Run(int dayIndex)
+            public void ForDay(int dayIndex)
             {
                 RegisterForDay?.Invoke(dayIndex);
             }
@@ -56,7 +51,7 @@ namespace AdventOfCode.Console.Core
                 }
                 return new PuzzleSubmission
                 {
-                    RegisterForDay = index => RegisterPuzzleForDay(index, puzzle)
+                    RegisterForDay = index => _calendar[index].Puzzle = puzzle
                 };
             }
             catch (Exception e) when (IsActivatorException(e))

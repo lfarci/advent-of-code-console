@@ -7,17 +7,38 @@ namespace AdventOfCode.Console
 {
     public class AdventOfCodeApplication
     {
+        private static AdventOfCodeApplication? instance;
+        private IDictionary<int, AdventOfCodeContext> _contextsByYear;
 
-        private IDictionary<int, AdventOfCodeContext> _contexts;
-
-        public AdventOfCodeApplication()
+        public static AdventOfCodeApplication Instance
         {
-            _contexts = new Dictionary<int, AdventOfCodeContext>();
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AdventOfCodeApplication();
+                }
+                return instance;
+            }
         }
 
-        public void AddYear(int year, Action<AdventOfCodeContext> onYearInitialized)
+        protected AdventOfCodeApplication()
         {
-            if (_contexts.ContainsKey(year))
+            _contextsByYear = new Dictionary<int, AdventOfCodeContext>();
+        }
+
+        public Calendar FindCalendar(int year)
+        {
+            if (!_contextsByYear.ContainsKey(year))
+            {
+                throw new ArgumentOutOfRangeException($"No calendar for year: {year}");
+            }
+            return _contextsByYear[year].Calendar;
+        }
+
+        public void StartYear(int year, Action<AdventOfCodeContext> onYearInitialized)
+        {
+            if (_contextsByYear.ContainsKey(year))
             {
                 throw new InvalidOperationException($"Trying to add the same year twice: {year}.");
             }
@@ -25,13 +46,13 @@ namespace AdventOfCode.Console
             try
             {
                 var context = new AdventOfCodeContext(year);
-                _contexts[year] = context;
+                _contextsByYear[year] = context;
                 AdventOfCodeConsole.Status($"Initializing year {year}...", () =>
                 {
                     context.Initialize(onYearInitialized).Wait();
                 });
             }
-            catch (Exception e) when (e is InvalidOperationException || e is IOException)
+            catch (Exception)
             {
                 AdventOfCodeConsole.ShowErrorMessage($"Failed to add year {year}.");
             }

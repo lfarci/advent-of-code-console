@@ -22,9 +22,7 @@ namespace AdventOfCode.Console.Commands
 
 
                 int year = int.Parse(settings?.Year ?? "");
-                ICalendarPageRepository calendars = CalendarPageRepository.Instance;
-                IPuzzleRepository challenges = PuzzleRepository.Instance;
-                CalendarPage calendar = await calendars.FindByYearAsync(year);
+                AdventOfCodeApplication app = AdventOfCodeApplication.Instance;
 
                 var answers = new Table()
                     .Border(TableBorder.Rounded)
@@ -34,21 +32,10 @@ namespace AdventOfCode.Console.Commands
                     .AddColumn(new TableColumn("[u]Part Two[/]"))
                     .AddColumn(new TableColumn("[u]Link[/]"));
 
-                foreach (var day in calendar.Days)
+                foreach (var day in app.FindCalendar(year).Days)
                 {
-
-                    var challenge = challenges.FindByDay(day.Index);
                     var link = $"https://adventofcode.com/{year}/day/{day.Index}";
-
-
-                    if (challenge != null)
-                    {
-                        answers.AddRow($"Day {day.Index}:", "0", "0", link);
-                    }
-                    else
-                    { 
-                        answers.AddRow($"Day {day.Index}", "", "", link);
-                    }
+                    answers.AddRow(day.Title, day.FirstPuzzleAnswer.ToString(), day.SecondPuzzleAnswer.ToString(), link);
                 }
 
                 AnsiConsole.Write(answers);
@@ -67,7 +54,7 @@ namespace AdventOfCode.Console.Commands
             }
 
 
-            
+
 
 
         }
