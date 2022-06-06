@@ -1,7 +1,7 @@
-﻿using AdventOfCode.CommandLineInterface.Core;
+﻿using AdventOfCode.Console.Core;
 using HtmlAgilityPack;
 
-namespace AdventOfCode.CommandLineInterface.Web
+namespace AdventOfCode.Console.Web
 {
     public class DayPage
     {

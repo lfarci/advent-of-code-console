@@ -1,6 +1,6 @@
 ﻿using System.Net.Security;
 
-namespace AdventOfCode.CommandLineInterface.Web
+namespace AdventOfCode.Console.Web
 {
     public class AdventOfCodeHttpClient : IAdventOfCodeHttpClient
     {

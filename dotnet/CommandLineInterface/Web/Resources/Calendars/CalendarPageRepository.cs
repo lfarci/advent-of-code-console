@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.CommandLineInterface.Web
+﻿namespace AdventOfCode.Console.Web
 {
     public class CalendarPageRepository : ICalendarPageRepository
     {
@@ -33,7 +33,9 @@
             {
                 using Stream stream = await _client.GetCalendarPageAsStreamAsync(year);
                 using StreamReader reader = new(stream);
-                return CalendarPage.Parse(await reader.ReadToEndAsync());
+                var calendar = CalendarPage.Parse(await reader.ReadToEndAsync());
+                calendar.Year = year;
+                return calendar;
             }
             catch (FormatException e)
             {

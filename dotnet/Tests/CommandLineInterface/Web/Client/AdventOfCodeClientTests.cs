@@ -1,4 +1,4 @@
-﻿using AdventOfCode.CommandLineInterface.Web;
+﻿using AdventOfCode.Console.Web;
 using Moq;
 using System;
 using System.IO;

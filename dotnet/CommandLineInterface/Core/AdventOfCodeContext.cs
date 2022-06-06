@@ -1,6 +1,6 @@
-﻿using AdventOfCode.CommandLineInterface.Web;
+﻿using AdventOfCode.Console.Web;
 
-namespace AdventOfCode.CommandLineInterface.Core
+namespace AdventOfCode.Console.Core
 {
     public class AdventOfCodeContext
     {
@@ -8,7 +8,7 @@ namespace AdventOfCode.CommandLineInterface.Core
         private static ICalendarPageRepository calendarPageRepository = CalendarPageRepository.Instance;
         private static IDayPageRepository dayPageRepository = DayPageRepository.Instance;
 
-        private IList<Day> _days;
+        private IEnumerable<Day> _days;
         public int Year { get; }
 
         public AdventOfCodeContext(int year)
@@ -22,20 +22,11 @@ namespace AdventOfCode.CommandLineInterface.Core
             return e is ApplicationException || e is SystemException;
         }
 
-        public class RegisterCallback
-        {
-            public Action<int>? RegisterForDay { get; set; }
-
-            public void ForDay(int dayIndex)
-            {
-                RegisterForDay?.Invoke(dayIndex);
-            }
-        }
-
         private async Task<Day> From(CalendarPage.DayEntry day)
         {
             var dayPage = await dayPageRepository.FindByYearAndDayAsync(Year, day.Index);
-            return new Day {
+            return new Day
+            {
                 Index = day.Index,
                 Completion = day.Completion,
                 FirstPuzzleAnswer = dayPage.FirstPuzzleAnswer,
@@ -46,32 +37,32 @@ namespace AdventOfCode.CommandLineInterface.Core
 
         public async Task Initialize(Action<AdventOfCodeContext> onInitialized)
         {
-            Console.WriteLine("Starting to initialize");
-
-            try
-            {
-                var calendar = await calendarPageRepository.FindByYearAsync(Year);
-                var days = await Task.WhenAll(calendar.Days.Select(async d => await From(d)));
-
-                _days = new List<Day>(days);
-                Console.WriteLine("Initialized");
-                onInitialized(this);
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine($"Because: {e.InnerException?.Message}");
-                Console.WriteLine($"Because: {e.InnerException?.InnerException?.Message}");
-            }
-
+            var calendar = await calendarPageRepository.FindByYearAsync(Year);
+            _days = await Task.WhenAll(calendar.Days.Select(async d => await From(d)));
+            onInitialized(this);
         }
 
-        private void RegisterPuzzle(int day, Puzzle puzzle)
-        { 
-        
+        private void RegisterPuzzleForDay(int index, Puzzle puzzle)
+        {
+            Day? day = _days.Where(d => d.Index == index).ToList().FirstOrDefault();
+            if (day == null)
+            {
+                throw new ArgumentOutOfRangeException($"No day {index} for year {Year}.");
+            }
+            day.Puzzle = puzzle;
         }
 
-        public RegisterCallback Submit<TPuzzle>() where TPuzzle : Puzzle
+        public class PuzzleSubmission
+        {
+            public Action<int>? RegisterForDay { get; set; }
+
+            public void Run(int dayIndex)
+            {
+                RegisterForDay?.Invoke(dayIndex);
+            }
+        }
+
+        public PuzzleSubmission Submit<TPuzzle>() where TPuzzle : Puzzle
         {
             try
             {
@@ -79,14 +70,12 @@ namespace AdventOfCode.CommandLineInterface.Core
                 TPuzzle? puzzle = (TPuzzle?)Activator.CreateInstance(type);
                 if (puzzle == null)
                 {
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException("Failed to create an instance of the submitted puzzle class.");
                 }
-
-                // I should have the calendar in the memory and find the day corresponding
-                // the given year and day, the set the day puzzle.
-
-                //_puzzleRepository.Save(puzzle);
-                return new RegisterCallback { RegisterForDay = day => RegisterPuzzle(day, puzzle) };
+                return new PuzzleSubmission
+                {
+                    RegisterForDay = index => RegisterPuzzleForDay(index, puzzle)
+                };
             }
             catch (Exception e) when (IsActivatorException(e))
             {

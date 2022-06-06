@@ -1,5 +1,5 @@
-﻿using AdventOfCode.CommandLineInterface.Core;
-using AdventOfCode.CommandLineInterface.Web;
+﻿using AdventOfCode.Console.Core;
+using AdventOfCode.Console.Web;
 using System;
 using Xunit;
 

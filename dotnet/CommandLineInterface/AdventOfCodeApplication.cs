@@ -1,13 +1,13 @@
-﻿using AdventOfCode.CommandLineInterface.Core;
-using CommandLineInterface.Commands;
+﻿using AdventOfCode.Console.Core;
+using AdventOfCode.Console.Commands;
 using Spectre.Console.Cli;
+using CommandLineInterface.Console;
 
-namespace AdventOfCode.CommandLineInterface
+namespace AdventOfCode.Console
 {
     public class AdventOfCodeApplication
     {
 
-        private static readonly IPuzzleRepository puzzleRepository = PuzzleRepository.Instance;
         private IDictionary<int, AdventOfCodeContext> _contexts;
 
         public AdventOfCodeApplication()
@@ -21,12 +21,20 @@ namespace AdventOfCode.CommandLineInterface
             {
                 throw new InvalidOperationException($"Trying to add the same year twice: {year}.");
             }
-            var context = new AdventOfCodeContext(year);
-            _contexts[year] = context;
 
-            Console.WriteLine("Loading...");
-            context.Initialize(onYearInitialized).Wait();
-            Console.WriteLine("Resources downloaded.");
+            try
+            {
+                var context = new AdventOfCodeContext(year);
+                _contexts[year] = context;
+                AdventOfCodeConsole.Status($"Initializing year {year}...", () =>
+                {
+                    context.Initialize(onYearInitialized).Wait();
+                });
+            }
+            catch (Exception e) when (e is InvalidOperationException || e is IOException)
+            {
+                AdventOfCodeConsole.ShowErrorMessage($"Failed to add year {year}.");
+            }
         }
 
         public int Run(string[] args)

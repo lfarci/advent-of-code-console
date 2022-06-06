@@ -1,4 +1,4 @@
-﻿using AdventOfCode.CommandLineInterface.Web;
+﻿using AdventOfCode.Console.Web;
 using System;
 using System.IO;
 using Xunit;
@@ -39,6 +39,14 @@ namespace Tests.CommandLineInterface.Web.Resources
             var repository = GetRepositoryThatReturns(validPage);
             var calendar = await repository.FindByYearAsync(defaultYear);
             Assert.NotNull(calendar);
+        }
+
+        [Fact]
+        public async void FindByYearAsync_ClientReturnsValidPage_ReturnsCalendarWithDefaultYear()
+        {
+            var repository = GetRepositoryThatReturns(validPage);
+            var calendar = await repository.FindByYearAsync(defaultYear);
+            Assert.Equal(defaultYear, calendar.Year);
         }
 
         private static ICalendarPageRepository GetRepositoryThatThrows<TException>() where TException : Exception, new()

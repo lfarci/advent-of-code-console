@@ -1,11 +1,11 @@
-﻿using AdventOfCode.CommandLineInterface.Core;
-using AdventOfCode.CommandLineInterface.Web;
+﻿using AdventOfCode.Console.Core;
+using AdventOfCode.Console.Web;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using Xunit;
 
-using static AdventOfCode.CommandLineInterface.Web.CalendarPage;
+using static AdventOfCode.Console.Web.CalendarPage;
 
 namespace Tests.CommandLineInterface.Web.Resources
 {
@@ -184,6 +184,12 @@ namespace Tests.CommandLineInterface.Web.Resources
                 new DayEntry { Index = 1, Completion = Completion.NotStarted },
             });
             Assert.True(first().Equals(second()));
+        }
+
+        [Fact]
+        public void Year_AfterConstructorCall_ReturnsCurrentYear()
+        {
+            Assert.Equal(DateTime.Now.Year, new CalendarPage().Year);
         }
 
         private static string ReadCalendarPage()

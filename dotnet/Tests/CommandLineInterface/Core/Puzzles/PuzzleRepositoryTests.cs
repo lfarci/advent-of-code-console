@@ -1,5 +1,5 @@
 ﻿using AdventOfCode.Challenges;
-using AdventOfCode.CommandLineInterface.Core;
+using AdventOfCode.Console.Core;
 using Xunit;
 
 namespace Tests.CommandLineInterface.Data

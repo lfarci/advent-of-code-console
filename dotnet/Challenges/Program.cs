@@ -1,6 +1,6 @@
 ﻿
 using AdventOfCode.Challenges;
-using AdventOfCode.CommandLineInterface;
+using AdventOfCode.Console;
 
 namespace AdventOfCode
 {
@@ -10,22 +10,19 @@ namespace AdventOfCode
         {
             var app = new AdventOfCodeApplication();
 
-            Console.WriteLine("Adding year 2021");
-
-            app.AddYear(2021, context => {
-
-                Console.WriteLine("[Program] About to submit puzzles");
-
-                context.Submit<SonarSweepChallenge>().ForDay(1);
-                context.Submit<DiveChallenge>().ForDay(2);
-                context.Submit<BinaryDiagnosticChallenge>().ForDay(3);
-
-                Console.WriteLine("[Program] All puzzles have been registered");
+            app.AddYear(2020, year => {
+                year.Submit<SonarSweepChallenge>().Run(1);
+                year.Submit<DiveChallenge>().Run(2);
+                year.Submit<BinaryDiagnosticChallenge>().Run(3);
             });
 
-            Console.WriteLine("Year 2021 added");
+            app.AddYear(2021, year => {
+                year.Submit<SonarSweepChallenge>().Run(1);
+                year.Submit<DiveChallenge>().Run(2);
+                year.Submit<BinaryDiagnosticChallenge>().Run(3);
+            });
 
-            //app.Run(args);
+            app.Run(args);
         }
     }
 }

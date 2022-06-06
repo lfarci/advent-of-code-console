@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.CommandLineInterface.Core
+﻿namespace AdventOfCode.Console.Core
 {
     public enum Completion
     {

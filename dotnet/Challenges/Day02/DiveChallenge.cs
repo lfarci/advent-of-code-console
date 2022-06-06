@@ -1,4 +1,4 @@
-﻿using AdventOfCode.CommandLineInterface.Core;
+﻿using AdventOfCode.Console.Core;
 
 namespace AdventOfCode.Challenges
 {

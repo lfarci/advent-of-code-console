@@ -2,7 +2,7 @@
 using Moq;
 using Moq.Protected;
 using System.Linq;
-using AdventOfCode.CommandLineInterface.Web;
+using AdventOfCode.Console.Web;
 using System.Net.Http;
 using System.Threading;
 using System.Net;

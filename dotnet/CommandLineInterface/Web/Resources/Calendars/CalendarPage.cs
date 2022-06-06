@@ -1,13 +1,14 @@
-﻿using AdventOfCode.CommandLineInterface.Core;
+﻿using AdventOfCode.Console.Core;
 using HtmlAgilityPack;
 
-namespace AdventOfCode.CommandLineInterface.Web
+namespace AdventOfCode.Console.Web
 {
     public class CalendarPage
     {
         private readonly IList<DayEntry> _days;
 
         public IList<DayEntry> Days { get => _days; }
+        public int Year { get; set; } = DateTime.Now.Year;
 
         public CalendarPage(IList<DayEntry> days)
         {

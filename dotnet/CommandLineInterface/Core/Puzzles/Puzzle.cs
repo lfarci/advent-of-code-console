@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventOfCode.CommandLineInterface.Core
+namespace AdventOfCode.Console.Core
 {
     public abstract class Puzzle
     {

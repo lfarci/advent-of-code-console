@@ -1,6 +1,6 @@
-﻿using AdventOfCode.CommandLineInterface.Web;
+﻿using AdventOfCode.Console.Web;
 
-namespace AdventOfCode.CommandLineInterface.Core
+namespace AdventOfCode.Console.Core
 {
     public class Day
     {
