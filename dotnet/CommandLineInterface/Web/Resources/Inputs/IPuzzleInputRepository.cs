@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Console.Web.Resources
 {
-    public interface IPuzzleInputRepository
+    internal interface IPuzzleInputRepository
     {
         /// <summary>
         /// Find a puzzle input for the given year and day index.

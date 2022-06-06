@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Console.Web.Resources
 {
-    public class DayPageRepository : IDayPageRepository
+    internal class DayPageRepository : IDayPageRepository
     {
         private static IDayPageRepository? instance;
         private readonly IAdventOfCodeClient _client;

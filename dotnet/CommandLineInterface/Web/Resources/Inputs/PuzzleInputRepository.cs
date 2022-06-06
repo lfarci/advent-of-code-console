@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Console.Web.Resources
 {
-    public class PuzzleInputRepository : IPuzzleInputRepository
+    internal class PuzzleInputRepository : IPuzzleInputRepository
     {
         private static IPuzzleInputRepository? instance;
         private readonly IAdventOfCodeClient _client = AdventOfCodeClient.Instance;

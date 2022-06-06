@@ -3,7 +3,7 @@ using HtmlAgilityPack;
 
 namespace AdventOfCode.Console.Web.Resources
 {
-    public class CalendarPage
+    internal class CalendarPage
     {
         private readonly IList<DayEntry> _days;
 

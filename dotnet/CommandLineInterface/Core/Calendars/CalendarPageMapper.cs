@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Console.Core
 {
-    public class CalendarPageMapper
+    internal class CalendarPageMapper
     {
         /// <summary>
         /// Parse the calendar page to a calendar object.

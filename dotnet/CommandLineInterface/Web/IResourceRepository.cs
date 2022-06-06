@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Console.Web
 {
-    public interface IResourceRepository
+    internal interface IResourceRepository
     {
 
         /// <summary>

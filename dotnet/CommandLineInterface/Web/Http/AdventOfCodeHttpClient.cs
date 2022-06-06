@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Console.Web.Http
 {
-    public class AdventOfCodeHttpClient : IAdventOfCodeHttpClient
+    internal class AdventOfCodeHttpClient : IAdventOfCodeHttpClient
     {
         private static readonly string scheme = "https";
         private static readonly HttpClientHandler handler = new()

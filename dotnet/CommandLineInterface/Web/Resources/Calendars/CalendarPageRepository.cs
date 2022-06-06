@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Console.Web.Resources
 {
-    public class CalendarPageRepository : ICalendarPageRepository
+    internal class CalendarPageRepository : ICalendarPageRepository
     {
         private static ICalendarPageRepository? instance;
         private readonly IAdventOfCodeClient _client = AdventOfCodeClient.Instance;

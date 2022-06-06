@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Console.Web.Client
 {
-    public class AdventOfCodeClient : IAdventOfCodeClient
+    internal class AdventOfCodeClient : IAdventOfCodeClient
     {
 
         private static IAdventOfCodeClient? instance = null;

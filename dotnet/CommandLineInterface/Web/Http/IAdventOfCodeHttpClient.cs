@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Console.Web
 {
-    public interface IAdventOfCodeHttpClient
+    internal interface IAdventOfCodeHttpClient
     {
         public string Host { get; }
         public string SessionId { get; }

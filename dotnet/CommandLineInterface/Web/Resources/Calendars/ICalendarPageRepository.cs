@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Console.Web.Resources
 {
-    public interface ICalendarPageRepository
+    internal interface ICalendarPageRepository
     {
         /// <summary>
         /// Find a calendar page for the given year.

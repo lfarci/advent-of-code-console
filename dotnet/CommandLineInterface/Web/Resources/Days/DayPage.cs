@@ -3,7 +3,7 @@ using HtmlAgilityPack;
 
 namespace AdventOfCode.Console.Web.Resources
 {
-    public class DayPage
+    internal class DayPage
     {
         public static readonly string TitleNotFoundError = "Title not found.";
         public static readonly string InvalidTitleFormatError = "Invalid title";

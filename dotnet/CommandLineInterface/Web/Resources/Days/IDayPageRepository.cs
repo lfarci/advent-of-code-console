@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Console.Web.Resources
 {
-    public interface IDayPageRepository
+    internal interface IDayPageRepository
     {
         /// <summary>
         /// Find a day page for the given year and day index.
