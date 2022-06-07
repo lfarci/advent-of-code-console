@@ -95,5 +95,12 @@ namespace Tests.CommandLineInterface.Core
             Assert.Throws<ArgumentOutOfRangeException>(() => context.Submit<Fixtures.FirstPuzzle>().ForDay(26));
         }
 
+        [Fact]
+        public void RegisterPuzzleFor_NotInitialized_ThrowsInvalidOperationException()
+        {
+            var context = new AdventOfCodeContext(new FixtureDataSource(), null, 2021);
+            Assert.Throws<InvalidOperationException>(() => context.RegisterPuzzleForDay(1, new Fixtures.FirstPuzzle()));
+        }
+
     }
 }

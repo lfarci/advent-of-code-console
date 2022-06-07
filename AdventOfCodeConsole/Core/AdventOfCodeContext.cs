@@ -50,7 +50,7 @@ namespace AdventOfCode.Console.Core
             onInitialized(this);
         }
 
-        private void RegisterPuzzleForDay(int index, Puzzle puzzle)
+        internal void RegisterPuzzleForDay(int index, Puzzle puzzle)
         {
             if (_calendar == null)
             {
