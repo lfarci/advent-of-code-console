@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tests.Properties {
+namespace AdventOfCodeConsole.Tests.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Tests.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tests.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AdventOfCodeConsole.Tests.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -82,13 +82,15 @@ namespace Tests.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;!-- saved from url=(0035)https://adventofcode.com/2021/day/8 --&gt;
-        ///&lt;html lang=&quot;en-us&quot;&gt;&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        ///&lt;html lang=&quot;en-us&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
         ///
-        ///&lt;title&gt;Day 8 - Advent of Code 2021&lt;/title&gt;
-        ///&lt;!--[if lt IE 9]&gt;&lt;script src=&quot;/static/html5.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;
-        ///&lt;link href=&quot;./Day 8 - Advent of Code 2021_files/css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
-        ///&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./Day 8 - Advent of Code 2021_files/style.css&quot;&gt;
-        ///&lt;link rel=&quot;stylesheet alternate&quot; ty [rest of string was truncated]&quot;;.
+        ///    &lt;title&gt;Day 8 - Advent of Code 2021&lt;/title&gt;
+        ///    &lt;!--[if lt IE 9]&gt;&lt;script src=&quot;/static/html5.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;
+        ///    &lt;link href=&quot;./Day 8 - Advent of Code 2021_files/css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./Day 8 - Advent of Code 2021_files/style.css&quot;&gt;
+        ///    &lt;link r [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CompleteDayPage {
             get {
@@ -116,13 +118,15 @@ namespace Tests.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
         ///&lt;!-- saved from url=(0035)https://adventofcode.com/2021/day/1 --&gt;
-        ///&lt;html lang=&quot;en-us&quot;&gt;&lt;head&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
+        ///&lt;html lang=&quot;en-us&quot;&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;
         ///
-        ///&lt;title&gt;Day 1 - Advent of Code 2021&lt;/title&gt;
-        ///&lt;!--[if lt IE 9]&gt;&lt;script src=&quot;/static/html5.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;
-        ///&lt;link href=&quot;./VeryCompleteDayPage_files/css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
-        ///&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./VeryCompleteDayPage_files/style.css&quot;&gt;
-        ///&lt;link rel=&quot;stylesheet alternate&quot; type=&quot;text/css&quot; hr [rest of string was truncated]&quot;;.
+        ///    &lt;title&gt;Day 1 - Advent of Code 2021&lt;/title&gt;
+        ///    &lt;!--[if lt IE 9]&gt;&lt;script src=&quot;/static/html5.js&quot;&gt;&lt;/script&gt;&lt;![endif]--&gt;
+        ///    &lt;link href=&quot;./VeryCompleteDayPage_files/css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+        ///    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;./VeryCompleteDayPage_files/style.css&quot;&gt;
+        ///    &lt;link rel=&quot;stylesheet a [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string VeryCompleteDayPage {
             get {

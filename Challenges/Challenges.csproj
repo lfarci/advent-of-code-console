@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\CommandLineInterface\CommandLineInterface.csproj" />
+		<ProjectReference Include="..\CommandLineInterface\AdventOfCodeConsole.csproj" />
 	</ItemGroup>
 
 </Project>
