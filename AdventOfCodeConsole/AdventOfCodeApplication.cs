@@ -22,12 +22,12 @@ namespace AdventOfCode.Console
             }
         }
 
-        protected AdventOfCodeApplication()
+        internal AdventOfCodeApplication()
         {
             _contextsByYear = new Dictionary<int, AdventOfCodeContext>();
         }
 
-        public Calendar FindCalendar(int year)
+        internal Calendar FindCalendar(int year)
         {
             if (!_contextsByYear.ContainsKey(year))
             {

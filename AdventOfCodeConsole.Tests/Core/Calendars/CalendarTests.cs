@@ -1,4 +1,5 @@
 ﻿using AdventOfCode.Console.Core;
+using AdventOfCodeConsole.Tests.Helpers;
 using System;
 using Xunit;
 

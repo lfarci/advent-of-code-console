@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Console.Core;
 using AdventOfCode.Console.Web.Resources;
+using AdventOfCodeConsole.Tests.Helpers;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Tests.CommandLineInterface.Web.Resources
 {
     public class CalendarPageTests
     {
-        private static readonly string resourceName = "Tests.Resources.CalendarPage.html";
+        private static readonly string resourceName = "AdventOfCodeConsole.Tests.Resources.CalendarPage.html";
         private static readonly string calendarPage = ReadCalendarPage();
         private static readonly IList<DayEntry> expectedDays = Fixtures.CalendarDays;
 

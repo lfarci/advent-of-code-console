@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Console.Core;
 using AdventOfCode.Console.Web.Resources;
+using AdventOfCodeConsole.Tests.Helpers;
 using System;
 using Xunit;
 
@@ -7,9 +8,9 @@ namespace Tests.CommandLineInterface.Web.Resources
 {
     public class DayPageTests
     {
-        private static readonly string notStartedDayPage = "Tests.Resources.NotStartedDayPage.html";
-        private static readonly string completeDayPage = "Tests.Resources.CompleteDayPage.html";
-        private static readonly string veryCompleteDayPage = "Tests.Resources.VeryCompleteDayPage.html";
+        private static readonly string notStartedDayPage = "AdventOfCodeConsole.Tests.Resources.NotStartedDayPage.html";
+        private static readonly string completeDayPage = "AdventOfCodeConsole.Tests.Resources.CompleteDayPage.html";
+        private static readonly string veryCompleteDayPage = "AdventOfCodeConsole.Tests.Resources.VeryCompleteDayPage.html";
 
         [Fact]
         public void ParseTitle_EmptyString_ThrowsFormatException()

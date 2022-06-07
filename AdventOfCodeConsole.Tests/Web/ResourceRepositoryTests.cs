@@ -1,5 +1,6 @@
 ﻿using AdventOfCode.Console.Web;
 using AdventOfCode.Console.Web.Resources;
+using AdventOfCodeConsole.Tests.Helpers;
 using System;
 using System.IO;
 using System.Linq.Expressions;

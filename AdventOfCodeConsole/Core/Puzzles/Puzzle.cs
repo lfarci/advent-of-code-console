@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdventOfCode.Console.Core
+﻿namespace AdventOfCode.Console.Core
 {
     public abstract class Puzzle
     {
         public class Answer
         {
-            public string Description { get; }
-            public long Value { get; }
-
-            public Answer(long value, string description)
-            {
-                Description = description;
-                Value = value;
-            }
+            public long Value { get; init; }
+            public string Description { get; init; } = "";
         }
 
-        public abstract IEnumerable<Answer> Run(string[] lines);
+        public abstract (Answer First, Answer Second) Run(string[] lines);
     }
 }

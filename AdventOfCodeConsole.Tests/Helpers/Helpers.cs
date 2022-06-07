@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests
+namespace AdventOfCodeConsole.Tests.Helpers
 {
     internal static class Helpers
     {
@@ -57,7 +57,7 @@ namespace Tests
 
         public static ICalendarPageRepository GetCalendarPageRepositoryThatReturns(string result)
         {
-            var client = Helpers.GetClientThatReturns(result, c => c.GetCalendarPageAsStreamAsync(It.IsAny<int>()).Result);
+            var client = GetClientThatReturns(result, c => c.GetCalendarPageAsStreamAsync(It.IsAny<int>()).Result);
             return new CalendarPageRepository(client);
         }
 

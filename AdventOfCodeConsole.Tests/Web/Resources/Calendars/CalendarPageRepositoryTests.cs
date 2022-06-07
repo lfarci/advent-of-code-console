@@ -1,4 +1,5 @@
 ﻿using AdventOfCode.Console.Web.Resources;
+using AdventOfCodeConsole.Tests.Helpers;
 using System;
 using System.IO;
 using Xunit;
@@ -8,7 +9,7 @@ namespace Tests.CommandLineInterface.Web.Resources
     public class CalendarPageRepositoryTests
     {
         private static readonly int defaultYear = Fixtures.DefaultYear;
-        private static readonly string resourceName = "Tests.Resources.CalendarPage.html";
+        private static readonly string resourceName = "AdventOfCodeConsole.Tests.Resources.CalendarPage.html";
         private static readonly string validPage = Helpers.ReadResourceContentAsString(resourceName);
 
         [Fact]

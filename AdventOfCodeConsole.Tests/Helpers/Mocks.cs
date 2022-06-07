@@ -4,7 +4,7 @@ using Moq;
 using System;
 using System.Linq.Expressions;
 
-namespace Tests
+namespace AdventOfCodeConsole.Tests.Helpers
 {
     internal static class Mocks
     {

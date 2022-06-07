@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using static AdventOfCode.Console.Web.Resources.CalendarPage;
 
-namespace Tests
+namespace AdventOfCodeConsole.Tests.Helpers
 {
     internal class Fixtures
     {
@@ -37,10 +37,11 @@ namespace Tests
             new DayEntry { Index = 25, Completion = Completion.NotStarted }
         };
 
-        public static readonly Calendar Calendar = new Calendar { 
+        public static readonly Calendar Calendar = new Calendar
+        {
             Year = 2021,
             Length = 10,
-            Days = new[] { 
+            Days = new[] {
                 new Day { Index = 1, Title = "Day 1" },
                 new Day { Index = 2, Title = "Day 2" },
                 new Day { Index = 3, Title = "Day 3"},
@@ -53,6 +54,57 @@ namespace Tests
                 new Day { Index = 10, Title = "Day 10" },
             }
         };
+
+        public class FirstPuzzle : Puzzle
+        {
+            public override (Answer First, Answer Second) Run(string[] lines)
+            {
+                return (
+                    new Answer { Value = 0, Description = "First" },
+                    new Answer { Value = 1, Description = "Second" }
+                );
+            }
+        }
+
+
+        public class SecondPuzzle : Puzzle
+        {
+            public override (Answer First, Answer Second) Run(string[] lines)
+            {
+                return (
+                    new Answer { Value = 0, Description = "First" },
+                    new Answer { Value = 1, Description = "Second" }
+                );
+            }
+        }
+
+        public class ThirdPuzzle : Puzzle
+        {
+            public override (Answer First, Answer Second) Run(string[] lines)
+            {
+                return (
+                    new Answer { Value = 0, Description = "First" },
+                    new Answer { Value = 1, Description = "Second" }
+                );
+            }
+
+        }
+
+        public class PuzzleWithPrivateConstructor : Puzzle
+        {
+            private PuzzleWithPrivateConstructor()
+            {
+            }
+
+            public override (Answer First, Answer Second) Run(string[] lines)
+            {
+                return (
+                    new Answer { Value = 0, Description = "First" },
+                    new Answer { Value = 1, Description = "Second" }
+                );
+            }
+
+        }
 
     }
 }
