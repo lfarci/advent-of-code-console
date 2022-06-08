@@ -32,11 +32,11 @@ namespace AdventOfCode.Console.Commands
                     .AddColumn(new TableColumn("[u]Part Two[/]"))
                     .AddColumn(new TableColumn("[u]Link[/]"));
 
-                foreach (var day in app.FindCalendar(year).Days)
-                {
-                    var link = $"https://adventofcode.com/{year}/day/{day.Index}";
-                    answers.AddRow(day.Title, day.FirstPuzzleAnswer.ToString(), day.SecondPuzzleAnswer.ToString(), link);
-                }
+                //foreach (var day in app.FindContext(year).Calendar.Days)
+                //{
+                //    var link = $"https://adventofcode.com/{year}/day/{day.Index}";
+                //    answers.AddRow(day.Title, day.FirstPuzzleAnswer.ToString(), day.SecondPuzzleAnswer.ToString(), link);
+                //}
 
                 AnsiConsole.Write(answers);
 
