@@ -7,8 +7,6 @@ namespace AdventOfCode.Console
     public class AdventOfCodeConsole
     {
         private static AdventOfCodeConsole? instance;
-        private IDictionary<int, AdventOfCodeContext> _contextsByYear;
-
         public static AdventOfCodeConsole Instance
         {
             get
@@ -21,23 +19,27 @@ namespace AdventOfCode.Console
             }
         }
 
+        internal IDictionary<int, AdventOfCodeContext> Contexts { get; init; }
+
         internal AdventOfCodeConsole()
         {
-            _contextsByYear = new Dictionary<int, AdventOfCodeContext>();
+            Contexts = new Dictionary<int, AdventOfCodeContext>();
         }
 
-        internal Calendar FindCalendar(int year)
+        private bool HasContextFor(int year) => Contexts.ContainsKey(year);
+
+        internal AdventOfCodeContext FindContext(int year)
         {
-            if (!_contextsByYear.ContainsKey(year))
+            if (!HasContextFor(year))
             {
-                throw new ArgumentOutOfRangeException($"No calendar for year: {year}");
+                throw new InvalidOperationException($"No context for year: {year}");
             }
-            return _contextsByYear[year].Calendar;
+            return Contexts[year];
         }
 
         public void StartYear(int year, Action<AdventOfCodeContext> onYearInitialized)
         {
-            if (_contextsByYear.ContainsKey(year))
+            if (HasContextFor(year))
             {
                 throw new InvalidOperationException($"Trying to add the same year twice: {year}.");
             }
@@ -45,7 +47,7 @@ namespace AdventOfCode.Console
             try
             {
                 var context = new AdventOfCodeContext(year);
-                _contextsByYear[year] = context;
+                Contexts[year] = context;
                 CommandLineInterface.Console.AdventOfCodeConsole.Status($"Initializing year {year}...", () =>
                 {
                     context.Initialize(onYearInitialized).Wait();
