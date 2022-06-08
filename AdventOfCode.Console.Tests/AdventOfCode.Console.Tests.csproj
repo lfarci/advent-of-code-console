@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\AdventOfCodeConsole\AdventOfCodeConsole.csproj" />
+		<ProjectReference Include="..\AdventOfCode.Console\AdventOfCode.Console.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

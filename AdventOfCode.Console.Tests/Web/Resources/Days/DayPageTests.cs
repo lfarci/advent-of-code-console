@@ -8,9 +8,9 @@ namespace AdventOfCode.Console.Tests.Web
 {
     public class DayPageTests
     {
-        private static readonly string notStartedDayPage = "AdventOfCodeConsole.Tests.Resources.NotStartedDayPage.html";
-        private static readonly string completeDayPage = "AdventOfCodeConsole.Tests.Resources.CompleteDayPage.html";
-        private static readonly string veryCompleteDayPage = "AdventOfCodeConsole.Tests.Resources.VeryCompleteDayPage.html";
+        private static readonly string notStartedDayPage = "AdventOfCode.Console.Tests.Resources.NotStartedDayPage.html";
+        private static readonly string completeDayPage = "AdventOfCode.Console.Tests.Resources.CompleteDayPage.html";
+        private static readonly string veryCompleteDayPage = "AdventOfCode.Console.Tests.Resources.VeryCompleteDayPage.html";
 
         [Fact]
         public void ParseTitle_EmptyString_ThrowsFormatException()

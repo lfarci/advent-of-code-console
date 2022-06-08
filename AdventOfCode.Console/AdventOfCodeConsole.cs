@@ -1,28 +1,27 @@
 ﻿using AdventOfCode.Console.Core;
 using AdventOfCode.Console.Commands;
 using Spectre.Console.Cli;
-using CommandLineInterface.Console;
 
 namespace AdventOfCode.Console
 {
-    public class AdventOfCodeApplication
+    public class AdventOfCodeConsole
     {
-        private static AdventOfCodeApplication? instance;
+        private static AdventOfCodeConsole? instance;
         private IDictionary<int, AdventOfCodeContext> _contextsByYear;
 
-        public static AdventOfCodeApplication Instance
+        public static AdventOfCodeConsole Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new AdventOfCodeApplication();
+                    instance = new AdventOfCodeConsole();
                 }
                 return instance;
             }
         }
 
-        internal AdventOfCodeApplication()
+        internal AdventOfCodeConsole()
         {
             _contextsByYear = new Dictionary<int, AdventOfCodeContext>();
         }
@@ -47,14 +46,14 @@ namespace AdventOfCode.Console
             {
                 var context = new AdventOfCodeContext(year);
                 _contextsByYear[year] = context;
-                AdventOfCodeConsole.Status($"Initializing year {year}...", () =>
+                CommandLineInterface.Console.AdventOfCodeConsole.Status($"Initializing year {year}...", () =>
                 {
                     context.Initialize(onYearInitialized).Wait();
                 });
             }
             catch (Exception)
             {
-                AdventOfCodeConsole.ShowErrorMessage($"Failed to add year {year}.");
+                CommandLineInterface.Console.AdventOfCodeConsole.ShowErrorMessage($"Failed to add year {year}.");
             }
         }
 

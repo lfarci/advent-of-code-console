@@ -3,13 +3,13 @@ using Xunit;
 
 namespace AdventOfCode.Console.Tests
 {
-    public class AdventOfCodeApplicationTests
+    public class AdventOfCodeConsoleTests
     {
 
         [Fact]
         public void StartYear_NewYear_SavesNewContextForTheGivenYear()
         {
-            var application = new AdventOfCodeApplication();
+            var application = new AdventOfCodeConsole();
             application.StartYear(2021, context => { });
             Assert.Equal(2021, application.FindCalendar(2021).Year);
         }
@@ -17,7 +17,7 @@ namespace AdventOfCode.Console.Tests
         [Fact]
         public void StartYear_NewYear_CallsDelegateWithContextOfTheGivenYear()
         {
-            var application = new AdventOfCodeApplication();
+            var application = new AdventOfCodeConsole();
             application.StartYear(2021, context =>
             {
                 Assert.Equal(2021, context.Year);
@@ -27,7 +27,7 @@ namespace AdventOfCode.Console.Tests
         [Fact]
         public void StartYear_AddSameYearTwice_ThrowsInvalidOperationException()
         {
-            var application = new AdventOfCodeApplication();
+            var application = new AdventOfCodeConsole();
             application.StartYear(2021, context => { });
             Assert.Throws<InvalidOperationException>(() => application.StartYear(2021, year => { }));
         }

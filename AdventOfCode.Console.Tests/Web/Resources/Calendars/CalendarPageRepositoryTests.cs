@@ -9,7 +9,7 @@ namespace AdventOfCode.Console.Tests.Web
     public class CalendarPageRepositoryTests
     {
         private static readonly int defaultYear = Fixtures.DefaultYear;
-        private static readonly string resourceName = "AdventOfCodeConsole.Tests.Resources.CalendarPage.html";
+        private static readonly string resourceName = "AdventOfCode.Console.Tests.Resources.CalendarPage.html";
         private static readonly string validPage = Helpers.ReadResourceContentAsString(resourceName);
 
         [Fact]

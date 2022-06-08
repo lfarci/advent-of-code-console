@@ -44,9 +44,9 @@ namespace AdventOfCode.Console.Tests.Web
         }
 
         [Theory]
-        [InlineData("AdventOfCodeConsole.Tests.Resources.NotStartedDayPage.html")]
-        [InlineData("AdventOfCodeConsole.Tests.Resources.CompleteDayPage.html")]
-        [InlineData("AdventOfCodeConsole.Tests.Resources.VeryCompleteDayPage.html")]
+        [InlineData("AdventOfCode.Console.Tests.Resources.NotStartedDayPage.html")]
+        [InlineData("AdventOfCode.Console.Tests.Resources.CompleteDayPage.html")]
+        [InlineData("AdventOfCode.Console.Tests.Resources.VeryCompleteDayPage.html")]
         public async Task FindByYearAndDayAsync_ValidPage_ReturnsDay(string resourceName)
         {
             var content = Helpers.ReadResourceContentAsString(resourceName);
@@ -55,9 +55,9 @@ namespace AdventOfCode.Console.Tests.Web
         }
 
         [Theory]
-        [InlineData(12, "AdventOfCodeConsole.Tests.Resources.NotStartedDayPage.html")]
-        [InlineData(4, "AdventOfCodeConsole.Tests.Resources.CompleteDayPage.html")]
-        [InlineData(7, "AdventOfCodeConsole.Tests.Resources.VeryCompleteDayPage.html")]
+        [InlineData(12, "AdventOfCode.Console.Tests.Resources.NotStartedDayPage.html")]
+        [InlineData(4, "AdventOfCode.Console.Tests.Resources.CompleteDayPage.html")]
+        [InlineData(7, "AdventOfCode.Console.Tests.Resources.VeryCompleteDayPage.html")]
         public async Task FindByYearAndDayAsync_ValidPage_ReturnsDayWithIndex(int index, string resourceName)
         {
             var content = Helpers.ReadResourceContentAsString(resourceName);

@@ -22,7 +22,7 @@ namespace AdventOfCode.Console.Commands
 
 
                 int year = int.Parse(settings?.Year ?? "");
-                AdventOfCodeApplication app = AdventOfCodeApplication.Instance;
+                AdventOfCodeConsole app = AdventOfCodeConsole.Instance;
 
                 var answers = new Table()
                     .Border(TableBorder.Rounded)
