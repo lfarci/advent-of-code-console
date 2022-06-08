@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Web
+namespace AdventOfCode.Console.Tests.Web
 {
     public class ResourceRepositoryTests
     {
@@ -30,7 +30,7 @@ namespace Tests.CommandLineInterface.Web
         [Fact]
         public async Task FindCalendarPageByYearAsync_ValidResponse_ReturnsCalendarPage()
         {
-            var calendar = new CalendarPage(Fixtures.CalendarDays) { Year = Fixtures.DefaultYear };
+            var calendar = new CalendarPage(Fixtures.CalendarPageEntries) { Year = Fixtures.DefaultYear };
             var resources = Mocks.GetRepositoryThatReturns(calendar);
             Assert.True(calendar.Equals(await resources.FindCalendarPageByYearAsync(Fixtures.DefaultYear)));
         }
@@ -71,7 +71,7 @@ namespace Tests.CommandLineInterface.Web
         [Fact]
         public async Task FindPuzzleInputByYearAndDayAsync_ValidResponse_ReturnsPuzzleInput()
         {
-            var lines = new string[] { "line0", "line1", "line2"};
+            var lines = new string[] { "line0", "line1", "line2" };
             var resources = Mocks.GetRepositoryThatReturns(lines);
             var returnedLines = await resources.FindPuzzleInputByYearAndDayAsync(2021, 1);
             Assert.Contains("line0", returnedLines);

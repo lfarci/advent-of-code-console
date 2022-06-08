@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Web.Resources
+namespace AdventOfCode.Console.Tests.Web
 {
     public class PuzzleInputRepositoryTests
     {

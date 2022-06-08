@@ -8,13 +8,13 @@ using Xunit;
 
 using static AdventOfCode.Console.Web.Resources.CalendarPage;
 
-namespace Tests.CommandLineInterface.Web.Resources
+namespace AdventOfCode.Console.Tests.Web
 {
     public class CalendarPageTests
     {
         private static readonly string resourceName = "AdventOfCodeConsole.Tests.Resources.CalendarPage.html";
         private static readonly string calendarPage = ReadCalendarPage();
-        private static readonly IList<DayEntry> expectedDays = Fixtures.CalendarDays;
+        private static readonly IList<DayEntry> expectedDays = Fixtures.CalendarPageEntries;
 
         [Fact]
         public void Parse_CalendarPage_ReturnsParsedCalendar()

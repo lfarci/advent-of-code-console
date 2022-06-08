@@ -3,7 +3,7 @@ using AdventOfCodeConsole.Tests.Helpers;
 using System;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Core.Calendars
+namespace AdventOfCode.Console.Tests.Core
 {
     public class CalendarTests
     {
@@ -30,7 +30,7 @@ namespace Tests.CommandLineInterface.Core.Calendars
         [Fact]
         public void Indexer_IndexIsEqualToLength_ThrowsOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => calendar[11]);
+            Assert.Throws<ArgumentOutOfRangeException>(() => calendar[26]);
         }
     }
 }

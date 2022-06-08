@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Web.Client
+namespace AdventOfCode.Console.Tests.Web
 {
     public class AdventOfCodeClientTests
     {

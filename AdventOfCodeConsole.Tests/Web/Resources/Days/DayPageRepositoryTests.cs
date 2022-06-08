@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Web.Resources
+namespace AdventOfCode.Console.Tests.Web
 {
     public class DayPageRepositoryTests
     {
@@ -22,7 +22,8 @@ namespace Tests.CommandLineInterface.Web.Resources
         public async Task FindByYearAndDayAsync_ClientThrowsIOException_ThrowsIOException()
         {
             var repository = GetRepositoryThatThrows<IOException>();
-            var thrown = await Assert.ThrowsAsync<IOException>(async () => {
+            var thrown = await Assert.ThrowsAsync<IOException>(async () =>
+            {
                 await repository.FindByYearAndDayAsync(defaultYear, defaultDay);
             });
             Assert.Equal(DayPageRepository.GetNotFoundErrorMessage(defaultYear, defaultDay), thrown.Message);
@@ -35,7 +36,8 @@ namespace Tests.CommandLineInterface.Web.Resources
         public async Task FindByYearAndDayAsync_ParserThrowsFormatException_ThrowsInvalidOperation(string invalidPage)
         {
             var repository = GetRepositoryThatReturns(invalidPage);
-            var thrown = await Assert.ThrowsAsync<InvalidOperationException>(async () => {
+            var thrown = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
                 await repository.FindByYearAndDayAsync(defaultYear, defaultDay);
             });
             Assert.Equal(DayPageRepository.GetParseErrorMessage(defaultYear, defaultDay), thrown.Message);

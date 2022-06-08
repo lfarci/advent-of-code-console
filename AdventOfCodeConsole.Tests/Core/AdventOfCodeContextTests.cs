@@ -1,13 +1,10 @@
 ﻿using AdventOfCode.Console.Core;
 using AdventOfCodeConsole.Tests.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Core
+namespace AdventOfCode.Console.Tests.Core
 {
     public class AdventOfCodeContextTests
     {

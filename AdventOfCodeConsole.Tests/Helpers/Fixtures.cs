@@ -1,4 +1,5 @@
 ﻿using AdventOfCode.Console.Core;
+using AdventOfCode.Console.Web.Resources;
 using System.Collections.Generic;
 using static AdventOfCode.Console.Web.Resources.CalendarPage;
 
@@ -9,7 +10,16 @@ namespace AdventOfCodeConsole.Tests.Helpers
         public static readonly int DefaultYear = 2021;
         public static readonly int DefaultDay = 1;
 
-        public static readonly IList<DayEntry> CalendarDays = new List<DayEntry>() {
+        public static readonly DayPage DayPage = new DayPage
+        {
+            Title = "My sample say page",
+            Completion = Completion.Complete,
+            Index = 1,
+            FirstPuzzleAnswer = 1324431,
+            SecondPuzzleAnswer = 23432
+        };
+
+        public static readonly IList<DayEntry> CalendarPageEntries = new List<DayEntry>() {
             new DayEntry { Index = 1, Completion = Completion.VeryComplete },
             new DayEntry { Index = 2, Completion = Completion.VeryComplete },
             new DayEntry { Index = 3, Completion = Completion.VeryComplete },
@@ -37,11 +47,10 @@ namespace AdventOfCodeConsole.Tests.Helpers
             new DayEntry { Index = 25, Completion = Completion.NotStarted }
         };
 
-        public static readonly Calendar Calendar = new Calendar
-        {
-            Year = 2021,
-            Length = 10,
-            Days = new[] {
+        public static readonly CalendarPage CalendarPage = new CalendarPage(Fixtures.CalendarPageEntries);
+
+
+        public static readonly IEnumerable<Day> CalendarDays = new[] {
                 new Day { Index = 1, Title = "Day 1" },
                 new Day { Index = 2, Title = "Day 2" },
                 new Day { Index = 3, Title = "Day 3"},
@@ -52,7 +61,28 @@ namespace AdventOfCodeConsole.Tests.Helpers
                 new Day { Index = 8, Title = "Day 8"},
                 new Day { Index = 9, Title = "Day 9"},
                 new Day { Index = 10, Title = "Day 10" },
-            }
+                new Day { Index = 11, Title = "Day 11" },
+                new Day { Index = 12, Title = "Day 12" },
+                new Day { Index = 13, Title = "Day 13" },
+                new Day { Index = 14, Title = "Day 14" },
+                new Day { Index = 15, Title = "Day 15" },
+                new Day { Index = 16, Title = "Day 16" },
+                new Day { Index = 17, Title = "Day 17" },
+                new Day { Index = 18, Title = "Day 18" },
+                new Day { Index = 19, Title = "Day 19" },
+                new Day { Index = 20, Title = "Day 20" },
+                new Day { Index = 21, Title = "Day 21" },
+                new Day { Index = 22, Title = "Day 22" },
+                new Day { Index = 23, Title = "Day 23" },
+                new Day { Index = 24, Title = "Day 24" },
+                new Day { Index = 25, Title = "Day 25" },
+            };
+
+        public static readonly Calendar Calendar = new()
+        {
+            Year = 2021,
+            Length = 25,
+            Days = CalendarDays
         };
 
         public class FirstPuzzle : Puzzle

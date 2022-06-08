@@ -1,13 +1,8 @@
 ﻿using AdventOfCode.Console.Core;
 using AdventOfCode.Console.Web.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Core.Days
+namespace AdventOfCode.Console.Tests.Core
 {
     public class DayBuilderTests
     {

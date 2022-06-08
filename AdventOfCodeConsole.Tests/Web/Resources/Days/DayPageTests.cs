@@ -4,7 +4,7 @@ using AdventOfCodeConsole.Tests.Helpers;
 using System;
 using Xunit;
 
-namespace Tests.CommandLineInterface.Web.Resources
+namespace AdventOfCode.Console.Tests.Web
 {
     public class DayPageTests
     {

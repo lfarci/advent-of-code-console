@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Xunit;
 using static AdventOfCode.Console.Web.Resources.CalendarPage;
 
-namespace Tests.CommandLineInterface.Core
+namespace AdventOfCode.Console.Tests.Core
 {
     public class CalendarPageMapperTests
     {
