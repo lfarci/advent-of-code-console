@@ -9,6 +9,6 @@ namespace AdventOfCode.Console.Core
         public Completion Completion { get; set; }
         public long? FirstPuzzleAnswer { get; set; } = null;
         public long? SecondPuzzleAnswer { get; set; } = null;
-        public Puzzle? Puzzle { get; set; }
+        internal Puzzle? Puzzle { get; set; }
     }
 }

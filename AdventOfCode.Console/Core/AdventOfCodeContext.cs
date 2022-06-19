@@ -2,28 +2,21 @@
 
 namespace AdventOfCode.Console.Core
 {
-    public class AdventOfCodeContext
+    public class AdventOfCodeContext : IPuzzleSubmitter
     {
-        public class PuzzleSubmission
-        {
-            internal Action<int>? Register { get; init; }
-
-            public void ForDay(int dayIndex)
-            {
-                Register?.Invoke(dayIndex);
-            }
-        }
-
         internal readonly static string AlreadyInitializedErrorMessage = "This context is already initialized.";
         internal readonly static string NotInitializedErrorMessage = "This context should be initialized.";
         internal readonly static string PuzzleCreationFailureErrorMessage = "Could not construct the puzzle.";
+        internal readonly static string NoSubmittedPuzzlesErrorMessage = "No puzzle to submit.";
 
         private readonly IDataSource _data;
         private Calendar? _calendar;
+        private Queue<Puzzle> _submittedPuzzles;
 
         internal bool Initialized { get => _calendar != null; }
         internal Calendar? Calendar { get => _calendar; }
-        internal int Year { get; }
+        public int Year { get; }
+        internal bool HasSubmittedPuzzles { get => _submittedPuzzles.Count > 0; }
 
         internal AdventOfCodeContext(int year)
             : this(
@@ -37,10 +30,11 @@ namespace AdventOfCode.Console.Core
         {
             _data = data;
             _calendar = calendar;
+            _submittedPuzzles = new Queue<Puzzle>();
             Year = year;
         }
 
-        internal async Task Initialize(Action<AdventOfCodeContext> onInitialized)
+        internal async Task Initialize(Action<IPuzzleSubmitter> onInitialized)
         {
             if (Initialized)
             {
@@ -50,26 +44,27 @@ namespace AdventOfCode.Console.Core
             onInitialized(this);
         }
 
-        internal void RegisterPuzzleForDay(int index, Puzzle puzzle)
-        {
-            if (_calendar == null)
-            {
-                throw new InvalidOperationException(NotInitializedErrorMessage);
-            }
-            _calendar[index].Puzzle = puzzle;
-        }
-
-        public PuzzleSubmission Submit<TPuzzle>() where TPuzzle : Puzzle, new()
+        public IPuzzleSubmitter Submit<TPuzzle>() where TPuzzle : Puzzle, new()
         {
             if (!Initialized)
             {
                 throw new InvalidOperationException(NotInitializedErrorMessage);
             }
-            return new PuzzleSubmission
-            {
-                Register = index => RegisterPuzzleForDay(index, new TPuzzle())
-            };
+            _submittedPuzzles.Enqueue(new TPuzzle());
+            return this;
+        }
 
+        public void ForDay(int index)
+        {
+            if (_calendar == null)
+            {
+                throw new InvalidOperationException(NotInitializedErrorMessage);
+            }
+            if (!HasSubmittedPuzzles)
+            {
+                throw new InvalidOperationException(NoSubmittedPuzzlesErrorMessage);
+            }
+            _calendar[index].Puzzle = _submittedPuzzles.Dequeue();
         }
     }
 }

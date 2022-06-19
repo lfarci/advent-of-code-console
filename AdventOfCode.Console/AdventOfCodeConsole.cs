@@ -19,16 +19,16 @@ namespace AdventOfCode.Console
             }
         }
 
-        internal IDictionary<int, AdventOfCodeContext> Contexts { get; init; }
+        internal IDictionary<int, IPuzzleSubmitter> Contexts { get; init; }
 
         internal AdventOfCodeConsole()
         {
-            Contexts = new Dictionary<int, AdventOfCodeContext>();
+            Contexts = new Dictionary<int, IPuzzleSubmitter>();
         }
 
         private bool HasContextFor(int year) => Contexts.ContainsKey(year);
 
-        internal AdventOfCodeContext FindContext(int year)
+        internal IPuzzleSubmitter FindContext(int year)
         {
             if (!HasContextFor(year))
             {
@@ -37,7 +37,7 @@ namespace AdventOfCode.Console
             return Contexts[year];
         }
 
-        public void StartYear(int year, Action<AdventOfCodeContext> onYearInitialized)
+        public void StartYear(int year, Action<IPuzzleSubmitter> onYearInitialized)
         {
             if (HasContextFor(year))
             {
@@ -46,11 +46,11 @@ namespace AdventOfCode.Console
 
             try
             {
-                var context = new AdventOfCodeContext(year);
+                IPuzzleSubmitter context = new AdventOfCodeContext(year);
                 Contexts[year] = context;
                 CommandLineInterface.Console.AdventOfCodeConsole.Status($"Initializing year {year}...", () =>
                 {
-                    context.Initialize(onYearInitialized).Wait();
+                    ((AdventOfCodeContext) context).Initialize(onYearInitialized).Wait();
                 });
             }
             catch (Exception)

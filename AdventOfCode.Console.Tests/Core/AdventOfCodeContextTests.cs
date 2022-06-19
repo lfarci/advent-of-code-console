@@ -25,6 +25,13 @@ namespace AdventOfCode.Console.Tests.Core
         }
 
         [Fact]
+        public void Constructor_OnlyValidYear_BuildsContextWithoutSubmittedCalendar()
+        {
+            var context = new AdventOfCodeContext(2021);
+            Assert.False(context.HasSubmittedPuzzles);
+        }
+
+        [Fact]
         public void Constructor_OnlyValidYear_BuildsContextWithGivenYear()
         {
             var context = new AdventOfCodeContext(2021);
@@ -37,6 +44,14 @@ namespace AdventOfCode.Console.Tests.Core
             var context = new AdventOfCodeContext(new FixtureDataSource(), null, 2021);
             await context.Initialize(context => { });
             Assert.Equal(Fixtures.Calendar, context.Calendar);
+        }
+
+        [Fact]
+        public async Task Initialize_EmptyDelegate_LeavesSubmittedPuzzleQueuesEmpty()
+        {
+            var context = new AdventOfCodeContext(2021);
+            await context.Initialize(context => { });
+            Assert.False(context.HasSubmittedPuzzles);
         }
 
         [Fact]
@@ -65,15 +80,24 @@ namespace AdventOfCode.Console.Tests.Core
         }
 
         [Fact]
-        public async Task Submit_ValidType_ReturnsPuzzleSubmission()
+        public async Task Submit_ValidPuzzleType_ReturnsReferenceToContext()
         {
             var context = new AdventOfCodeContext(new FixtureDataSource(), null, 2021);
             await context.Initialize(c => { });
-            Assert.NotNull(context.Submit<Fixtures.FirstPuzzle>());
+            Assert.Equal(context, context.Submit<Fixtures.FirstPuzzle>());
         }
 
         [Fact]
-        public async Task Submit_ValidType_CallingSubmissionSetsPuzzleWhenCalledForKnownDay()
+        public async Task Submit_ValidPuzzleType_EnqueuesSubmittedPuzzle()
+        {
+            var context = new AdventOfCodeContext(new FixtureDataSource(), null, 2021);
+            await context.Initialize(c => { });
+            context.Submit<Fixtures.FirstPuzzle>();
+            Assert.True(context.HasSubmittedPuzzles);
+        }
+
+        [Fact]
+        public async Task ForDay_KnownDayIndex_CallingSubmissionSetsPuzzleWhenCalledForKnownDay()
         {
             var context = new AdventOfCodeContext(new FixtureDataSource(), null, 2021);
             await context.Initialize(c => { });
@@ -85,7 +109,7 @@ namespace AdventOfCode.Console.Tests.Core
         }
 
         [Fact]
-        public async Task Submit_ValidType_CallingSubmissionThrowsWhenCalledForUnknownDay()
+        public async Task ForDay_UnknownDayIndex_ThrowsArgumentOutOfRangeException()
         {
             var context = new AdventOfCodeContext(new FixtureDataSource(), null, 2021);
             await context.Initialize(c => { });
@@ -93,11 +117,11 @@ namespace AdventOfCode.Console.Tests.Core
         }
 
         [Fact]
-        public void RegisterPuzzleFor_NotInitialized_ThrowsInvalidOperationException()
+        public async Task ForDay_NoSubmittedPuzzles_ThrowsInvalidOperationException()
         {
             var context = new AdventOfCodeContext(new FixtureDataSource(), null, 2021);
-            Assert.Throws<InvalidOperationException>(() => context.RegisterPuzzleForDay(1, new Fixtures.FirstPuzzle()));
+            await context.Initialize(c => { });
+            Assert.Throws<InvalidOperationException>(() => context.ForDay(1));
         }
-
     }
 }
