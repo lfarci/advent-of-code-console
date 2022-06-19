@@ -19,38 +19,38 @@ namespace AdventOfCode.Console
             }
         }
 
-        internal IDictionary<int, AdventOfCodeContext> Contexts { get; init; }
+        internal IDictionary<int, IPuzzleSubmitter> Submitters { get; init; }
 
         internal AdventOfCodeConsole()
         {
-            Contexts = new Dictionary<int, AdventOfCodeContext>();
+            Submitters = new Dictionary<int, IPuzzleSubmitter>();
         }
 
-        private bool HasContextFor(int year) => Contexts.ContainsKey(year);
+        private bool HasSubmitterFor(int year) => Submitters.ContainsKey(year);
 
-        internal AdventOfCodeContext FindContext(int year)
+        internal IPuzzleSubmitter FindSubmitter(int year)
         {
-            if (!HasContextFor(year))
+            if (!HasSubmitterFor(year))
             {
                 throw new InvalidOperationException($"No context for year: {year}");
             }
-            return Contexts[year];
+            return Submitters[year];
         }
 
-        public void StartYear(int year, Action<AdventOfCodeContext> onYearInitialized)
+        public void StartYear(int year, Action<IPuzzleSubmitter> onYearInitialized)
         {
-            if (HasContextFor(year))
+            if (HasSubmitterFor(year))
             {
                 throw new InvalidOperationException($"Trying to add the same year twice: {year}.");
             }
 
             try
             {
-                var context = new AdventOfCodeContext(year);
-                Contexts[year] = context;
+                IPuzzleSubmitter context = new AdventOfCodeContext(year);
+                Submitters[year] = context;
                 CommandLineInterface.Console.AdventOfCodeConsole.Status($"Initializing year {year}...", () =>
                 {
-                    context.Initialize(onYearInitialized).Wait();
+                    ((AdventOfCodeContext) context).Initialize(onYearInitialized).Wait();
                 });
             }
             catch (Exception)
