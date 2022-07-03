@@ -1,6 +1,8 @@
 ﻿using AdventOfCode.Console.Core;
+using AdventOfCode.Console.Web;
 using AdventOfCode.Console.Commands;
 using Spectre.Console.Cli;
+using AdventOfCode.Console.View;
 
 namespace AdventOfCode.Console
 {
@@ -19,10 +21,15 @@ namespace AdventOfCode.Console
             }
         }
 
+        internal IAdventOfCodeView Console { get; init; }
         internal IDictionary<int, IPuzzleSubmitter> Submitters { get; init; }
 
-        internal AdventOfCodeConsole()
+        internal AdventOfCodeConsole() : this(new AdventOfCodeView())
+        {}
+
+        internal AdventOfCodeConsole(IAdventOfCodeView console)
         {
+            Console = console;
             Submitters = new Dictionary<int, IPuzzleSubmitter>();
         }
 
@@ -48,15 +55,28 @@ namespace AdventOfCode.Console
             {
                 IPuzzleSubmitter context = new AdventOfCodeContext(year);
                 Submitters[year] = context;
-                CommandLineInterface.Console.AdventOfCodeConsole.Status($"Initializing year {year}...", () =>
+                Console.Status($"Initializing year {year}...", () =>
                 {
                     ((AdventOfCodeContext) context).Initialize(onYearInitialized).Wait();
                 });
             }
             catch (Exception)
             {
-                CommandLineInterface.Console.AdventOfCodeConsole.ShowErrorMessage($"Failed to add year {year}.");
+                Console.ShowError($"Failed to add year {year}.");
             }
+        }
+
+        public void ShowPuzzleAnswers(int year, int day)
+        {
+            Console.Status($"Downloading input for year {year} and day {day}...", () =>
+            {
+                IResourceRepository repository = ResourceRepository.Instance;
+                string[] lines = repository.FindPuzzleInputByYearAndDayAsync(year, day).Result;
+                var submitter = FindSubmitter(year);
+                
+
+
+            });
         }
 
         public int Run(string[] args)
@@ -64,6 +84,9 @@ namespace AdventOfCode.Console
             var app = new CommandApp();
             app.Configure(config =>
             {
+                config.AddCommand<ShowPuzzleAnswers>("run")
+                    .WithDescription("Runs the submitted puzzle and shows its answers.")
+                    .WithExample(new[] { "run", "2020", "1" });
                 config.AddCommand<ShowCalendarCommand>("calendar")
                     .WithDescription("Show the Advent Of Code calendar for the given year.")
                     .WithExample(new[] { "calendar", "2020" });

@@ -14,7 +14,7 @@ namespace AdventOfCode.Console.Core
         private Queue<Puzzle> _submittedPuzzles;
 
         internal bool Initialized { get => _calendar != null; }
-        internal Calendar? Calendar { get => _calendar; }
+        public Calendar? Calendar { get => _calendar; }
         public int Year { get; }
         internal bool HasSubmittedPuzzles { get => _submittedPuzzles.Count > 0; }
 

@@ -49,7 +49,7 @@ namespace AdventOfCode.Console.Tests.Core
         [Fact]
         public async Task Initialize_EmptyDelegate_LeavesSubmittedPuzzleQueuesEmpty()
         {
-            var context = new AdventOfCodeContext(2021);
+            var context = new AdventOfCodeContext(new FixtureDataSource(), null, 2021);
             await context.Initialize(context => { });
             Assert.False(context.HasSubmittedPuzzles);
         }
