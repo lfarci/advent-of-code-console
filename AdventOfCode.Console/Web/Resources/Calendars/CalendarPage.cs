@@ -58,7 +58,7 @@ namespace AdventOfCode.Console.Web.Resources
             var document = new HtmlDocument();
             document.LoadHtml(text);
 
-            var calendar = document.DocumentNode.SelectSingleNode("//main/pre[@class='calendar']");
+            var calendar = document.DocumentNode.SelectSingleNode("//main/pre[contains(@class, 'calendar')]");
 
             if (calendar == null)
             {

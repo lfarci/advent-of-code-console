@@ -30,6 +30,7 @@ namespace AdventOfCode.Console.Tests.Web
         [InlineData("<body><main><pre class='unknown'></pre></main></body>")]
         [InlineData("<body><main><div class='calendar'></div></main></body>")]
         [InlineData("<body><main><pre class='calendar'></pre></main></body>")]
+        [InlineData("<body><main><pre class='calendar-suffix'><a></a></pre></main></body>")]
         public void Parse_InvalidHtmlPage_ThrowsFormatException(string text)
         {
             Assert.Throws<FormatException>(() => Parse(text));
