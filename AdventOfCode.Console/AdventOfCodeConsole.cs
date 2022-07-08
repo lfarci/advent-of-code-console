@@ -66,16 +66,23 @@ namespace AdventOfCode.Console
             }
         }
 
-        public void ShowPuzzleAnswers(int year, int day)
+        public void ShowPuzzleAnswers(int year, int dayIndex)
         {
-            Console.Status($"Downloading input for year {year} and day {day}...", () =>
+            Console.Status($"Downloading input for year {year} and day {dayIndex}...", () =>
             {
                 IResourceRepository repository = ResourceRepository.Instance;
-                string[] lines = repository.FindPuzzleInputByYearAndDayAsync(year, day).Result;
+                string[] lines = repository.FindPuzzleInputByYearAndDayAsync(year, dayIndex).Result;
                 var submitter = FindSubmitter(year);
-                
 
-
+                if (submitter.Calendar != null)
+                {
+                    var day = submitter.Calendar[dayIndex];
+                    Console.ShowPuzzleAnswers(day, lines);
+                }
+                else
+                { 
+                    Console.ShowError($"Could not run submitted puzzle because year {year} isn't initialized.");
+                }
             });
         }
 
@@ -87,12 +94,6 @@ namespace AdventOfCode.Console
                 config.AddCommand<ShowPuzzleAnswers>("run")
                     .WithDescription("Runs the submitted puzzle and shows its answers.")
                     .WithExample(new[] { "run", "2020", "1" });
-                config.AddCommand<ShowCalendarCommand>("calendar")
-                    .WithDescription("Show the Advent Of Code calendar for the given year.")
-                    .WithExample(new[] { "calendar", "2020" });
-                config.AddCommand<ShowAnswersCommand>("answers")
-                    .WithDescription("Show the Advent Of Code answers for the given year.")
-                    .WithExample(new[] { "answers", "2020" });
             });
             return app.Run(args);
         }

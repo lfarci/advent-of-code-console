@@ -2,7 +2,7 @@
 	
   <PropertyGroup>
 	<PackageId>AdventOfCode.Console</PackageId>
-	<Version>0.0.2</Version>
+	<Version>0.0.5</Version>
 	<Authors>Logan Farci</Authors>
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>

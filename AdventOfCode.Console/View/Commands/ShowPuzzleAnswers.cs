@@ -1,13 +1,11 @@
-﻿using AdventOfCode.Console.Core;
-using AdventOfCode.Console.Web.Resources;
-using Spectre.Console;
+﻿using Spectre.Console;
 using Spectre.Console.Cli;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
 namespace AdventOfCode.Console.Commands
 {
-    public class ShowPuzzleAnswers : Command<ShowAnswersCommand.Settings>
+    public class ShowPuzzleAnswers : Command<ShowPuzzleAnswers.Settings>
     {
         public class Settings : CommandSettings
         {
@@ -16,22 +14,20 @@ namespace AdventOfCode.Console.Commands
             public string? Year { get; init; }
 
             [CommandArgument(1, "[day]")]
-            [Description("The year to show the Advent Of Code calendar for.")]
+            [Description("The day to show the Advent Of Code calendar for.")]
             public string? Day { get; init; }
         }
 
+        private const int V = 0;
         private AdventOfCodeConsole _console = AdventOfCodeConsole.Instance;
 
-        public override int Execute([NotNull] CommandContext context, [NotNull] ShowAnswersCommand.Settings settings)
+        public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
         {
             try
             {
-                var app = AdventOfCodeConsole.Instance;
-
-
                 int year = int.Parse(settings?.Year ?? "");
-                
-
+                int day = int.Parse(settings?.Day ?? "");
+                _console.ShowPuzzleAnswers(year, day);
                 return 0;
             }
             catch (FormatException)

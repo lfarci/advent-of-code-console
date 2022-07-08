@@ -30,8 +30,8 @@ namespace AdventOfCode.Console.View
             else
             {
                 var (First, Second) = day.Puzzle.Run(input);
-                AnsiConsole.MarkupLine($"- First answer: {First}");
-                AnsiConsole.MarkupLine($"- Second answer: {Second}");
+                AnsiConsole.MarkupLine($"- {First.Description}: {First.Value}");
+                AnsiConsole.MarkupLine($"- {Second.Description}: {Second.Value}");
             }
         }
     }
