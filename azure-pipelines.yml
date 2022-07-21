@@ -9,17 +9,16 @@ pool:
 variables:
     BuildConfiguration: 'Release'
     DotnetSdkVersion: '6.x'
-    DotnetSdkVersion: '6.x'
     NugetPackageFeedName: 'AdventOfCodeKit'
     Major: '0'
     Minor: '0'
-
+    
 steps:
 
 - task: UseDotNet@2
-    displayName: 'Use .NET SDK $(DotnetSdkVersion)'
-    inputs:
-        version: '$(DotnetSdkVersion)'
+  displayName: 'Use .NET SDK $(DotnetSdkVersion)'
+  inputs:
+    version: '$(DotnetSdkVersion)'
 
 #- task: DotNetCoreCLI@2
 #    displayName: 'Restore project dependencies'
