@@ -1,7 +1,9 @@
 name: $(Major).$(Minor)$(Rev:.r)
 
 trigger:
-- '*'
+  branches:
+    include:
+    - main
 
 pool:
   vmImage: 'ubuntu-20.04'
