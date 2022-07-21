@@ -22,15 +22,6 @@ steps:
   inputs:
     version: '$(DotnetSdkVersion)'
 
-- task: SonarCloudPrepare@1
-  displayName: 'Prepare analysis configuration'
-  inputs:
-    SonarCloud: 'SC'
-    organization: 'lfarci'
-    scannerMode: 'MSBuild'
-    projectKey: 'lfarci_advent-of-code-kit'
-    projectName: 'Advent Of Code Kit'
-
 - task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
   inputs:
@@ -71,12 +62,6 @@ steps:
   inputs:
     codeCoverageTool: 'cobertura'
     summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
-
-- task: SonarCloudAnalyze@1
-  displayName: 'Run SonarCloud analysis'
-
-- task: SonarCloudPublish@1
-  displayName: 'Publish results on build summary'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack the project - $(buildConfiguration)'
