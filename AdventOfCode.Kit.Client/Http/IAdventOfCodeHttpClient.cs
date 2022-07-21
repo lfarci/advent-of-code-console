@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Kit.Client
+﻿namespace AdventOfCode.Kit.Client.Http
 {
     internal interface IAdventOfCodeHttpClient
     {
