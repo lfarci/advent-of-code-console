@@ -2,28 +2,28 @@
 
 namespace AdventOfCode.Kit.Client.Resources
 {
-    internal class CalendarPage
+    public class CalendarPage
     {
         private readonly IList<DayEntry> _days;
 
         public IList<DayEntry> Days { get => _days; }
         public int Year { get; set; } = DateTime.Now.Year;
 
-        public CalendarPage(IList<DayEntry> days)
+        internal CalendarPage(IList<DayEntry> days)
         {
             _days = new List<DayEntry>(days);
         }
 
-        public CalendarPage() : this(new List<DayEntry>())
+        internal CalendarPage() : this(new List<DayEntry>())
         {
         }
 
-        public void Add(int dayIndex, Completion completion)
+        internal void Add(int dayIndex, Completion completion)
         {
             _days.Add(new DayEntry { Index = dayIndex, Completion = completion });
         }
 
-        public static int ParseDayIndex(HtmlNode dayAnchorNode)
+        internal static int ParseDayIndex(HtmlNode dayAnchorNode)
         {
             var daySpanNode = dayAnchorNode.SelectSingleNode("span[@class='calendar-day']");
             try
@@ -37,7 +37,7 @@ namespace AdventOfCode.Kit.Client.Resources
             }
         }
 
-        public static Completion ParseCompletion(HtmlNode dayAnchorNode)
+        internal static Completion ParseCompletion(HtmlNode dayAnchorNode)
         {
             var className = dayAnchorNode.Attributes["class"]?.Value;
             if (className != null && className.Contains("calendar-complete"))
@@ -51,7 +51,7 @@ namespace AdventOfCode.Kit.Client.Resources
             return Completion.NotStarted;
         }
 
-        public static CalendarPage Parse(string text)
+        internal static CalendarPage Parse(string text)
         {
             var parsed = new CalendarPage();
             var document = new HtmlDocument();

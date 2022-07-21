@@ -2,12 +2,12 @@
 
 namespace AdventOfCode.Kit.Client.Resources
 {
-    internal class DayPage
+    public class DayPage
     {
-        public static readonly string TitleNotFoundError = "Title not found.";
-        public static readonly string InvalidTitleFormatError = "Invalid title";
-        public static readonly string UnexpectedPuzzleAnswersCountError = "Unexpected count of puzzles answers";
-        public static readonly string InvalidPuzzleAnswerFormatError = "Invalid puzzle answer format";
+        internal static readonly string TitleNotFoundError = "Title not found.";
+        internal static readonly string InvalidTitleFormatError = "Invalid title";
+        internal static readonly string UnexpectedPuzzleAnswersCountError = "Unexpected count of puzzles answers";
+        internal static readonly string InvalidPuzzleAnswerFormatError = "Invalid puzzle answer format";
 
         private static readonly string titleSeparator = ":";
         private static readonly string titleDecorator = "-";
@@ -23,7 +23,7 @@ namespace AdventOfCode.Kit.Client.Resources
         public long? FirstPuzzleAnswer { get; set; } = null;
         public long? SecondPuzzleAnswer { get; set; } = null;
 
-        public static string ParseTitle(string text)
+        internal static string ParseTitle(string text)
         {
             string[] tokens = text.Split(titleSeparator);
             if (tokens.Length != 2)
@@ -33,12 +33,12 @@ namespace AdventOfCode.Kit.Client.Resources
             return tokens[1].Replace(titleDecorator, "").Trim();
         }
 
-        public static bool HasSubmissionForm(HtmlNode document)
+        internal static bool HasSubmissionForm(HtmlNode document)
         {
             return document.SelectSingleNode("//main/form[@method='post']") != null;
         }
 
-        public static DayPage Parse(string text)
+        internal static DayPage Parse(string text)
         {
             var document = new HtmlDocument();
             var dayPage = new DayPage();

@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode.Kit.Client
+﻿namespace AdventOfCode.Kit.Client.Http
 {
-    public interface IAdventOfCodeClient
+    internal interface IAdventOfCodeClient
     {
         Task<Stream> GetCalendarPageAsStreamAsync(int year);
         Task<Stream> GetDayPageAsStreamAsync(int year, int day);

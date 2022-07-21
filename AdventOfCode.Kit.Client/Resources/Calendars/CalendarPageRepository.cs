@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode.Kit.Client.Resources
+﻿using AdventOfCode.Kit.Client.Http;
+
+namespace AdventOfCode.Kit.Client.Resources
 {
     internal class CalendarPageRepository : ICalendarPageRepository
     {

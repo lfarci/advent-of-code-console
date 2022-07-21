@@ -1,6 +1,8 @@
-﻿namespace AdventOfCode.Kit.Client.Resources
+﻿using AdventOfCode.Kit.Client.Resources;
+
+namespace AdventOfCode.Kit.Client
 {
-    internal interface IResourceRepository
+    public interface IResourceRepository
     {
 
         /// <summary>

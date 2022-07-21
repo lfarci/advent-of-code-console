@@ -1,8 +1,6 @@
-﻿using AdventOfCode.Kit.Client.Http;
-
-namespace AdventOfCode.Kit.Client
+﻿namespace AdventOfCode.Kit.Client.Http
 {
-    public class AdventOfCodeClient : IAdventOfCodeClient
+    internal class AdventOfCodeClient : IAdventOfCodeClient
     {
 
         private static IAdventOfCodeClient? instance = null;
@@ -35,7 +33,8 @@ namespace AdventOfCode.Kit.Client
 
         public async Task<Stream> GetCalendarPageAsStreamAsync(int year)
         {
-            return await GetAdventOfCodeResourceAsync(new Request { 
+            return await GetAdventOfCodeResourceAsync(new Request
+            {
                 Uri = $"/{year}",
                 ErrorMessage = $"Failed to request calendar page for year {year}."
             });

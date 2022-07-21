@@ -1,14 +1,14 @@
 ﻿using AdventOfCode.Kit.Client.Resources;
 
-namespace AdventOfCode.Kit.Client.Resources
+namespace AdventOfCode.Kit.Client
 {
-    internal class ResourceRepository : IResourceRepository
+    public class ResourceRepository : IResourceRepository
     {
         private static IResourceRepository? instance;
 
-        public ICalendarPageRepository CalendarPages { get; init; } = CalendarPageRepository.Instance;
-        public IDayPageRepository DayPages { get; init; } = DayPageRepository.Instance;
-        public IPuzzleInputRepository PuzzleInputs { get; init; } = PuzzleInputRepository.Instance;
+        internal ICalendarPageRepository CalendarPages { get; init; } = CalendarPageRepository.Instance;
+        internal IDayPageRepository DayPages { get; init; } = DayPageRepository.Instance;
+        internal IPuzzleInputRepository PuzzleInputs { get; init; } = PuzzleInputRepository.Instance;
 
         public static IResourceRepository Instance
         {
