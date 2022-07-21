@@ -13,7 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		azure-pipelines.yml = azure-pipelines.yml
 		coverlet.runsettings.xml = coverlet.runsettings.xml
 		nuget.config = nuget.config
-		.github\workflows\qualityAnalysis.yml = .github\workflows\qualityAnalysis.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
