@@ -11,8 +11,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <PackageReference Include="Spectre.Console" Version="0.44.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdventOfCode.Kit.Client\AdventOfCode.Kit.Client.csproj" />
   </ItemGroup>
 
 </Project>

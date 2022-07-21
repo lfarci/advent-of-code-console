@@ -1,4 +1,5 @@
-﻿using AdventOfCode.Kit.Console.Core;
+﻿using AdventOfCode.Kit.Client.Core;
+using AdventOfCode.Kit.Console.Core;
 using System.Collections.Generic;
 
 namespace AdventOfCodeConsole.Tests.Helpers

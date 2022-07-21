@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Kit.Console.Core;
+﻿using AdventOfCode.Kit.Client.Core;
 using Spectre.Console;
 
 namespace AdventOfCode.Kit.Console.View

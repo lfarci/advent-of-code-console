@@ -1,8 +1,9 @@
-﻿using HtmlAgilityPack;
+﻿using AdventOfCode.Kit.Client.Core;
+using HtmlAgilityPack;
 
 namespace AdventOfCode.Kit.Client.Resources
 {
-    public class CalendarPage
+    internal class CalendarPage
     {
         private readonly IList<DayEntry> _days;
 

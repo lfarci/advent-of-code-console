@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Kit.Console.Core;
+﻿using AdventOfCode.Kit.Client.Core;
 
 namespace AdventOfCode.Kit.Console.View
 {

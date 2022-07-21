@@ -1,4 +1,5 @@
-﻿using AdventOfCode.Kit.Client.Resources;
+﻿using AdventOfCode.Kit.Client.Core;
+using AdventOfCode.Kit.Client.Resources;
 using AdventOfCodeConsole.Tests.Helpers;
 using HtmlAgilityPack;
 using System;

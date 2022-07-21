@@ -1,8 +1,8 @@
 ﻿using AdventOfCode.Kit.Console.Core;
-using AdventOfCode.Kit.Console.Web;
 using AdventOfCode.Kit.Console.Commands;
 using Spectre.Console.Cli;
 using AdventOfCode.Kit.Console.View;
+using AdventOfCode.Kit.Client.Core;
 
 namespace AdventOfCode.Kit.Console
 {
@@ -23,12 +23,14 @@ namespace AdventOfCode.Kit.Console
 
         internal IAdventOfCodeView Console { get; init; }
         internal IDictionary<int, IPuzzleSubmitter> Submitters { get; init; }
+        internal IDataSource Data { get; init;  }
 
         internal AdventOfCodeConsole() : this(new AdventOfCodeView())
         {}
 
         internal AdventOfCodeConsole(IAdventOfCodeView console)
         {
+            Data = new AdventOfCodeWebsite();
             Console = console;
             Submitters = new Dictionary<int, IPuzzleSubmitter>();
         }
@@ -72,8 +74,7 @@ namespace AdventOfCode.Kit.Console
             {
                 try
                 {
-                    IResourceRepository repository = ResourceRepository.Instance;
-                    string[] lines = repository.FindPuzzleInputByYearAndDayAsync(year, dayIndex).Result;
+                    string[] lines = Data.FindPuzzleInputByYearAndDayAsync(year, dayIndex).Result;
                     var submitter = FindSubmitter(year);
 
                     if (submitter?.Calendar != null)

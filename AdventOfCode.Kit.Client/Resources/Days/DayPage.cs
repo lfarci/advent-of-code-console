@@ -1,8 +1,9 @@
-﻿using HtmlAgilityPack;
+﻿using AdventOfCode.Kit.Client.Core;
+using HtmlAgilityPack;
 
 namespace AdventOfCode.Kit.Client.Resources
 {
-    public class DayPage
+    internal class DayPage
     {
         internal static readonly string TitleNotFoundError = "Title not found.";
         internal static readonly string InvalidTitleFormatError = "Invalid title";
