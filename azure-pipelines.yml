@@ -1,17 +1,17 @@
-name: $(Major).$(Minor)$(Rev:.rr)
+name: $(Major).$(Minor)$(Rev:.r)
 
 trigger:
 - '*'
 
 pool:
-    container: 'ubuntu-20.04'
+  vmImage: 'ubuntu-20.04'
 
 variables:
-    BuildConfiguration: 'Release'
-    DotnetSdkVersion: '6.x'
-    NugetPackageFeedName: 'AdventOfCodeKit'
-    Major: '0'
-    Minor: '0'
+  BuildConfiguration: 'Release'
+  DotnetSdkVersion: '6.x'
+  NugetPackageFeedName: 'AdventOfCodeKit'
+  Major: '0'
+  Minor: '0'
     
 steps:
 
