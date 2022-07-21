@@ -59,11 +59,15 @@ stages:
         arguments: 'run reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Pack the project - $(BuildConfiguration)'
+      displayName: 'Pack the project - $(buildConfiguration)'
       inputs:
         command: 'pack'
         projects: '**/*.csproj'
-        arguments: '--no-build --configuration $(BuildConfiguration) -p:PackageVersion=$(Major).$(Minor).$(Rev:.r)'
+        arguments: '--no-build --configuration $(buildConfiguration)'
+        versioningScheme: byPrereleaseNumber
+        majorVersion: $(Major)
+        minorVersion: $(Minor)
+        patchVersion: $(Rev:.r)
 
     - task: NuGetCommand@2
       displayName: 'Publish NuGet package'
