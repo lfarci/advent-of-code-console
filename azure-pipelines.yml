@@ -86,7 +86,7 @@ stages:
       displayName: 'Publish NuGet package'
       inputs:
         command: push
-        feedPublish: '$(System.TeamProject)/$(nugetPackageFeedName)'
+        feedPublish: 'AdventOfCodeKit'
         allowPackageConflicts: true
       condition: succeeded()
 
