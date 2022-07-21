@@ -66,22 +66,29 @@ namespace AdventOfCode.Console
             }
         }
 
-        public void ShowPuzzleAnswers(int year, int dayIndex)
+        internal void ShowPuzzleAnswers(int year, int dayIndex)
         {
             Console.Status($"Downloading input for year {year} and day {dayIndex}...", () =>
             {
-                IResourceRepository repository = ResourceRepository.Instance;
-                string[] lines = repository.FindPuzzleInputByYearAndDayAsync(year, dayIndex).Result;
-                var submitter = FindSubmitter(year);
-
-                if (submitter.Calendar != null)
+                try
                 {
-                    var day = submitter.Calendar[dayIndex];
-                    Console.ShowPuzzleAnswers(day, lines);
+                    IResourceRepository repository = ResourceRepository.Instance;
+                    string[] lines = repository.FindPuzzleInputByYearAndDayAsync(year, dayIndex).Result;
+                    var submitter = FindSubmitter(year);
+
+                    if (submitter?.Calendar != null)
+                    {
+                        var day = submitter.Calendar[dayIndex];
+                        Console.ShowPuzzleAnswers(day, lines);
+                    }
+                    else
+                    {
+                        Console.ShowError($"Could not run submitted puzzle because year {year} isn't initialized.");
+                    }
                 }
-                else
-                { 
-                    Console.ShowError($"Could not run submitted puzzle because year {year} isn't initialized.");
+                catch (IOException)
+                {
+                    Console.ShowError($"Failed to fetch the input data for the requested puzzle."); 
                 }
             });
         }
