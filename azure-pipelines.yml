@@ -13,7 +13,7 @@ stages:
     variables:
       buildConfiguration: 'Release'
       dotnetSdkVersion: '6.x'
-      nugetPackageFeedName: 'AdventOfCode.Console'
+      nugetPackageFeedName: 'AdventOfCodeKit'
 
     steps:
     - task: UseDotNet@2
@@ -70,10 +70,9 @@ stages:
     - task: NuGetCommand@2
       displayName: 'Publish NuGet package'
       inputs:
-        command: 'push'
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
-        feedsToUse: 'AdventOfCodeKit'
-        nugetConfigPath: '$(Build.WorkingDirectory)/nuget.config'
+        command: push
+        feedPublish: '$(System.TeamProject)/$(nugetPackageFeedName)'
+        allowPackageConflicts: true
       condition: succeeded()
 
     - task: PublishCodeCoverageResults@1
