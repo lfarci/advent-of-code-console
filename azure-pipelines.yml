@@ -11,15 +11,17 @@ stages:
       vmImage: 'ubuntu-20.04'
 
     variables:
-      buildConfiguration: 'Release'
-      dotnetSdkVersion: '6.x'
-      nugetPackageFeedName: 'AdventOfCodeKit'
+      BuildConfiguration: 'Release'
+      DotnetSdkVersion: '6.x'
+      NugetPackageFeedName: 'AdventOfCodeKit'
+      Major: '0'
+      Minor: '0'
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Use .NET SDK $(dotnetSdkVersion)'
+      displayName: 'Use .NET SDK $(DotnetSdkVersion)'
       inputs:
-        version: '$(dotnetSdkVersion)'
+        version: '$(DotnetSdkVersion)'
 
     - task: DotNetCoreCLI@2
       displayName: 'Restore project dependencies'
@@ -28,10 +30,10 @@ stages:
         projects: '**/*.csproj'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Build the project - $(buildConfiguration)'
+      displayName: 'Build the project - $(BuildConfiguration)'
       inputs:
         command: 'build'
-        arguments: '--no-restore --configuration $(buildConfiguration)'
+        arguments: '--no-restore --configuration $(BuildConfiguration)'
         projects: '**/*.csproj'
 
     - task: DotNetCoreCLI@2
@@ -42,10 +44,10 @@ stages:
         arguments: 'restore'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Run unit tests - $(buildConfiguration)'
+      displayName: 'Run unit tests - $(BuildConfiguration)'
       inputs:
         command: 'test'
-        arguments: '--no-build --configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
+        arguments: '--no-build --configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/TestResults/Coverage/'
         publishTestResults: true
         projects: '**/*.Tests.csproj'
 
@@ -57,21 +59,20 @@ stages:
         arguments: 'run reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Pack the project - $(buildConfiguration)'
+      displayName: 'Pack the project - $(BuildConfiguration)'
       inputs:
         command: 'pack'
         projects: '**/*.csproj'
-        arguments: '--no-build --configuration $(buildConfiguration)'
-        versioningScheme: byPrereleaseNumber
-        majorVersion: '0'
-        minorVersion: '0'
-        patchVersion: '6'
+        arguments: '--no-build --configuration $(BuildConfiguration)'
+        majorVersion: $(Major)
+        minorVersion: $(Minor)
+        patchVersion: $(Rev:.r)
 
     - task: NuGetCommand@2
       displayName: 'Publish NuGet package'
       inputs:
         command: push
-        feedPublish: '$(System.TeamProject)/$(nugetPackageFeedName)'
+        feedPublish: '$(System.TeamProject)/$(NugetPackageFeedName)'
         allowPackageConflicts: true
       condition: succeeded()
 
@@ -82,12 +83,12 @@ stages:
         summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
 
     - task: DotNetCoreCLI@2
-      displayName: 'Publish the project - $(buildConfiguration)'
+      displayName: 'Publish the project - $(BuildConfiguration)'
       inputs:
         command: 'publish'
         projects: '**/*.csproj'
         publishWebProjects: false
-        arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
+        arguments: '--no-build --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(BuildConfiguration)'
         zipAfterPublish: true
 
     - publish: '$(Build.ArtifactStagingDirectory)'
