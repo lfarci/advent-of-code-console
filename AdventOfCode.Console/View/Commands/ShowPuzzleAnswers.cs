@@ -18,28 +18,28 @@ namespace AdventOfCode.Console.Commands
             public string? Day { get; init; }
         }
 
-        private const int V = 0;
         private AdventOfCodeConsole _console = AdventOfCodeConsole.Instance;
 
         public override int Execute([NotNull] CommandContext context, [NotNull] Settings settings)
         {
+            int exit = 0;
             try
             {
                 int year = int.Parse(settings?.Year ?? "");
                 int day = int.Parse(settings?.Day ?? "");
                 _console.ShowPuzzleAnswers(year, day);
-                return 0;
             }
             catch (FormatException)
             {
-                AnsiConsole.MarkupLine($"[red][bold]Invalid year:[/] {settings.Year}[/]");
-                return -1;
+                AnsiConsole.MarkupLine($"[red][bold]Invalid arguments:[/] year \"{settings.Year}\" and day \"{settings.Day}\"[/]");
+                exit = -1;
             }
             catch (IOException)
             {
                 AnsiConsole.MarkupLine($"[red][bold]Failed to show calendar for the given year:[/] {settings.Year}[/]");
-                return -1;
+                exit = -1;
             }
+            return exit;
 
         }
     }
