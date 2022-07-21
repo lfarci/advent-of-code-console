@@ -85,9 +85,10 @@ stages:
     - task: NuGetCommand@2
       displayName: 'Publish NuGet package'
       inputs:
-        command: push
-        feedPublish: 'AdventOfCodeKit'
-        allowPackageConflicts: true
+        command: 'push'
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+        feedsToUse: 'AdventOfCodeKit'
+        nugetConfigPath: '$(Build.WorkingDirectory)/nuget.config'
       condition: succeeded()
 
     - publish: '$(Build.ArtifactStagingDirectory)'
