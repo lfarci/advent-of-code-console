@@ -67,6 +67,15 @@ stages:
         minorVersion: '0'
         patchVersion: '6'
 
+    - task: NuGetCommand@2
+      displayName: 'Publish NuGet package'
+      inputs:
+        command: 'push'
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+        feedsToUse: 'AdventOfCodeKit'
+        nugetConfigPath: '$(Build.WorkingDirectory)/nuget.config'
+      condition: succeeded()
+
     - task: PublishCodeCoverageResults@1
       displayName: 'Publish code coverage report'
       inputs:
@@ -81,15 +90,6 @@ stages:
         publishWebProjects: false
         arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
         zipAfterPublish: true
-
-    - task: NuGetCommand@2
-      displayName: 'Publish NuGet package'
-      inputs:
-        command: 'push'
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
-        feedsToUse: 'AdventOfCodeKit'
-        nugetConfigPath: '$(Build.WorkingDirectory)/nuget.config'
-      condition: succeeded()
 
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: drop
