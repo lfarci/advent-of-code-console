@@ -12,7 +12,7 @@ namespace AdventOfCode.Console.Tests.Web
 {
     public class CalendarPageTests
     {
-        private static readonly string resourceName = "AdventOfCode.Console.Tests.Resources.CalendarPage.html";
+        private static readonly string resourceName = "AdventOfCode.Kit.Console.Tests.Resources.CalendarPage.html";
         private static readonly string calendarPage = ReadCalendarPage();
         private static readonly IList<DayEntry> expectedDays = Fixtures.CalendarPageEntries;
 

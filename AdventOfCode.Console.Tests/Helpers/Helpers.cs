@@ -1,5 +1,4 @@
-﻿using AdventOfCode.Console.Web;
-using AdventOfCode.Console.Web.Client;
+﻿using AdventOfCode.Console.Web.Client;
 using AdventOfCode.Console.Web.Resources;
 using Moq;
 using System;
@@ -7,7 +6,6 @@ using System.IO;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AdventOfCodeConsole.Tests.Helpers
 {

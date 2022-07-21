@@ -1,4 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("AdventOfCode.Console.Tests")]
+[assembly: InternalsVisibleTo("AdventOfCode.Kit.Console.Tests")]
 [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")] 
