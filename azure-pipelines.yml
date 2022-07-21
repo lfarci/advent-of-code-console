@@ -9,11 +9,9 @@ stages:
     displayName: 'Build job'
     pool:
       vmImage: 'ubuntu-20.04'
-      demands:
-      - npm
 
     variables:
-      wwwrootDir: 'Tailspin.SpaceGame.Web/wwwroot'
+      buildConfiguration: 'Release'
       dotnetSdkVersion: '6.x'
 
     steps:
