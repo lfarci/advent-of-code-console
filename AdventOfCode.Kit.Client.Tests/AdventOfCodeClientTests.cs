@@ -1,5 +1,5 @@
-﻿using AdventOfCode.Kit.Client;
-using AdventOfCode.Kit.Client.Core;
+﻿using AdventOfCode.Kit.Client.Models;
+using AdventOfCode.Kit.Client.Web;
 using AdventOfCode.Kit.Client.Web.Resources;
 using AdventOfCodeConsole.Tests.Helpers;
 using Moq;
@@ -7,15 +7,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AdventOfCode.Kit.Console.Tests.Core
+namespace AdventOfCode.Kit.Client.Tests.Models
 {
-    public class AdventOfCodeWebsiteTests
+    public class AdventOfCodeClientTests
     {
 
         [Fact]
         public async Task FindCalendarByYearAsync_ValidYear_ReturnsCalendarWithExpectedNumberOfDays()
         {
-            var website = new AdventOfCodeWebsite { Resources = GetRepository() };
+            var website = new AdventOfCodeClient { Resources = GetRepository() };
             var calendar = await website.FindCalendarByYearAsync(2021);
             Assert.Equal(Fixtures.CalendarDays.Count(), calendar.Days.Count());
         }
@@ -23,7 +23,7 @@ namespace AdventOfCode.Kit.Console.Tests.Core
         [Fact]
         public async Task FindCalendarByYearAsync_ValidYear_ReturnsCalendarWithExpectedLength()
         {
-            var website = new AdventOfCodeWebsite { Resources = GetRepository() };
+            var website = new AdventOfCodeClient { Resources = GetRepository() };
             var calendar = await website.FindCalendarByYearAsync(2021);
             Assert.Equal(Fixtures.CalendarDays.Count(), calendar.Length);
         }
@@ -31,7 +31,7 @@ namespace AdventOfCode.Kit.Console.Tests.Core
         [Fact]
         public async Task FindCalendarByYearAsync_ValidYear_ReturnsCalendarWithExpectedYear()
         {
-            var website = new AdventOfCodeWebsite { Resources = GetRepository() };
+            var website = new AdventOfCodeClient { Resources = GetRepository() };
             var calendar = await website.FindCalendarByYearAsync(2021);
             Assert.Equal(Fixtures.CalendarPage.Year, calendar.Year);
         }

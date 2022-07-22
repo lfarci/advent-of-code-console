@@ -1,6 +1,6 @@
 ﻿using AdventOfCode.Kit.Client.Web.Resources;
 
-namespace AdventOfCode.Kit.Client
+namespace AdventOfCode.Kit.Client.Web
 {
     internal interface IResourceRepository
     {

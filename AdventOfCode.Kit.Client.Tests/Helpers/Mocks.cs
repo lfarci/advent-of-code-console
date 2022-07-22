@@ -1,4 +1,5 @@
 ﻿using AdventOfCode.Kit.Client;
+using AdventOfCode.Kit.Client.Web;
 using AdventOfCode.Kit.Client.Web.Resources;
 using Moq;
 using System;
@@ -14,7 +15,7 @@ namespace AdventOfCodeConsole.Tests.Helpers
                 calendarPage,
                 r => r.FindByYearAsync(Fixtures.DefaultYear).Result
             );
-            return new ResourceRepository { CalendarPages = mock };
+            return new AdventOfCodeWebsite { CalendarPages = mock };
         }
 
         public static IResourceRepository GetRepositoryThatReturns(DayPage dayPage)
@@ -23,7 +24,7 @@ namespace AdventOfCodeConsole.Tests.Helpers
                 dayPage,
                 r => r.FindByYearAndDayAsync(Fixtures.DefaultYear, Fixtures.DefaultDay).Result
             );
-            return new ResourceRepository { DayPages = mock };
+            return new AdventOfCodeWebsite { DayPages = mock };
         }
 
         public static IResourceRepository GetRepositoryThatReturns(string[] inputLines)
@@ -32,28 +33,28 @@ namespace AdventOfCodeConsole.Tests.Helpers
                 inputLines,
                 r => r.FindByYearAndDayAsync(Fixtures.DefaultYear, Fixtures.DefaultDay).Result
             );
-            return new ResourceRepository { PuzzleInputs = mock };
+            return new AdventOfCodeWebsite { PuzzleInputs = mock };
         }
 
         public static IResourceRepository GetRepositoryThatThrows<TThrown>(Expression<Action<ICalendarPageRepository>> call)
             where TThrown : Exception, new()
         {
             var mock = MockThrown<TThrown, ICalendarPageRepository>(call);
-            return new ResourceRepository { CalendarPages = mock };
+            return new AdventOfCodeWebsite { CalendarPages = mock };
         }
 
         public static IResourceRepository GetRepositoryThatThrows<TThrown>(Expression<Action<IDayPageRepository>> call)
             where TThrown : Exception, new()
         {
             var mock = MockThrown<TThrown, IDayPageRepository>(call);
-            return new ResourceRepository { DayPages = mock };
+            return new AdventOfCodeWebsite { DayPages = mock };
         }
 
         public static IResourceRepository GetRepositoryThatThrows<TThrown>(Expression<Action<IPuzzleInputRepository>> call)
             where TThrown : Exception, new()
         {
             var mock = MockThrown<TThrown, IPuzzleInputRepository>(call);
-            return new ResourceRepository { PuzzleInputs = mock };
+            return new AdventOfCodeWebsite { PuzzleInputs = mock };
         }
 
         private static TRepository MockReturnValue<TResult, TRepository>(TResult value, Expression<Func<TRepository, TResult>> call)

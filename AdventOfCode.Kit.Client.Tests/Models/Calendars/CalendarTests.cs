@@ -1,9 +1,9 @@
-﻿using AdventOfCode.Kit.Client.Core;
+﻿using AdventOfCode.Kit.Client.Models;
 using AdventOfCodeConsole.Tests.Helpers;
 using System;
 using Xunit;
 
-namespace AdventOfCode.Kit.Console.Tests.Core
+namespace AdventOfCode.Kit.Client.Tests.Models
 {
     public class CalendarTests
     {

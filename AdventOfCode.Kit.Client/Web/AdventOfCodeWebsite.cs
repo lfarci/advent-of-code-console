@@ -1,8 +1,8 @@
 ﻿using AdventOfCode.Kit.Client.Web.Resources;
 
-namespace AdventOfCode.Kit.Client
+namespace AdventOfCode.Kit.Client.Web
 {
-    internal class ResourceRepository : IResourceRepository
+    internal class AdventOfCodeWebsite : IResourceRepository
     {
         private static IResourceRepository? instance;
 
@@ -16,7 +16,7 @@ namespace AdventOfCode.Kit.Client
             {
                 if (instance == null)
                 {
-                    instance = new ResourceRepository();
+                    instance = new AdventOfCodeWebsite();
                 }
                 return instance;
             }

@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Kit.Client.Core
+﻿namespace AdventOfCode.Kit.Client.Models
 {
     public class Calendar
     {

@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode.Kit.Client.Core
+﻿namespace AdventOfCode.Kit.Client.Models
 {
-    public class DayBuilder
+    internal class DayBuilder
     {
         private readonly Day _day = new();
 

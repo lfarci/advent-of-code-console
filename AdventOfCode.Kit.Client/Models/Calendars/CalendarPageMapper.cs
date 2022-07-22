@@ -1,6 +1,6 @@
 ﻿using AdventOfCode.Kit.Client.Web.Resources;
 
-namespace AdventOfCode.Kit.Client.Core
+namespace AdventOfCode.Kit.Client.Models
 {
     internal class CalendarPageMapper
     {

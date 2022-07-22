@@ -2,7 +2,7 @@
 using AdventOfCode.Kit.Console.Commands;
 using Spectre.Console.Cli;
 using AdventOfCode.Kit.Console.View;
-using AdventOfCode.Kit.Client.Core;
+using AdventOfCode.Kit.Client;
 
 namespace AdventOfCode.Kit.Console
 {
@@ -23,14 +23,14 @@ namespace AdventOfCode.Kit.Console
 
         internal IAdventOfCodeView Console { get; init; }
         internal IDictionary<int, IPuzzleSubmitter> Submitters { get; init; }
-        internal IDataSource Data { get; init;  }
+        internal IAdventOfCode Data { get; init;  }
 
         internal AdventOfCodeConsole() : this(new AdventOfCodeView())
         {}
 
         internal AdventOfCodeConsole(IAdventOfCodeView console)
         {
-            Data = new AdventOfCodeWebsite();
+            Data = new AdventOfCodeClient();
             Console = console;
             Submitters = new Dictionary<int, IPuzzleSubmitter>();
         }

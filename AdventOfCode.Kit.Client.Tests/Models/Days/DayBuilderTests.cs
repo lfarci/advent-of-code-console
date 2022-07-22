@@ -1,8 +1,8 @@
-﻿using AdventOfCode.Kit.Client.Core;
+﻿using AdventOfCode.Kit.Client.Models;
 using AdventOfCode.Kit.Client.Web.Resources;
 using Xunit;
 
-namespace AdventOfCode.Kit.Console.Tests.Core
+namespace AdventOfCode.Kit.Client.Tests.Models
 {
     public class DayBuilderTests
     {

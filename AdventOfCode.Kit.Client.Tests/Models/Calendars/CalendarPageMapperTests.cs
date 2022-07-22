@@ -1,10 +1,10 @@
-﻿using AdventOfCode.Kit.Client.Core;
+﻿using AdventOfCode.Kit.Client.Models;
 using AdventOfCode.Kit.Client.Web.Resources;
 using System.Collections.Generic;
 using Xunit;
 using static AdventOfCode.Kit.Client.Web.Resources.CalendarPage;
 
-namespace AdventOfCode.Kit.Console.Tests.Core
+namespace AdventOfCode.Kit.Client.Tests.Models
 {
     public class CalendarPageMapperTests
     {

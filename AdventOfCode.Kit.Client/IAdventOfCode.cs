@@ -1,6 +1,8 @@
-﻿namespace AdventOfCode.Kit.Client.Core
+﻿using AdventOfCode.Kit.Client.Models;
+
+namespace AdventOfCode.Kit.Client
 {
-    public interface IDataSource
+    public interface IAdventOfCode
     {
         /// <summary>
         /// Find a calendar for the given year.

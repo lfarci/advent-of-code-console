@@ -1,15 +1,16 @@
-﻿using AdventOfCode.Kit.Client;
+﻿using AdventOfCode.Kit.Client.Models;
+using AdventOfCode.Kit.Client.Web;
 using AdventOfCode.Kit.Client.Web.Resources;
 using static AdventOfCode.Kit.Client.Web.Resources.CalendarPage;
 
-namespace AdventOfCode.Kit.Client.Core
+namespace AdventOfCode.Kit.Client
 {
-    public class AdventOfCodeWebsite : IDataSource
+    public class AdventOfCodeClient : IAdventOfCode
     {
-        internal IResourceRepository Resources { get; init; } = ResourceRepository.Instance;
+        internal IResourceRepository Resources { get; init; } = AdventOfCodeWebsite.Instance;
 
-        public AdventOfCodeWebsite() { 
-            Resources = ResourceRepository.Instance;
+        public AdventOfCodeClient() { 
+            Resources = AdventOfCodeWebsite.Instance;
         }
 
         private async Task<Day> GetCalendarDayAsync(int year, DayEntry calendarPageDayEntry)

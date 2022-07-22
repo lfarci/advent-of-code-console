@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Kit.Client.Core;
+﻿using AdventOfCode.Kit.Client.Models;
 using AdventOfCode.Kit.Client.Web.Resources;
 using System.Collections.Generic;
 using static AdventOfCode.Kit.Client.Web.Resources.CalendarPage;

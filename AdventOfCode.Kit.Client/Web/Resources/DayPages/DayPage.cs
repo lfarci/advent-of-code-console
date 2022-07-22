@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Kit.Client.Core;
+﻿using AdventOfCode.Kit.Client.Models;
 using HtmlAgilityPack;
 
 namespace AdventOfCode.Kit.Client.Web.Resources

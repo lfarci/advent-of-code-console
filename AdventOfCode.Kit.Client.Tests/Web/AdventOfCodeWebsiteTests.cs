@@ -6,9 +6,9 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AdventOfCode.Kit.Client.Tests.Web.Resources
+namespace AdventOfCode.Kit.Client.Tests.Web
 {
-    public class ResourceRepositoryTests
+    public class AdventOfCodeWebsiteTests
     {
         [Fact]
         public async Task FindCalendarPageByYearAsync_IOExceptionIsThrown_ThrowsAgain()

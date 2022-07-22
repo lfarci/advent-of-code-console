@@ -1,4 +1,5 @@
-﻿using AdventOfCode.Kit.Client.Core;
+﻿using AdventOfCode.Kit.Client;
+using AdventOfCode.Kit.Client.Models;
 
 namespace AdventOfCode.Kit.Console.Core
 {
@@ -9,7 +10,7 @@ namespace AdventOfCode.Kit.Console.Core
         internal readonly static string PuzzleCreationFailureErrorMessage = "Could not construct the puzzle.";
         internal readonly static string NoSubmittedPuzzlesErrorMessage = "No puzzle to submit.";
 
-        private readonly IDataSource _data;
+        private readonly IAdventOfCode _data;
         private Calendar? _calendar;
         private Queue<Puzzle> _submittedPuzzles;
 
@@ -20,13 +21,13 @@ namespace AdventOfCode.Kit.Console.Core
 
         internal AdventOfCodeContext(int year)
             : this(
-                  new AdventOfCodeWebsite(),
+                  new AdventOfCodeClient(),
                   null,
                   year
               )
         { }
 
-        internal AdventOfCodeContext(IDataSource data, Calendar? calendar, int year)
+        internal AdventOfCodeContext(IAdventOfCode data, Calendar? calendar, int year)
         {
             _data = data;
             _calendar = calendar;
