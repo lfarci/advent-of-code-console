@@ -5,7 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AdventOfCode.Kit.Console.Tests.Web
+namespace AdventOfCode.Kit.Client.Tests.Web.Resources
 {
     public class DayPageRepositoryTests
     {

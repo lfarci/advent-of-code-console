@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AdventOfCode.Kit.Console.Tests.Web
+namespace AdventOfCode.Kit.Client.Tests.Web.Resources
 {
     public class ResourceRepositoryTests
     {

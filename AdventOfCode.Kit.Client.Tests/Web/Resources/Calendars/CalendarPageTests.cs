@@ -8,7 +8,7 @@ using Xunit;
 
 using static AdventOfCode.Kit.Client.Web.Resources.CalendarPage;
 
-namespace AdventOfCode.Kit.Console.Tests.Web
+namespace AdventOfCode.Kit.Client.Tests.Web.Resources
 {
     public class CalendarPageTests
     {
