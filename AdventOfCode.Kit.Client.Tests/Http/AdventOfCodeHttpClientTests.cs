@@ -9,14 +9,14 @@ using Xunit;
 
 namespace AdventOfCode.Kit.Console.Tests.Web
 {
-    public class AdventOfCodeClientTests
+    public class AdventOfCodeHttpClientTests
     {
         private static readonly Mock<IHttpRequestSender> httpRequestSenderMock = new();
 
         [Fact]
         public void Instance_AlwaysReturnsSameInstance()
         {
-            Assert.Equal(AdventOfCodeClient.Instance, AdventOfCodeClient.Instance);
+            Assert.Equal(AdventOfCodeHttpClient.Instance, AdventOfCodeHttpClient.Instance);
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace AdventOfCode.Kit.Console.Tests.Web
             httpRequestSenderMock
                 .Setup(client => client.GetResourceAsync(It.IsAny<string>()).Result)
                 .Returns(response);
-            return new AdventOfCodeClient(httpRequestSenderMock.Object);
+            return new AdventOfCodeHttpClient(httpRequestSenderMock.Object);
         }
 
         private static async Task AssertThrowsIOException(HttpResponseMessage? message, Func<IAdventOfCodeClient, Task> call)

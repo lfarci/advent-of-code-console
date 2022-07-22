@@ -1,9 +1,9 @@
 ﻿namespace AdventOfCode.Kit.Client.Http
 {
-    internal class AdventOfCodeClient : IAdventOfCodeClient
+    internal class AdventOfCodeHttpClient : IAdventOfCodeClient
     {
         private static IAdventOfCodeClient? instance = null;
-        private static IConfiguration defaultConfiguration = new AdventOfCodeClientConfiguration();
+        private static readonly IAdventOfCodeClientConfiguration defaultConfiguration = new AdventOfCodeHttpClientConfiguration();
 
         public static IAdventOfCodeClient Instance
         {
@@ -11,7 +11,7 @@
             {
                 if (instance == null)
                 {
-                    instance = new AdventOfCodeClient(defaultConfiguration);
+                    instance = new AdventOfCodeHttpClient(defaultConfiguration);
                 }
                 return instance;
             }
@@ -19,11 +19,11 @@
 
         private readonly IHttpRequestSender _client;
 
-        internal AdventOfCodeClient(IConfiguration configuration)
+        internal AdventOfCodeHttpClient(IAdventOfCodeClientConfiguration configuration)
             : this(new AdventOfCodeHttpRequestSender(configuration.Host, configuration.SessionId))
         {}
 
-        internal AdventOfCodeClient(IHttpRequestSender client)
+        internal AdventOfCodeHttpClient(IHttpRequestSender client)
         {
             _client = client;
         }

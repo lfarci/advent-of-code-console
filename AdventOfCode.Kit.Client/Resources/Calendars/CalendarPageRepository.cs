@@ -5,7 +5,7 @@ namespace AdventOfCode.Kit.Client.Resources
     internal class CalendarPageRepository : ICalendarPageRepository
     {
         private static ICalendarPageRepository? instance;
-        private readonly IAdventOfCodeClient _client = AdventOfCodeClient.Instance;
+        private readonly IAdventOfCodeClient _client = AdventOfCodeHttpClient.Instance;
         public static ICalendarPageRepository Instance
         {
             get
@@ -18,7 +18,7 @@ namespace AdventOfCode.Kit.Client.Resources
             }
         }
 
-        protected CalendarPageRepository() : this(AdventOfCodeClient.Instance)
+        protected CalendarPageRepository() : this(AdventOfCodeHttpClient.Instance)
         { }
 
         public CalendarPageRepository(IAdventOfCodeClient client)

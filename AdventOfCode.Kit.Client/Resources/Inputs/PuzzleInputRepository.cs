@@ -5,7 +5,7 @@ namespace AdventOfCode.Kit.Client.Resources
     internal class PuzzleInputRepository : IPuzzleInputRepository
     {
         private static IPuzzleInputRepository? instance;
-        private readonly IAdventOfCodeClient _client = AdventOfCodeClient.Instance;
+        private readonly IAdventOfCodeClient _client = AdventOfCodeHttpClient.Instance;
 
         public static IPuzzleInputRepository Instance
         {
@@ -19,7 +19,7 @@ namespace AdventOfCode.Kit.Client.Resources
             }
         }
 
-        protected PuzzleInputRepository() : this(AdventOfCodeClient.Instance)
+        protected PuzzleInputRepository() : this(AdventOfCodeHttpClient.Instance)
         { }
 
         public PuzzleInputRepository(IAdventOfCodeClient client)

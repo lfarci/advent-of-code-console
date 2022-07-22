@@ -4,7 +4,7 @@ using Xunit;
 
 namespace AdventOfCode.Kit.Client.Tests.Http
 {
-    public class AdventOfCodeClientConfigurationTests
+    public class AdventOfCodeHttpClientConfigurationTests
     {
 
         [Theory]
@@ -18,26 +18,26 @@ namespace AdventOfCode.Kit.Client.Tests.Http
         [InlineData("", null)]
         public void Constructor_EmptyOrNullArgument_ThrowsArgumentException(string? host, string? sessionId)
         {
-            Assert.Throws<ArgumentException>(() => new AdventOfCodeClientConfiguration(host, sessionId));
+            Assert.Throws<ArgumentException>(() => new AdventOfCodeHttpClientConfiguration(host, sessionId));
         }
 
         [Fact]
         public void RequireNotNullOrEmpty_Null_ThrowsArgumentException()
         { 
-            Assert.Throws<ArgumentException>(() => AdventOfCodeClientConfiguration.RequireNotNullOrEmpty(null));
+            Assert.Throws<ArgumentException>(() => AdventOfCodeHttpClientConfiguration.RequireNotNullOrEmpty(null));
         }
 
         [Fact]
         public void RequireNotNullOrEmpty_EmptyString_ThrowsArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => AdventOfCodeClientConfiguration.RequireNotNullOrEmpty(""));
+            Assert.Throws<ArgumentException>(() => AdventOfCodeHttpClientConfiguration.RequireNotNullOrEmpty(""));
         }
 
         [Fact]
         public void RequireNotNullOrEmpty_ValidString_ReturnsString()
         {
             string text = "Some text";
-            Assert.Equal(text, AdventOfCodeClientConfiguration.RequireNotNullOrEmpty(text));
+            Assert.Equal(text, AdventOfCodeHttpClientConfiguration.RequireNotNullOrEmpty(text));
         }
     }
 }

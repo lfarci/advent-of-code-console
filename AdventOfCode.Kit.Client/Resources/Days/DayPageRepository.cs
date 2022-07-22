@@ -18,7 +18,7 @@ namespace AdventOfCode.Kit.Client.Resources
             }
         }
 
-        protected DayPageRepository() : this(AdventOfCodeClient.Instance)
+        protected DayPageRepository() : this(AdventOfCodeHttpClient.Instance)
         { }
 
         public DayPageRepository(IAdventOfCodeClient client)
