@@ -10,7 +10,7 @@ namespace AdventOfCode.Kit.Console.Core
         internal readonly static string PuzzleCreationFailureErrorMessage = "Could not construct the puzzle.";
         internal readonly static string NoSubmittedPuzzlesErrorMessage = "No puzzle to submit.";
 
-        private readonly IAdventOfCode _data;
+        private readonly IAdventOfCodeClient _data;
         private Calendar? _calendar;
         private Queue<Puzzle> _submittedPuzzles;
 
@@ -27,7 +27,7 @@ namespace AdventOfCode.Kit.Console.Core
               )
         { }
 
-        internal AdventOfCodeContext(IAdventOfCode data, Calendar? calendar, int year)
+        internal AdventOfCodeContext(IAdventOfCodeClient data, Calendar? calendar, int year)
         {
             _data = data;
             _calendar = calendar;

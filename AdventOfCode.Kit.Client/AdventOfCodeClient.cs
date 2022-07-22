@@ -5,7 +5,7 @@ using static AdventOfCode.Kit.Client.Web.Resources.CalendarPage;
 
 namespace AdventOfCode.Kit.Client
 {
-    public class AdventOfCodeClient : IAdventOfCode
+    public class AdventOfCodeClient : IAdventOfCodeClient
     {
         internal IResourceRepository Resources { get; init; }
 

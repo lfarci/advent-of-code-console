@@ -8,7 +8,7 @@ namespace AdventOfCode.Kit.Client.Web
         internal IDayPageRepository DayPages { get; init; }
         internal IPuzzleInputRepository PuzzleInputs { get; init; }
 
-        public AdventOfCodeWebsite(IConfiguration configuration)
+        public AdventOfCodeWebsite(IClientConfiguration configuration)
         {
             CalendarPages = new CalendarPageRepository(configuration);
             DayPages = new DayPageRepository(configuration);

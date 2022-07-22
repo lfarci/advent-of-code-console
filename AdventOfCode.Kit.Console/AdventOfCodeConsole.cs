@@ -22,15 +22,16 @@ namespace AdventOfCode.Kit.Console
         }
 
         internal IAdventOfCodeView Console { get; init; }
+        internal IAdventOfCodeClient Client { get; init;  }
         internal IDictionary<int, IPuzzleSubmitter> Submitters { get; init; }
-        internal IAdventOfCode Data { get; init;  }
 
-        internal AdventOfCodeConsole() : this(new AdventOfCodeView())
+        internal AdventOfCodeConsole()
+            : this(new AdventOfCodeClient(), new AdventOfCodeView())
         {}
 
-        internal AdventOfCodeConsole(IAdventOfCodeView console)
+        internal AdventOfCodeConsole(IAdventOfCodeClient client, IAdventOfCodeView console)
         {
-            Data = new AdventOfCodeClient();
+            Client = client;
             Console = console;
             Submitters = new Dictionary<int, IPuzzleSubmitter>();
         }
@@ -74,7 +75,7 @@ namespace AdventOfCode.Kit.Console
             {
                 try
                 {
-                    string[] lines = Data.FindPuzzleInputByYearAndDayAsync(year, dayIndex).Result;
+                    string[] lines = Client.FindPuzzleInputByYearAndDayAsync(year, dayIndex).Result;
                     var submitter = FindSubmitter(year);
 
                     if (submitter?.Calendar != null)

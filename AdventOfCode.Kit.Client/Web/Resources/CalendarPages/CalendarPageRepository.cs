@@ -4,13 +4,13 @@ namespace AdventOfCode.Kit.Client.Web.Resources
 {
     internal class CalendarPageRepository : ICalendarPageRepository
     {
-        private readonly IAdventOfCodeClient _client;
+        private readonly Http.IAdventOfCodeClient _client;
 
-        internal CalendarPageRepository(IConfiguration configuration)
+        internal CalendarPageRepository(IClientConfiguration configuration)
             : this(new AdventOfCodeHttpClient(configuration))
         { }
 
-        public CalendarPageRepository(IAdventOfCodeClient client)
+        public CalendarPageRepository(Http.IAdventOfCodeClient client)
         {
             _client = client;
         }

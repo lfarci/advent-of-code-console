@@ -2,7 +2,7 @@
 
 namespace AdventOfCode.Kit.Client
 {
-    public interface IAdventOfCode
+    public interface IAdventOfCodeClient
     {
         /// <summary>
         /// Find a calendar for the given year.

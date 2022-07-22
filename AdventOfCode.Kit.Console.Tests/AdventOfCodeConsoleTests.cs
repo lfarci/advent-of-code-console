@@ -1,22 +1,28 @@
-﻿using System;
+﻿using AdventOfCode.Kit.Client;
+using AdventOfCode.Kit.Client.Web;
+using AdventOfCode.Kit.Console.View;
+using Moq;
+using System;
 using Xunit;
 
 namespace AdventOfCode.Kit.Console.Tests
 {
     public class AdventOfCodeConsoleTests
     {
+        private IAdventOfCodeClient clientMock = new Mock<IAdventOfCodeClient>().Object;
+        private IAdventOfCodeView viewMock = new Mock<IAdventOfCodeView>().Object;
 
         [Fact]
         public void FindSubmitter_NoContexts_Throws()
         {
-            var console = new AdventOfCodeConsole();
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
             Assert.Throws<InvalidOperationException>(() => console.FindSubmitter(2021));
         }
 
         [Fact]
         public void FindSubmitter_UniqueYear_ReturnsContextForUniqueYear()
         {
-            var console = new AdventOfCodeConsole();
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
             console.StartYear(2021, context => { });
             Assert.Equal(2021, console.FindSubmitter(2021).Year);
         }
@@ -24,7 +30,7 @@ namespace AdventOfCode.Kit.Console.Tests
         [Fact]
         public void FindSubmitter_MultipleYears_SavesNewSubmitterForTheGivenYear()
         {
-            var console = new AdventOfCodeConsole();
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
             console.StartYear(2019, context => { });
             console.StartYear(2020, context => { });
             console.StartYear(2021, context => { });
@@ -36,14 +42,14 @@ namespace AdventOfCode.Kit.Console.Tests
         [Fact]
         public void StartYear_NoSubmitters_CallsDelegateWithContextOfTheGivenYear()
         {
-            var console = new AdventOfCodeConsole();
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
             console.StartYear(2021, context => Assert.Equal(2021, context.Year));
         }
 
         [Fact]
         public void StartYear_NoContexts_SavesNewSubmitterForTheSpecifiedYear()
         {
-            var console = new AdventOfCodeConsole();
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
             console.StartYear(2021, context => { });
             Assert.True(console.Submitters.ContainsKey(2021));
         }
@@ -51,7 +57,7 @@ namespace AdventOfCode.Kit.Console.Tests
         [Fact]
         public void StartYear_NoSubmitter_SavesOnlyOneSubmitter()
         {
-            var console = new AdventOfCodeConsole();
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
             console.StartYear(2021, context => { });
             Assert.Equal(1, console.Submitters.Count);
         }
@@ -59,7 +65,7 @@ namespace AdventOfCode.Kit.Console.Tests
         [Fact]
         public void StartYear_MultipleSubmitters_SavesMultipleSubmittersForTheSpecifiedYears()
         {
-            var console = new AdventOfCodeConsole();
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
             console.StartYear(2019, context => { });
             console.StartYear(2020, context => { });
             console.StartYear(2021, context => { });
@@ -71,7 +77,7 @@ namespace AdventOfCode.Kit.Console.Tests
         [Fact]
         public void StartYear_MultipleSubmitters_SavesOnlySubmittersForStartedYears()
         {
-            var console = new AdventOfCodeConsole();
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
             console.StartYear(2019, context => { });
             console.StartYear(2020, context => { });
             console.StartYear(2021, context => { });
@@ -81,9 +87,9 @@ namespace AdventOfCode.Kit.Console.Tests
         [Fact]
         public void StartYear_AddSameYearTwice_ThrowsInvalidOperationException()
         {
-            var application = new AdventOfCodeConsole();
-            application.StartYear(2021, context => { });
-            Assert.Throws<InvalidOperationException>(() => application.StartYear(2021, year => { }));
+            var console = new AdventOfCodeConsole(clientMock, viewMock);
+            console.StartYear(2021, context => { });
+            Assert.Throws<InvalidOperationException>(() => console.StartYear(2021, year => { }));
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         private readonly IHttpRequestSender _client;
 
-        internal AdventOfCodeHttpClient(IConfiguration configuration)
+        internal AdventOfCodeHttpClient(IClientConfiguration configuration)
             : this(new AdventOfCodeHttpRequestSender(configuration.Host, configuration.SessionId))
         {}
 

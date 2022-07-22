@@ -4,13 +4,13 @@ namespace AdventOfCode.Kit.Client.Web.Resources
 {
     internal class DayPageRepository : IDayPageRepository
     {
-        private readonly IAdventOfCodeClient _client;
+        private readonly Http.IAdventOfCodeClient _client;
 
-        public DayPageRepository(IConfiguration configuration)
+        public DayPageRepository(IClientConfiguration configuration)
             : this(new AdventOfCodeHttpClient(configuration))
         { }
 
-        public DayPageRepository(IAdventOfCodeClient client)
+        public DayPageRepository(Http.IAdventOfCodeClient client)
         {
             _client = client;
         }

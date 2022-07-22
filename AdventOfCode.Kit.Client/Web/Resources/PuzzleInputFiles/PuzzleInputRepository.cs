@@ -4,13 +4,13 @@ namespace AdventOfCode.Kit.Client.Web.Resources
 {
     internal class PuzzleInputRepository : IPuzzleInputRepository
     {
-        private readonly IAdventOfCodeClient _client;
+        private readonly Http.IAdventOfCodeClient _client;
 
-        public PuzzleInputRepository(IConfiguration configuration)
+        public PuzzleInputRepository(IClientConfiguration configuration)
             : this(new AdventOfCodeHttpClient(configuration))
         { }
 
-        public PuzzleInputRepository(IAdventOfCodeClient client)
+        public PuzzleInputRepository(Http.IAdventOfCodeClient client)
         {
             _client = client;
         }

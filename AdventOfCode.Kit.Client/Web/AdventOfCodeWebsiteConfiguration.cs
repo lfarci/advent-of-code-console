@@ -1,6 +1,6 @@
 ﻿namespace AdventOfCode.Kit.Client.Web
 {
-    public class AdventOfCodeWebsiteConfiguration : IConfiguration
+    internal class AdventOfCodeWebsiteConfiguration : IClientConfiguration
     {
         internal static readonly string hostEnvironmentVariableName = "AOC_HOST";
         internal static readonly string sessionIdEnvironmentVariableName = "AOC_SESSION_ID";

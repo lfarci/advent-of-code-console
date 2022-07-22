@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode.Kit.Client.Web
+﻿namespace AdventOfCode.Kit.Client
 {
-    public interface IConfiguration
+    internal interface IClientConfiguration
     {
         public string Host { get; init; }
         public string SessionId { get; init; }
