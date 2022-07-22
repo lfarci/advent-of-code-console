@@ -11,7 +11,7 @@ namespace AdventOfCode.Kit.Console.Tests.Web
 {
     public class AdventOfCodeClientTests
     {
-        private static readonly Mock<IAdventOfCodeHttpClient> clientMock = new();
+        private static readonly Mock<IHttpRequestSender> clientMock = new();
 
         [Fact]
         public void Instance_AlwaysReturnsSameInstance()

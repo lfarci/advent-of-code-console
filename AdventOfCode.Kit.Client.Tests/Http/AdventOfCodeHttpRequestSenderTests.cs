@@ -11,11 +11,11 @@ using AdventOfCode.Kit.Client.Http;
 
 namespace AdventOfCode.Kit.Console.Tests.Web
 {
-    public class AdventOfCodeHttpClientTests
+    public class AdventOfCodeHttpRequestSenderTests
     {
         private static readonly string host = "adventofcode.com";
         private static readonly string session = "sessionId";
-        private static readonly IAdventOfCodeHttpClient client = new AdventOfCodeHttpClient(host, session);
+        private static readonly AdventOfCodeHttpRequestSender client = new(host, session);
 
         [Fact]
         public void Host_ReturnsHostPassedToConstructor() => Assert.Equal(host, client.Host);
@@ -78,7 +78,7 @@ namespace AdventOfCode.Kit.Console.Tests.Web
                 .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
                 .ReturnsAsync(new HttpResponseMessage { StatusCode = HttpStatusCode.OK });
 
-            var client = new AdventOfCodeHttpClient(httpClientHandlerMock.Object, host, session);
+            var client = new AdventOfCodeHttpRequestSender(httpClientHandlerMock.Object, host, session);
             Assert.NotNull(client.GetResourceAsync("/"));
         }
 
@@ -92,7 +92,7 @@ namespace AdventOfCode.Kit.Console.Tests.Web
                 .Setup("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
                 .Throws<HttpRequestException>();
 
-            var client = new AdventOfCodeHttpClient(httpClientHandlerMock.Object, host, session);
+            var client = new AdventOfCodeHttpRequestSender(httpClientHandlerMock.Object, host, session);
             await Assert.ThrowsAsync<IOException>(() => client.GetResourceAsync("/"));
         }
     }

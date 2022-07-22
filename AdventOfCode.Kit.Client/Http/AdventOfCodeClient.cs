@@ -7,7 +7,7 @@
         private static readonly string host = "adventofcode.com";
         private static readonly string session = Environment.GetEnvironmentVariable("AOC_SESSION_ID") ?? "";
 
-        private readonly IAdventOfCodeHttpClient _client;
+        private readonly IHttpRequestSender _client;
 
         public static IAdventOfCodeClient Instance
         {
@@ -23,10 +23,10 @@
 
         private AdventOfCodeClient()
         {
-            _client = new AdventOfCodeHttpClient(host, session);
+            _client = new AdventOfCodeHttpRequestSender(host, session);
         }
 
-        internal AdventOfCodeClient(IAdventOfCodeHttpClient client)
+        internal AdventOfCodeClient(IHttpRequestSender client)
         {
             _client = client;
         }

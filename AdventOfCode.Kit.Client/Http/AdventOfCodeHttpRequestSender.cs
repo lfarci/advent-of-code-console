@@ -2,10 +2,10 @@
 
 namespace AdventOfCode.Kit.Client.Http
 {
-    internal class AdventOfCodeHttpClient : IAdventOfCodeHttpClient
+    internal class AdventOfCodeHttpRequestSender : IHttpRequestSender
     {
         private static readonly string scheme = "https";
-        private static readonly HttpClientHandler handler = new()
+        private static readonly HttpClientHandler defaultHttpClientHandler = new()
         {
             ServerCertificateCustomValidationCallback = (request, certificate, cetChain, policyErrors) => {
                 return policyErrors == SslPolicyErrors.None;
@@ -16,14 +16,14 @@ namespace AdventOfCode.Kit.Client.Http
         private readonly string _adventOfCodeHost;
         private readonly string _sessionId;
 
-        public AdventOfCodeHttpClient(string adventOfCodeHost, string sessionId)
+        public AdventOfCodeHttpRequestSender(string adventOfCodeHost, string sessionId)
         {
             _adventOfCodeHost = adventOfCodeHost;
             _sessionId = sessionId;
-            _client = new HttpClient(handler);
+            _client = new HttpClient(defaultHttpClientHandler);
         }
 
-        public AdventOfCodeHttpClient(
+        public AdventOfCodeHttpRequestSender(
             HttpClientHandler handler,
             string adventOfCodeHost,
             string sessionId) : this(adventOfCodeHost, sessionId)
@@ -31,8 +31,8 @@ namespace AdventOfCode.Kit.Client.Http
             _client = new HttpClient(handler);
         }
 
-        public string Host { get { return _adventOfCodeHost; } }
-        public string SessionId { get { return _sessionId; } }
+        internal string Host { get { return _adventOfCodeHost; } }
+        internal string SessionId { get { return _sessionId; } }
 
         private Uri BuildResourceUri(string resourcePath)
         {
