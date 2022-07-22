@@ -1,5 +1,5 @@
 ﻿using AdventOfCode.Kit.Client;
-using AdventOfCode.Kit.Client.Resources;
+using AdventOfCode.Kit.Client.Web.Resources;
 using Moq;
 using System;
 using System.Linq.Expressions;

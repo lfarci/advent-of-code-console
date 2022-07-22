@@ -1,6 +1,6 @@
 ﻿using AdventOfCode.Kit.Client;
-using AdventOfCode.Kit.Client.Resources;
-using static AdventOfCode.Kit.Client.Resources.CalendarPage;
+using AdventOfCode.Kit.Client.Web.Resources;
+using static AdventOfCode.Kit.Client.Web.Resources.CalendarPage;
 
 namespace AdventOfCode.Kit.Client.Core
 {

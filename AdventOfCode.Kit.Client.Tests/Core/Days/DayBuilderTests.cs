@@ -1,5 +1,5 @@
 ﻿using AdventOfCode.Kit.Client.Core;
-using AdventOfCode.Kit.Client.Resources;
+using AdventOfCode.Kit.Client.Web.Resources;
 using Xunit;
 
 namespace AdventOfCode.Kit.Console.Tests.Core

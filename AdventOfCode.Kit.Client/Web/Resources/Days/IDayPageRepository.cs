@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Kit.Client.Resources
+﻿namespace AdventOfCode.Kit.Client.Web.Resources
 {
     internal interface IDayPageRepository
     {

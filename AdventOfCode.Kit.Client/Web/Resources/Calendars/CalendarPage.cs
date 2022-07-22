@@ -1,7 +1,7 @@
 ﻿using AdventOfCode.Kit.Client.Core;
 using HtmlAgilityPack;
 
-namespace AdventOfCode.Kit.Client.Resources
+namespace AdventOfCode.Kit.Client.Web.Resources
 {
     internal class CalendarPage
     {

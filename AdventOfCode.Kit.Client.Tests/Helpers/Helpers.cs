@@ -1,5 +1,5 @@
-﻿using AdventOfCode.Kit.Client.Http;
-using AdventOfCode.Kit.Client.Resources;
+﻿using AdventOfCode.Kit.Client.Web.Http;
+using AdventOfCode.Kit.Client.Web.Resources;
 using Moq;
 using System;
 using System.IO;
