@@ -11,7 +11,7 @@ namespace AdventOfCode.Kit.Console.Tests.Web
 {
     public class AdventOfCodeClientTests
     {
-        private static readonly Mock<IHttpRequestSender> clientMock = new();
+        private static readonly Mock<IHttpRequestSender> httpRequestSenderMock = new();
 
         [Fact]
         public void Instance_AlwaysReturnsSameInstance()
@@ -83,22 +83,22 @@ namespace AdventOfCode.Kit.Console.Tests.Web
             await AssertReturnsContent("Puzzle input", c => c.GetPuzzleInputAsStreamAsync(2021, 1));
         }
 
-        private static IAdventOfCodeClient GetClientThatReturns(HttpResponseMessage? response)
+        private static IAdventOfCodeClient GetHttpRequestSenderThatReturns(HttpResponseMessage? response)
         {
-            clientMock
+            httpRequestSenderMock
                 .Setup(client => client.GetResourceAsync(It.IsAny<string>()).Result)
                 .Returns(response);
-            return new AdventOfCodeClient(clientMock.Object);
+            return new AdventOfCodeClient(httpRequestSenderMock.Object);
         }
 
         private static async Task AssertThrowsIOException(HttpResponseMessage? message, Func<IAdventOfCodeClient, Task> call)
         {
-            await Assert.ThrowsAsync<IOException>(() => call(GetClientThatReturns(message)));
+            await Assert.ThrowsAsync<IOException>(() => call(GetHttpRequestSenderThatReturns(message)));
         }
 
         private static async Task AssertReturnsContent(string content, Func<IAdventOfCodeClient, Task<Stream>> call)
         {
-            var client = GetClientThatReturns(new HttpResponseMessage
+            var client = GetHttpRequestSenderThatReturns(new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.OK,
                 Content = new StringContent(content)

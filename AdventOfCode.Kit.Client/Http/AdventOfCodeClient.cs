@@ -2,15 +2,8 @@
 {
     internal class AdventOfCodeClient : IAdventOfCodeClient
     {
-
-        private static readonly string defaultHost = "adventofcode.com"; 
-        private static readonly string defaultSessionId = "";
-
         private static IAdventOfCodeClient? instance = null;
-        private static readonly string host = Environment.GetEnvironmentVariable("AOC_HOST") ?? defaultHost;
-        private static readonly string session = Environment.GetEnvironmentVariable("AOC_SESSION_ID") ?? defaultSessionId;
-
-        private readonly IHttpRequestSender _client;
+        private static IConfiguration defaultConfiguration = new AdventOfCodeClientConfiguration();
 
         public static IAdventOfCodeClient Instance
         {
@@ -18,16 +11,17 @@
             {
                 if (instance == null)
                 {
-                    instance = new AdventOfCodeClient();
+                    instance = new AdventOfCodeClient(defaultConfiguration);
                 }
                 return instance;
             }
         }
 
-        private AdventOfCodeClient()
-        {
-            _client = new AdventOfCodeHttpRequestSender(host, session);
-        }
+        private readonly IHttpRequestSender _client;
+
+        internal AdventOfCodeClient(IConfiguration configuration)
+            : this(new AdventOfCodeHttpRequestSender(configuration.Host, configuration.SessionId))
+        {}
 
         internal AdventOfCodeClient(IHttpRequestSender client)
         {
@@ -61,7 +55,7 @@
             });
         }
 
-        struct Request
+        private struct Request
         {
             public string Uri { get; set; }
             public string ErrorMessage { get; set; }
