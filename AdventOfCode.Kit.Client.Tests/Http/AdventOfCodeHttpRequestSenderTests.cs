@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.IO;
 using AdventOfCode.Kit.Client.Http;
+using System;
 
 namespace AdventOfCode.Kit.Console.Tests.Web
 {
@@ -22,6 +23,20 @@ namespace AdventOfCode.Kit.Console.Tests.Web
 
         [Fact]
         public void SessionId_ReturnsHostPassedToConstructor() => Assert.Equal(session, client.SessionId);
+
+        [Theory]
+        [InlineData("ValidHost", "")]
+        [InlineData("ValidHost", null)]
+        [InlineData("", "ValidSessionId")]
+        [InlineData(null, "ValidSessionId")]
+        [InlineData(null, null)]
+        [InlineData("", "")]
+        [InlineData(null, "")]
+        [InlineData("", null)]
+        public void Constructor_EmptyOrNullArgument_ThrowsArgumentException(string host, string sessionId)
+        {
+            Assert.Throws<ArgumentException>(() => new AdventOfCodeHttpRequestSender(host, sessionId));
+        }
 
         [Fact]
         public void BuildHttpGetRequestMessage_ValidResourcePath_ReturnsRequestWithRootUri()

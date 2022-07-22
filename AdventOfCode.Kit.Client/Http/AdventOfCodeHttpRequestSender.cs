@@ -16,10 +16,19 @@ namespace AdventOfCode.Kit.Client.Http
         private readonly string _adventOfCodeHost;
         private readonly string _sessionId;
 
+        private static string RequireNotNullOrEmpty(string text, string fieldName = "text")
+        {
+            if (string.IsNullOrEmpty(text))
+            { 
+                throw new ArgumentException($"A value is required for '{fieldName}'.");
+            }
+            return text;
+        }
+
         public AdventOfCodeHttpRequestSender(string adventOfCodeHost, string sessionId)
         {
-            _adventOfCodeHost = adventOfCodeHost;
-            _sessionId = sessionId;
+            _adventOfCodeHost = RequireNotNullOrEmpty(adventOfCodeHost, "sessionId");
+            _sessionId = RequireNotNullOrEmpty(sessionId, "");
             _client = new HttpClient(defaultHttpClientHandler);
         }
 
@@ -55,7 +64,7 @@ namespace AdventOfCode.Kit.Client.Http
 
         public virtual async Task<HttpResponseMessage?> GetResourceAsync(string resourcePath)
         {
-            HttpResponseMessage? response = null;
+            HttpResponseMessage? response;
             try
             {
                 var request = BuildHttpGetRequestMessage(resourcePath);
