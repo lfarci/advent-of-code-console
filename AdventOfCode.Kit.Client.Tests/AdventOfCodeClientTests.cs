@@ -11,12 +11,6 @@ namespace AdventOfCode.Kit.Client.Tests.Models
 {
     public class AdventOfCodeClientTests
     {
-
-        private IConfiguration _configuration = new AdventOfCodeWebsiteConfiguration { 
-            Host = "adventodcode.com",
-            SessionId = "A session id"
-        };
-
         [Fact]
         public async Task FindCalendarByYearAsync_ValidYear_ReturnsCalendarWithExpectedNumberOfDays()
         {
