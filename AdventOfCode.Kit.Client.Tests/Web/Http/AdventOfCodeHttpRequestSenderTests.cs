@@ -10,7 +10,7 @@ using System.IO;
 using AdventOfCode.Kit.Client.Web.Http;
 using System;
 
-namespace AdventOfCode.Kit.Console.Tests.Web
+namespace AdventOfCode.Kit.Client.Tests.Web.Http
 {
     public class AdventOfCodeHttpRequestSenderTests
     {

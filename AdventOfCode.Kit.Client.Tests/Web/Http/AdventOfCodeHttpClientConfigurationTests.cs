@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace AdventOfCode.Kit.Client.Tests.Http
+namespace AdventOfCode.Kit.Client.Tests.Web.Http
 {
     public class AdventOfCodeHttpClientConfigurationTests
     {
