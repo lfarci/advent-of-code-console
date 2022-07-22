@@ -7,10 +7,11 @@ namespace AdventOfCode.Kit.Client
 {
     public class AdventOfCodeClient : IAdventOfCode
     {
-        internal IResourceRepository Resources { get; init; } = AdventOfCodeWebsite.Instance;
+        internal IResourceRepository Resources { get; init; }
 
-        public AdventOfCodeClient() { 
-            Resources = AdventOfCodeWebsite.Instance;
+        public AdventOfCodeClient() {
+            var configuration = new AdventOfCodeWebsiteConfiguration();
+            Resources = new AdventOfCodeWebsite(configuration);
         }
 
         private async Task<Day> GetCalendarDayAsync(int year, DayEntry calendarPageDayEntry)

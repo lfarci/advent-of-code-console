@@ -13,12 +13,6 @@ namespace AdventOfCode.Kit.Client.Tests.Web.Resources
         private static readonly string validPage = Helpers.ReadResourceContentAsString(resourceName);
 
         [Fact]
-        public void Instance_ReturnsSingleton()
-        {
-            Assert.Equal(CalendarPageRepository.Instance, CalendarPageRepository.Instance);
-        }
-
-        [Fact]
         public async void FindByYearAsync_ClientThrowsIOException_ThrowsIOException()
         {
             var repository = Helpers.GetCalendarPageRepositoryThatThrows<IOException>();

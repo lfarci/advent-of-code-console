@@ -4,28 +4,17 @@ namespace AdventOfCode.Kit.Client.Web.Resources
 {
     internal class DayPageRepository : IDayPageRepository
     {
-        private static IDayPageRepository? instance;
         private readonly IAdventOfCodeClient _client;
-        public static IDayPageRepository Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new DayPageRepository();
-                }
-                return instance;
-            }
-        }
 
-        protected DayPageRepository() : this(AdventOfCodeHttpClient.Instance)
+        public DayPageRepository(IConfiguration configuration)
+            : this(new AdventOfCodeHttpClient(configuration))
         { }
 
         public DayPageRepository(IAdventOfCodeClient client)
         {
             _client = client;
         }
-
+        
         public static string GetParseErrorMessage(int year, int day)
         {
             return $"Could not parse response for year {year} and day {day}.";

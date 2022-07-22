@@ -2,24 +2,9 @@
 {
     internal class AdventOfCodeHttpClient : IAdventOfCodeClient
     {
-        private static IAdventOfCodeClient? instance = null;
-        private static readonly IAdventOfCodeClientConfiguration defaultConfiguration = new AdventOfCodeHttpClientConfiguration();
-
-        public static IAdventOfCodeClient Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new AdventOfCodeHttpClient(defaultConfiguration);
-                }
-                return instance;
-            }
-        }
-
         private readonly IHttpRequestSender _client;
 
-        internal AdventOfCodeHttpClient(IAdventOfCodeClientConfiguration configuration)
+        internal AdventOfCodeHttpClient(IConfiguration configuration)
             : this(new AdventOfCodeHttpRequestSender(configuration.Host, configuration.SessionId))
         {}
 

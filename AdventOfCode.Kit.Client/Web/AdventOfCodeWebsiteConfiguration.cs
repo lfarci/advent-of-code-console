@@ -1,6 +1,6 @@
-﻿namespace AdventOfCode.Kit.Client.Web.Http
+﻿namespace AdventOfCode.Kit.Client.Web
 {
-    internal class AdventOfCodeHttpClientConfiguration : IAdventOfCodeClientConfiguration
+    public class AdventOfCodeWebsiteConfiguration : IConfiguration
     {
         internal static readonly string hostEnvironmentVariableName = "AOC_HOST";
         internal static readonly string sessionIdEnvironmentVariableName = "AOC_SESSION_ID";
@@ -10,13 +10,13 @@
         public string Host { get; init; }
         public string SessionId { get; init; }
 
-        public AdventOfCodeHttpClientConfiguration(string? host, string? sessionId)
+        public AdventOfCodeWebsiteConfiguration(string? host, string? sessionId)
         {
             Host = RequireNotNullOrEmpty(host, "Host");
             SessionId = RequireNotNullOrEmpty(sessionId, "Session");
         }
 
-        public AdventOfCodeHttpClientConfiguration() 
+        public AdventOfCodeWebsiteConfiguration()
             : this(
                   Environment.GetEnvironmentVariable(hostEnvironmentVariableName) ?? defaultHost,
                   Environment.GetEnvironmentVariable(sessionIdEnvironmentVariableName) ?? defaultSessionId)

@@ -12,12 +12,6 @@ namespace AdventOfCode.Kit.Client.Tests.Web.Resources
         private static readonly int defaultDay = 1;
 
         [Fact]
-        public void Instance_ReturnsSingleton()
-        {
-            Assert.Equal(PuzzleInputRepository.Instance, PuzzleInputRepository.Instance);
-        }
-
-        [Fact]
         public async void FindByYearAndDayAsync_ClientThrowsException_ThrowsOutOfRangeException()
         {
             var repository = GetRepositoryThatThrows<IOException>();

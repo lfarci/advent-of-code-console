@@ -1,10 +1,10 @@
-﻿using AdventOfCode.Kit.Client.Web.Http;
+﻿using AdventOfCode.Kit.Client.Web;
 using System;
 using Xunit;
 
 namespace AdventOfCode.Kit.Client.Tests.Web.Http
 {
-    public class AdventOfCodeHttpClientConfigurationTests
+    public class AdventOfCodeWebsiteConfigurationTests
     {
 
         [Theory]
@@ -18,26 +18,26 @@ namespace AdventOfCode.Kit.Client.Tests.Web.Http
         [InlineData("", null)]
         public void Constructor_EmptyOrNullArgument_ThrowsArgumentException(string? host, string? sessionId)
         {
-            Assert.Throws<ArgumentException>(() => new AdventOfCodeHttpClientConfiguration(host, sessionId));
+            Assert.Throws<ArgumentException>(() => new AdventOfCodeWebsiteConfiguration(host, sessionId));
         }
 
         [Fact]
         public void RequireNotNullOrEmpty_Null_ThrowsArgumentException()
         { 
-            Assert.Throws<ArgumentException>(() => AdventOfCodeHttpClientConfiguration.RequireNotNullOrEmpty(null));
+            Assert.Throws<ArgumentException>(() => AdventOfCodeWebsiteConfiguration.RequireNotNullOrEmpty(null));
         }
 
         [Fact]
         public void RequireNotNullOrEmpty_EmptyString_ThrowsArgumentException()
         {
-            Assert.Throws<ArgumentException>(() => AdventOfCodeHttpClientConfiguration.RequireNotNullOrEmpty(""));
+            Assert.Throws<ArgumentException>(() => AdventOfCodeWebsiteConfiguration.RequireNotNullOrEmpty(""));
         }
 
         [Fact]
         public void RequireNotNullOrEmpty_ValidString_ReturnsString()
         {
             string text = "Some text";
-            Assert.Equal(text, AdventOfCodeHttpClientConfiguration.RequireNotNullOrEmpty(text));
+            Assert.Equal(text, AdventOfCodeWebsiteConfiguration.RequireNotNullOrEmpty(text));
         }
     }
 }

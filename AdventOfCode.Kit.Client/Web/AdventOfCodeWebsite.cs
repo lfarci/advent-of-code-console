@@ -4,22 +4,25 @@ namespace AdventOfCode.Kit.Client.Web
 {
     internal class AdventOfCodeWebsite : IResourceRepository
     {
-        private static IResourceRepository? instance;
+        internal ICalendarPageRepository CalendarPages { get; init; }
+        internal IDayPageRepository DayPages { get; init; }
+        internal IPuzzleInputRepository PuzzleInputs { get; init; }
 
-        internal ICalendarPageRepository CalendarPages { get; init; } = CalendarPageRepository.Instance;
-        internal IDayPageRepository DayPages { get; init; } = DayPageRepository.Instance;
-        internal IPuzzleInputRepository PuzzleInputs { get; init; } = PuzzleInputRepository.Instance;
-
-        public static IResourceRepository Instance
+        public AdventOfCodeWebsite(IConfiguration configuration)
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new AdventOfCodeWebsite();
-                }
-                return instance;
-            }
+            CalendarPages = new CalendarPageRepository(configuration);
+            DayPages = new DayPageRepository(configuration);
+            PuzzleInputs = new PuzzleInputRepository(configuration);
+        }
+
+        internal AdventOfCodeWebsite(
+            ICalendarPageRepository calendarPages,
+            IDayPageRepository dayPages, 
+            IPuzzleInputRepository puzzleInputs)
+        {
+            CalendarPages = calendarPages;
+            DayPages = dayPages;
+            PuzzleInputs = puzzleInputs;
         }
 
         public async Task<CalendarPage> FindCalendarPageByYearAsync(int year)

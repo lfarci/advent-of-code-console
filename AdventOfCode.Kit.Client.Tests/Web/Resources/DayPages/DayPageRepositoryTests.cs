@@ -13,12 +13,6 @@ namespace AdventOfCode.Kit.Client.Tests.Web.Resources
         private static readonly int defaultDay = 1;
 
         [Fact]
-        public void Instance_ReturnsSingleton()
-        {
-            Assert.Equal(DayPageRepository.Instance, DayPageRepository.Instance);
-        }
-
-        [Fact]
         public async Task FindByYearAndDayAsync_ClientThrowsIOException_ThrowsIOException()
         {
             var repository = GetRepositoryThatThrows<IOException>();

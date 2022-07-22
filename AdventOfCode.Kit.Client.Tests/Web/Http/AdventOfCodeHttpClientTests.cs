@@ -14,12 +14,6 @@ namespace AdventOfCode.Kit.Client.Tests.Web.Http
         private static readonly Mock<IHttpRequestSender> httpRequestSenderMock = new();
 
         [Fact]
-        public void Instance_AlwaysReturnsSameInstance()
-        {
-            Assert.Equal(AdventOfCodeHttpClient.Instance, AdventOfCodeHttpClient.Instance);
-        }
-
-        [Fact]
         public async Task GetDayPageAsStreamAsync_ResponseIsNull_ThrowsClientException()
         {
             await AssertThrowsIOException(null, c => c.GetDayPageAsStreamAsync(2021, 1));
