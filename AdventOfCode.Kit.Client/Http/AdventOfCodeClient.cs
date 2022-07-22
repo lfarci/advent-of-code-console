@@ -3,9 +3,12 @@
     internal class AdventOfCodeClient : IAdventOfCodeClient
     {
 
+        private static readonly string defaultHost = "adventofcode.com"; 
+        private static readonly string defaultSessionId = "";
+
         private static IAdventOfCodeClient? instance = null;
-        private static readonly string host = "adventofcode.com";
-        private static readonly string session = Environment.GetEnvironmentVariable("AOC_SESSION_ID") ?? "";
+        private static readonly string host = Environment.GetEnvironmentVariable("AOC_HOST") ?? defaultHost;
+        private static readonly string session = Environment.GetEnvironmentVariable("AOC_SESSION_ID") ?? defaultSessionId;
 
         private readonly IHttpRequestSender _client;
 
