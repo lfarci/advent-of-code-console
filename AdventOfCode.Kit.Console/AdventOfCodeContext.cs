@@ -19,9 +19,9 @@ namespace AdventOfCode.Kit.Console.Core
         public int Year { get; }
         internal bool HasSubmittedPuzzles { get => _submittedPuzzles.Count > 0; }
 
-        internal AdventOfCodeContext(int year)
+        internal AdventOfCodeContext(int year, IAdventOfCodeClient client)
             : this(
-                  new AdventOfCodeClient(),
+                  client,
                   null,
                   year
               )

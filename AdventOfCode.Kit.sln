@@ -16,9 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Kit.Client", "AdventOfCode.Kit.Client\AdventOfCode.Kit.Client.csproj", "{36879FA5-1A2A-4AC1-9120-4440DB6D5C3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Kit.Client", "AdventOfCode.Kit.Client\AdventOfCode.Kit.Client.csproj", "{36879FA5-1A2A-4AC1-9120-4440DB6D5C3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode.Kit.Client.Tests", "AdventOfCode.Kit.Client.Tests\AdventOfCode.Kit.Client.Tests.csproj", "{C0F5F90D-C997-4B21-9EB1-D36F66D40918}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode.Kit.Client.Tests", "AdventOfCode.Kit.Client.Tests\AdventOfCode.Kit.Client.Tests.csproj", "{C0F5F90D-C997-4B21-9EB1-D36F66D40918}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

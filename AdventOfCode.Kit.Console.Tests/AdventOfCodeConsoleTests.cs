@@ -1,5 +1,4 @@
 ﻿using AdventOfCode.Kit.Client;
-using AdventOfCode.Kit.Client.Web;
 using AdventOfCode.Kit.Console.View;
 using Moq;
 using System;

@@ -56,7 +56,7 @@ namespace AdventOfCode.Kit.Console
 
             try
             {
-                IPuzzleSubmitter context = new AdventOfCodeContext(year);
+                IPuzzleSubmitter context = new AdventOfCodeContext(year, Client);
                 Submitters[year] = context;
                 Console.Status($"Initializing year {year}...", () =>
                 {
