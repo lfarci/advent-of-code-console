@@ -11,10 +11,16 @@ namespace AdventOfCode.Kit.Client.Tests.Models
 {
     public class AdventOfCodeClientTests
     {
+
+        private IConfiguration _configuration = new AdventOfCodeWebsiteConfiguration { 
+            Host = "adventodcode.com",
+            SessionId = "A session id"
+        };
+
         [Fact]
         public async Task FindCalendarByYearAsync_ValidYear_ReturnsCalendarWithExpectedNumberOfDays()
         {
-            var website = new AdventOfCodeClient { Resources = GetRepository() };
+            var website = new AdventOfCodeClient(GetRepository());
             var calendar = await website.FindCalendarByYearAsync(2021);
             Assert.Equal(Fixtures.CalendarDays.Count(), calendar.Days.Count());
         }
@@ -22,7 +28,7 @@ namespace AdventOfCode.Kit.Client.Tests.Models
         [Fact]
         public async Task FindCalendarByYearAsync_ValidYear_ReturnsCalendarWithExpectedLength()
         {
-            var website = new AdventOfCodeClient { Resources = GetRepository() };
+            var website = new AdventOfCodeClient(GetRepository());
             var calendar = await website.FindCalendarByYearAsync(2021);
             Assert.Equal(Fixtures.CalendarDays.Count(), calendar.Length);
         }
@@ -30,7 +36,7 @@ namespace AdventOfCode.Kit.Client.Tests.Models
         [Fact]
         public async Task FindCalendarByYearAsync_ValidYear_ReturnsCalendarWithExpectedYear()
         {
-            var website = new AdventOfCodeClient { Resources = GetRepository() };
+            var website = new AdventOfCodeClient(GetRepository());
             var calendar = await website.FindCalendarByYearAsync(2021);
             Assert.Equal(Fixtures.CalendarPage.Year, calendar.Year);
         }

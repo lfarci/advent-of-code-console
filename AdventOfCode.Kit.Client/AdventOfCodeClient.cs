@@ -9,9 +9,15 @@ namespace AdventOfCode.Kit.Client
     {
         internal IResourceRepository Resources { get; init; }
 
-        public AdventOfCodeClient() {
+        public AdventOfCodeClient() 
+        {
             var configuration = new AdventOfCodeWebsiteConfiguration();
             Resources = new AdventOfCodeWebsite(configuration);
+        }
+
+        internal AdventOfCodeClient(IResourceRepository resources)
+        {
+            Resources = resources;
         }
 
         private async Task<Day> GetCalendarDayAsync(int year, DayEntry calendarPageDayEntry)
