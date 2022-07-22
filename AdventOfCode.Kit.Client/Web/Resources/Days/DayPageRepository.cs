@@ -1,4 +1,4 @@
-﻿using AdventOfCode.Kit.Client.Http;
+﻿using AdventOfCode.Kit.Client.Web.Http;
 
 namespace AdventOfCode.Kit.Client.Resources
 {

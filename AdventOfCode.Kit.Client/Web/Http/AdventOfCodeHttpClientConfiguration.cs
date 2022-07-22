@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Kit.Client.Http
+﻿namespace AdventOfCode.Kit.Client.Web.Http
 {
     internal class AdventOfCodeHttpClientConfiguration : IAdventOfCodeClientConfiguration
     {
