@@ -1,0 +1,61 @@
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    strategy:
+      matrix:
+        dotnet-version: ['6.x']
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+
+    - name: Restore project dependencies
+      run: dotnet restore '**/*.csproj'
+
+    - name: Build the project - Release
+      run: dotnet build --no-restore --configuration Release '**/*.csproj'
+
+    - name: Install .NET tools from local manifest
+      run: dotnet tool restore
+
+    - name: Run unit tests - Release
+      run: dotnet test --no-build --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(pwd)/TestResults/Coverage/
+      continue-on-error: true
+
+    - name: Create code coverage report
+      run: dotnet tool run reportgenerator -reports:$(pwd)/**/coverage.cobertura.xml -targetdir:$(pwd)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines
+
+    - name: Publish code coverage report
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage-report
+        path: $(pwd)/CodeCoverage
+
+    - name: Pack the project - Release
+      run: dotnet pack --no-build --configuration Release '**/*.csproj' /p:PackageVersion=$(date +%Y%m%d%H%M%S)
+
+    # - name: Publish NuGet package
+    #   run: dotnet nuget push '**/*.nupkg' -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+
+    # - name: Publish the project - Release
+    #   run: dotnet publish --no-build --configuration Release --output $(pwd)/Release '**/*.csproj'
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: drop
+        path: $(pwd)/Release
