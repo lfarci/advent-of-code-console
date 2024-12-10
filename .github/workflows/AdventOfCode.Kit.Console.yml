@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-      paths:
-        - 'src/AdventOfCode.Kit.Console/**'
+    paths:
+      - 'src/AdventOfCode.Kit.Console/**'
   workflow_dispatch:
 
 env:
