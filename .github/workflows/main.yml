@@ -9,6 +9,7 @@ on:
 env:
   LIBRARY_PROJECT_FILE: AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
   CONFIGURATION: Release
+  VERSION: 0.0.0
 
 jobs:
   build:
@@ -50,7 +51,7 @@ jobs:
     #     path: $(pwd)/CodeCoverage
 
     - name: Pack the project - Release
-      run: dotnet pack --no-build --configuration Release ${{ env.LIBRARY_PROJECT_FILE }} /p:PackageVersion=$(date +%Y%m%d%H%M%S)
+      run: dotnet pack --no-build --configuration Release ${{ env.LIBRARY_PROJECT_FILE }} /p:PackageVersion=${{ env.VERSION }}
 
     # - name: Publish NuGet package
     #   run: dotnet nuget push '**/*.nupkg' -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
