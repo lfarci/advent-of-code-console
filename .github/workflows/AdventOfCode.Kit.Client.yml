@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  PACKAGE_PROJECT_FILE: src/AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
+  PACKAGE_PROJECT_FILE: src/AdventOfCode.Kit.Console/AdventOfCode.Kit.Client.csproj
   PACKAGE_VERSION: 0.0.2
   RELEASE_PATH: Release
   DOTNET_VERSION: 9.x
