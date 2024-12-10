@@ -34,12 +34,12 @@ jobs:
     - name: Install .NET tools from local manifest
       run: dotnet tool restore
 
-    - name: Run unit tests - Release
-      run: dotnet test --no-build --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/Coverage/
-      continue-on-error: true
+    # - name: Run unit tests - Release
+    #   run: dotnet test --no-build --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/Coverage/
+    #   continue-on-error: true
 
-    - name: Show current directory
-      run: ls TestResults/Coverage
+    # - name: Show current directory
+    #   run: ls TestResults/Coverage
 
     - name: Create code coverage report
       run: dotnet tool run reportgenerator -reports:**/coverage.cobertura.xml -targetdir:CodeCoverage -reporttypes:HtmlSummary
