@@ -40,7 +40,7 @@ jobs:
       run: dotnet tool run reportgenerator -reports:$(pwd)/**/coverage.cobertura.xml -targetdir:$(pwd)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines
 
     - name: Publish code coverage report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: code-coverage-report
         path: $(pwd)/CodeCoverage
@@ -55,7 +55,7 @@ jobs:
     #   run: dotnet publish --no-build --configuration Release --output $(pwd)/Release '**/*.csproj'
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: drop
         path: $(pwd)/Release
