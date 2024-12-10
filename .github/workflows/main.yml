@@ -8,6 +8,7 @@ on:
 
 env:
   LIBRARY_PROJECT_FILE: AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
+  DOTNET_VERSION: 6.x
   CONFIGURATION: Release
   VERSION: 0.0.0
 
@@ -15,18 +16,14 @@ jobs:
   build:
     runs-on: ubuntu-20.04
 
-    strategy:
-      matrix:
-        dotnet-version: ['6.x']
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+    - name: Setup .NET Core SDK ${{ env.DOTNET_VERSION }}
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: ${{ matrix.dotnet-version }}
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Restore project dependencies
       run: dotnet restore ${{ env.LIBRARY_PROJECT_FILE }}
