@@ -1,5 +1,4 @@
-
-name: CI
+name: AdventOfCode.Kit
 
 on:
   push:
@@ -7,7 +6,7 @@ on:
       - main
 
 env:
-  PACKAGE_PROJECT_FILE: AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
+  PACKAGE_PROJECT_FILE: src/AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
   PACKAGE_VERSION: 0.0.0
   RELEASE_PATH: Release
   DOTNET_VERSION: 6.x
