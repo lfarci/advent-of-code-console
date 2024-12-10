@@ -62,3 +62,11 @@ jobs:
       with:
         name: package-${{ env.VERSION }}
         path: ${{ env.RELEASE_PATH }}
+
+    - name: Authenticate with GitHub Packages
+      run: dotnet nuget add source --username lfarci --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/lfarci/index.json"
+
+    - name: Publish NuGet package
+      run: dotnet nuget push ${{ env.RELEASE_PATH }}/*.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
+
+    
