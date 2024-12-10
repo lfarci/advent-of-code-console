@@ -1,4 +1,4 @@
-name: AdventOfCode.Kit.Console
+name: AdventOfCode.Kit.Client
 
 on:
   push:
