@@ -8,6 +8,7 @@ on:
 
 env:
   LIBRARY_PROJECT_FILE: AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
+  CONFIGURATION: Release
 
 jobs:
   build:
@@ -29,8 +30,8 @@ jobs:
     - name: Restore project dependencies
       run: dotnet restore ${{ env.LIBRARY_PROJECT_FILE }}
 
-    - name: Build the project - Release
-      run: dotnet build --no-restore --configuration Release ${{ env.LIBRARY_PROJECT_FILE }}
+    - name: Build the project - ${{ env.CONFIGURATION }}
+      run: dotnet build --no-restore --configuration ${{ env.CONFIGURATION }} ${{ env.LIBRARY_PROJECT_FILE }}
 
     - name: Install .NET tools from local manifest
       run: dotnet tool restore
@@ -39,14 +40,14 @@ jobs:
       run: dotnet test --no-build --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(pwd)/TestResults/Coverage/
       continue-on-error: true
 
-    - name: Create code coverage report
-      run: dotnet tool run reportgenerator -reports:$(pwd)/**/coverage.cobertura.xml -targetdir:$(pwd)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines
+    # - name: Create code coverage report
+    #   run: dotnet tool run reportgenerator -reports:$(pwd)/**/coverage.cobertura.xml -targetdir:$(pwd)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines
 
-    - name: Publish code coverage report
-      uses: actions/upload-artifact@v4
-      with:
-        name: code-coverage-report
-        path: $(pwd)/CodeCoverage
+    # - name: Publish code coverage report
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: code-coverage-report
+    #     path: $(pwd)/CodeCoverage
 
     - name: Pack the project - Release
       run: dotnet pack --no-build --configuration Release '**/*.csproj' /p:PackageVersion=$(date +%Y%m%d%H%M%S)
@@ -60,5 +61,5 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: drop
+        name: build
         path: $(pwd)/Release
