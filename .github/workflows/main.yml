@@ -7,7 +7,7 @@ on:
 
 env:
   PACKAGE_PROJECT_FILE: src/AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
-  PACKAGE_VERSION: 0.0.1
+  PACKAGE_VERSION: 0.0.2
   RELEASE_PATH: Release
   DOTNET_VERSION: 9.x
   DOTNET_CONFIGURATION: Release
