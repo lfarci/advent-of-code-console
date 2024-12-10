@@ -1,0 +1,83 @@
+name: AdventOfCode.Kit.Console
+
+on:
+  push:
+    branches:
+      - main
+      paths:
+        - 'src/AdventOfCode.Kit.Console/**'
+  workflow_dispatch:
+
+env:
+  PACKAGE_PROJECT_FILE: src/AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
+  PACKAGE_VERSION: 0.0.2
+  RELEASE_PATH: Release
+  DOTNET_VERSION: 9.x
+  DOTNET_CONFIGURATION: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core SDK ${{ env.DOTNET_VERSION }}
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Restore project dependencies
+      run: dotnet restore ${{ env.PACKAGE_PROJECT_FILE }}
+
+    - name: Build the project - ${{ env.DOTNET_CONFIGURATION }}
+      run: dotnet build --no-restore --configuration ${{ env.DOTNET_CONFIGURATION }} ${{ env.PACKAGE_PROJECT_FILE }}
+
+    - name: Install .NET tools from local manifest
+      run: dotnet tool restore
+
+    # - name: Run unit tests - Release
+    #   run: dotnet test --no-build --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=TestResults/Coverage/
+    #   continue-on-error: true
+
+    # - name: Show current directory
+    #   run: ls TestResults/Coverage
+
+    # - name: Create code coverage report
+    #   run: dotnet tool run reportgenerator -reports:**/coverage.cobertura.xml -targetdir:CodeCoverage -reporttypes:HtmlSummary
+
+    # - name: Publish code coverage report
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: code-coverage-report
+    #     path: CodeCoverage
+
+    - name: Pack the project - Release
+      run: |
+        dotnet pack --no-build --configuration ${{ env.DOTNET_CONFIGURATION }} --output ${{ env.RELEASE_PATH }} ${{ env.PACKAGE_PROJECT_FILE }} /p:PackageVersion=${{ env.PACKAGE_VERSION }}
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: package-${{ env.PACKAGE_VERSION }}
+        path: Release/**/*.nupkg
+
+  publish:
+    runs-on: ubuntu-20.04
+    needs: build
+
+    steps:
+
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: package-${{ env.PACKAGE_VERSION }}
+
+    - name: Authenticate with GitHub Packages
+      run: dotnet nuget add source --username lfarci --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/lfarci/index.json"
+
+    - name: Publish NuGet package
+      run: dotnet nuget push *.nupkg --source github --api-key ${{ secrets.GITHUB_TOKEN }}
+
+    

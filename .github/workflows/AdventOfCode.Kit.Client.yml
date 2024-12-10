@@ -1,9 +1,12 @@
-name: AdventOfCode.Kit
+name: AdventOfCode.Kit.Console
 
 on:
   push:
     branches:
       - main
+      paths:
+        - 'src/AdventOfCode.Kit.Client/**'
+  workflow_dispatch:
 
 env:
   PACKAGE_PROJECT_FILE: src/AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
