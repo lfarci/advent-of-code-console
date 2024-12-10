@@ -9,7 +9,7 @@ on:
 env:
   PACKAGE_PROJECT_FILE: AdventOfCode.Kit.Console/AdventOfCode.Kit.Console.csproj
   PACKAGE_VERSION: 0.0.0
-  RELEASE_PATH: $(pwd)/Release
+  RELEASE_PATH: $GITHUB_WORKSPACE/Release
   DOTNET_VERSION: 6.x
   DOTNET_CONFIGURATION: Release
 
@@ -36,7 +36,7 @@ jobs:
       run: dotnet tool restore
 
     - name: Run unit tests - Release
-      run: dotnet test --no-build --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(pwd)/TestResults/Coverage/
+      run: dotnet test --no-build --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$GITHUB_WORKSPACE/TestResults/Coverage/
       continue-on-error: true
 
     # - name: Create code coverage report
