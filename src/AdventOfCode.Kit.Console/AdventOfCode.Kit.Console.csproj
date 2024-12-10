@@ -8,15 +8,11 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <IncludeReferencedProjects>true</IncludeReferencedProjects>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AdventOfCode.Kit.Client" Version="0.0.2" />
     <PackageReference Include="Spectre.Console" Version="0.44.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\AdventOfCode.Kit.Client\AdventOfCode.Kit.Client.csproj" />
   </ItemGroup>
 
 </Project>
